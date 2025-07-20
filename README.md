@@ -2,10 +2,6 @@
 
 A React-based calendar application for managing staff roles, duties, and schedules at FSY (For the Strength of Youth) conferences.
 
-# FSY Navigator - Staff Calendar Application
-
-A React-based calendar application for managing staff roles, duties, and schedules at FSY (For the Strength of Youth) conferences.
-
 ## 🚀 Quick Start
 
 ### Prerequisites

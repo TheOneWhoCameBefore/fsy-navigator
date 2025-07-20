@@ -74,9 +74,33 @@ firebase deploy
 ```
 
 ### Option 2: Static Hosting (Netlify/Vercel/etc.)
+
+#### Netlify Deployment:
 ```bash
 npm run build
 # Upload dist/ folder to hosting provider
+```
+
+**Netlify Configuration:**
+- **Build Command**: `npm run build`
+- **Publish Directory**: `dist`
+- **Node Version**: 18.x or later (set in Netlify dashboard)
+
+**Important Netlify Settings:**
+1. **Site Settings > Build & Deploy > Build Settings**:
+   - Build command: `npm run build`
+   - Publish directory: `dist`
+   
+2. **Site Settings > Build & Deploy > Environment Variables**:
+   - Add any custom Firebase config if needed
+   
+3. **Site Settings > Build & Deploy > Deploy Contexts**:
+   - Production branch: `main` (or your default branch)
+
+#### Vercel Deployment:
+```bash
+npm run build
+# Connect GitHub repo to Vercel
 ```
 
 ## ✅ Post-Deployment Verification
@@ -91,6 +115,8 @@ npm run build
 - [ ] Mobile responsiveness verified
 - [ ] Modal interactions work
 - [ ] Day navigation works
+- [ ] **Netlify-specific**: HTTPS works properly (automatic)
+- [ ] **Netlify-specific**: Custom domain configured (if applicable)
 
 ### Performance Testing:
 - [ ] Initial page load < 3 seconds
