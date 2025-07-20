@@ -5,7 +5,7 @@ A React-based calendar application for managing staff roles, duties, and schedul
 ## 🚀 Quick Start
 
 ### Prerequisites
-- Node.js (v18 or later) and npm
+- Node.js (v22 or later) and npm
 - Firebase project with:
   - Anonymous Authentication enabled
   - Firestore database configured
