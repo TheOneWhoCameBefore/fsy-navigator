@@ -1,0 +1,37 @@
+# Logs
+logs
+*.log
+npm-debug.log*
+yarn-debug.log*
+yarn-error.log*
+pnpm-debug.log*
+lerna-debug.log*
+
+node_modules
+dist
+dist-ssr
+*.local
+
+# Editor directories and files
+.vscode/*
+!.vscode/extensions.json
+.idea
+.DS_Store
+*.suo
+*.ntvs*
+*.njsproj
+*.sln
+*.sw?
+
+# Development and test files
+*-backup.*
+*-v2.*
+debug-*.js
+test-*.js
+*.Zone.Identifier
+run-test.sh
+
+# Documentation backups
+MIGRATION_ANALYSIS.md
+OPTIMIZATION_SUMMARY.md
+FIREBASE_SETUP.md

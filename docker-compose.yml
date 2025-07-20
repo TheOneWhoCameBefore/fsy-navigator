@@ -1,0 +1,16 @@
+version: '3.8'
+
+services:
+  app:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "5173:5173" # Map container port 5173 to host port 5173
+    volumes:
+      # Mount your host project directory into the container's /app directory.
+      # This allows live reloading as you edit files on your host.
+      - .:/app
+      # Explicitly mount node_modules as a named volume to prevent host's node_modules
+      # from overwriting the container's, ensuring dependencies are managed by Docker.
+      - /app/node_modules
