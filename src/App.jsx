@@ -885,6 +885,7 @@ const App = () => {
                     const rowspan = Math.max(1, Math.floor(eventAtTime.duration / 5));
                     const eventKey = `${eventAtTime.weekday}-${eventAtTime.startTime}-${eventAtTime.endTime}-${eventAtTime.eventName}-${eventAtTime.eventType}`;
                     const colors = getActivityColor(eventAtTime);
+                    const visibleRoleCount = roles.filter(r => activeFilterRoles[r.replace(/[^a-z0-9]/gi, '-').toLowerCase()] !== false && r !== 'Agenda').length;
                     rowCells.push(
                         <td
                             key={role}
@@ -908,8 +909,9 @@ const App = () => {
                                 })}
                             >
                                 <div className="sticky top-8 overflow-hidden text-ellipsis">
-                                    <span className="event-full hidden md:block"><strong>{eventAtTime.eventAbbreviation}</strong> - {eventAtTime.eventName}</span>
-                                    <span className="event-abbr-only block md:hidden text-xs"><strong>{eventAtTime.eventAbbreviation}</strong></span>
+                                    {/* On small screens, show full name if <= 4 visible roles, else abbreviation only */}
+                                    <span className={`event-full ${visibleRoleCount <= 4 ? 'block' : 'hidden'} md:block`}><strong>{eventAtTime.eventAbbreviation}</strong> - {eventAtTime.eventName}</span>
+                                    <span className={`event-abbr-only ${visibleRoleCount > 4 ? 'block' : 'hidden'} md:hidden text-xs`}><strong>{eventAtTime.eventAbbreviation}</strong></span>
                                 </div>
                             </div>
                         </td>
@@ -981,19 +983,6 @@ const App = () => {
             eventKey = `${agendaEvent.weekday}-${agendaEvent.startTime}-${agendaEvent.endTime}-${agendaEvent.eventName}-${agendaEvent.eventType}`;
         }
 
-        // Handle role title click for name search
-        const handleRoleTitleClick = (e) => {
-            e.stopPropagation(); // Prevent triggering the modal
-            const assignments = roleAssignments[role];
-            if (assignments && assignments.length > 0) {
-                // Find the first person assigned to this role
-                const nameData = allNames.find(n => n.role === role);
-                if (nameData) {
-                    selectName(nameData);
-                }
-            }
-        };
-
         return (
             <div
                 key={role}
@@ -1012,9 +1001,8 @@ const App = () => {
                 })}
             >
                 <div 
-                    className="font-bold text-gray-800 cursor-pointer hover:text-blue-600 transition-colors duration-200" 
+                    className="font-bold text-gray-800 hover:text-blue-600 transition-colors duration-200" 
                     dangerouslySetInnerHTML={{ __html: roleNameWithAssignments }}
-                    onClick={handleRoleTitleClick}
                 ></div>
                 <div className={`text-sm ${colors.textColor}`}>{displayText}{timeIndicator}</div>
             </div>
@@ -1504,7 +1492,6 @@ const App = () => {
                     <div className="flex items-center text-xs text-gray-700"><span className="w-3 h-3 rounded-sm mr-1.5 inline-block bg-green-100"></span>Duty</div>
                     <div className="flex items-center text-xs text-gray-700"><span className="w-3 h-3 rounded-sm mr-1.5 inline-block bg-cyan-100"></span>Meeting</div>
                     <div className="flex items-center text-xs text-gray-700"><span className="w-3 h-3 rounded-sm mr-1.5 inline-block bg-yellow-100"></span>Break/Off</div>
-                    <div className="flex items-center text-xs text-gray-700"><span className="w-3 h-3 rounded-sm mr-1.5 inline-block bg-gray-50 border border-gray-300"></span>Free</div>
                 </section>
 
                 <nav className="flex justify-center items-center gap-2 mt-2">
