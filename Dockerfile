@@ -13,7 +13,7 @@ COPY package*.json ./
 # This addresses the npm bug related to optional dependencies
 RUN rm -rf node_modules package-lock.json
 
-# Install project dependencies
+# Install project dependencies including new Leaflet dependency
 # Removed --no-optional for now to ensure all necessary native modules are installed
 RUN npm install
 # --- IMPORTANT FIXES END HERE ---

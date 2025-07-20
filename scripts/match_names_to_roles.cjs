@@ -204,16 +204,16 @@ console.log("\n--- Assignment Results ---");
 for (const role in acRoles) {
     const assignedName = acAssignments[role];
     finalAssignments.push({ role, names: assignedName || "" });
-    if(assignedName) console.log(`✅ ${role} -> ${assignedName}`);
-    else console.log(`❌ ${role} -> Not matched`);
+    if(assignedName) console.log(` ${role} -> ${assignedName}`);
+    else console.log(` ${role} -> Not matched`);
 }
 
 for (const role in cnRoles) {
     const groupKey = cnAssignments[role];
     const assignedNames = groupKey ? cnGroupMembers[groupKey].join(';') : "";
     finalAssignments.push({ role, names: assignedNames });
-     if(assignedNames) console.log(`✅ ${role} -> ${assignedNames.replace(/;/g, ', ')}`);
-    else console.log(`❌ ${role} -> Not matched`);
+     if(assignedNames) console.log(` ${role} -> ${assignedNames.replace(/;/g, ', ')}`);
+    else console.log(` ${role} -> Not matched`);
 }
 
 const csvRows = ["role,names,updatedAt"];
@@ -222,4 +222,4 @@ finalAssignments.sort((a,b) => a.role.localeCompare(b.role)).forEach(a => {
 });
 
 fs.writeFileSync('../data/role_assignments.csv', csvRows.join("\n"));
-console.log("\n✅ Saved final assignments to role_assignments.csv");
+console.log("\n Saved final assignments to role_assignments.csv");

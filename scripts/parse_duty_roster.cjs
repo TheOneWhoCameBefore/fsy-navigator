@@ -283,7 +283,7 @@ function main() {
     csvContent += row.join(',') + '\n';
   }
   fs.writeFileSync(outputFile, csvContent, 'utf-8');
-  console.log(`✅ Saved ${events.length} merged events to ${outputFile}`);
+  console.log(` Saved ${events.length} merged events to ${outputFile}`);
 }
 
 main();

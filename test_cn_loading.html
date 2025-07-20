@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <title>Test CN Loading</title>
+    <script type="module">
+        // Import Firebase
+        import { initializeApp } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-app.js';
+        import { getFirestore, collection, onSnapshot } from 'https://www.gstatic.com/firebasejs/10.8.0/firebase-firestore.js';
+        
+        const firebaseConfig = {
+            apiKey: "AIzaSyCPAp_LIlxRkDu9lOTdBJJ0FrJFKJWqpqs",
+            authDomain: "fsy-staff-calendar.firebaseapp.com",
+            projectId: "fsy-staff-calendar",
+            storageBucket: "fsy-staff-calendar.appspot.com",
+            messagingSenderId: "62491819742",
+            appId: "1:62491819742:web:f96261c1dcd218795a8c4f"
+        };
+        
+        const appId = "1:62491819742:web:f96261c1dcd218795a8c4f";
+        
+        const app = initializeApp(firebaseConfig);
+        const db = getFirestore(app);
+        
+        console.log(' Testing CN loading...');
+        
+        const roleAssignmentsCollectionPath = `artifacts/${appId}/public/data/roleAssignments`;
+        console.log(' Collection path:', roleAssignmentsCollectionPath);
+        
+        const unsubscribe = onSnapshot(
+            collection(db, roleAssignmentsCollectionPath),
+            (snapshot) => {
+                console.log(' Snapshot received with', snapshot.docs.length, 'documents');
+                const cnNames = new Set();
+                
+                snapshot.docs.forEach(doc => {
+                    const data = doc.data();
+                    const role = data.role || doc.id;
+                    console.log(' Role:', role, 'Data:', data);
+                    
+                    const isCnRole = role && (
+                        role.startsWith('CN ') || 
+                        role.startsWith('CN') ||
+                        role.toLowerCase().includes('cn') || 
+                        role.toLowerCase().includes('counselor')
+                    );
+                    
+                    if (isCnRole && data.names && data.names.length > 0) {
+                        console.log(' CN Role found:', role, 'Names:', data.names);
+                        data.names.forEach(name => cnNames.add(name));
+                    }
+                });
+                
+                const cnArray = Array.from(cnNames).sort();
+                console.log(' Final CN names array:', cnArray);
+                document.getElementById('result').innerHTML = `
+                    <h2>CN Names Found (${cnArray.length}):</h2>
+                    <ul>${cnArray.map(name => `<li>${name}</li>`).join('')}</ul>
+                `;
+            },
+            (error) => {
+                console.error(' Error:', error);
+                document.getElementById('result').innerHTML = `<h2>Error: ${error.message}</h2>`;
+            }
+        );
+    </script>
+</head>
+<body>
+    <h1>Testing CN Loading from Firebase</h1>
+    <div id="result">Loading...</div>
+</body>
+</html>

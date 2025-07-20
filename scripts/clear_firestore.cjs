@@ -45,7 +45,7 @@ async function clearCollection(firebaseConfig, collectionArg) {
     for (const docSnap of snapshot.docs) {
       await deleteDoc(doc(db, colName, docSnap.id));
     }
-    console.log(`✅ Cleared all documents from collection '${colName}'.`);
+    console.log(` Cleared all documents from collection '${colName}'.`);
   } catch (err) {
     console.error(`Error clearing collection '${colName}':`, err);
   }

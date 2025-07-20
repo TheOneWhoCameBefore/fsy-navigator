@@ -10,10 +10,19 @@
     "dev": "vite",
     "build": "vite build",
     "lint": "eslint . --ext js,jsx --report-unused-disable-directives --max-warnings 0",
-    "preview": "vite preview"
+    "preview": "vite preview",
+    "setup-spots": "node scripts/upload_camp_selection_sample_data.cjs",
+    "export-spots": "node scripts/export_claimed_spots.cjs",
+    "reset-spots": "node scripts/reset_all_spots.cjs",
+    "import-mymaps": "node scripts/import_google_mymaps.cjs",
+    "upload-companies": "node scripts/upload_company_names.cjs",
+    "upload-indoor": "node scripts/upload_indoor_locations.cjs",
+    "setup-all": "node scripts/setup_all_data.cjs",
+    "remove-emojis": "node scripts/remove_emojis.cjs"
   },
   "dependencies": {
     "firebase": "^10.0.0",
+    "leaflet": "^1.9.4",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "swiper": "^11.0.0"
@@ -22,6 +31,7 @@
     "@types/react": "^18.2.66",
     "@types/react-dom": "^18.2.22",
     "@vitejs/plugin-react": "^4.2.1",
+    "csv-parser": "^3.0.0",
     "eslint": "^8.57.0",
     "eslint-plugin-react": "^7.34.1",
     "eslint-plugin-react-hooks": "^4.6.0",
