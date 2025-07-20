@@ -1,0 +1,137 @@
+Weekday,Start Time,End Time,Role,Event Name,Event Abbreviation,Event Type,Event Description
+Sunday,6:00 PM,6:45 PM,Agenda,SC/AC/WC Meeting,ME,Agenda,"A coordination meeting for Session Coordinators, Assistant Coordinators, and Wellness Coordinators."
+Sunday,6:45 PM,7:00 PM,Agenda,Roll Call and Transition,RC,Agenda,A brief gathering to account for all staff and transition to the next activity.
+Sunday,7:00 PM,7:45 PM,Agenda,Session Adviser Message,SA,Agenda,A mandatory meeting with an uplifting message and final instructions from the Session Adviser to the staff.
+Sunday,7:45 PM,8:00 PM,Agenda,Move to AC/CN Breakout,TR,Agenda,Transition time for Assistant Coordinators and Counselors to move to their breakout session locations.
+Sunday,8:00 PM,8:15 PM,Agenda,AC/CN Breakout,ME,Agenda,"A breakout session for Assistant Coordinators and Counselors to get to build relationships, answer questions, and set expectations."
+Sunday,8:15 PM,9:15 PM,Agenda,Mingle | Meet Your Co-CN | CN Interviews | Door Tag Prep,PL,Agenda,"A multi-purpose time for staff to mingle, for co-counselors to meet, for counselor interviews to be conducted, and for door tag preparation."
+Monday,7:30 AM,8:20 AM,Agenda,Staff Breakfast,BR,Agenda,A breakfast for all staff members to start the day together.
+Monday,8:20 AM,8:30 AM,Agenda,Transition,TR,Agenda,Move to staff business meeting.
+Monday,8:30 AM,9:15 AM,Agenda,Staff Business Meeting,ME,Agenda,A meeting to discuss the business and logistical aspects of the FSY session.
+Monday,9:15 AM,10:00 AM,Agenda,Co-counselor Planning,CO,Agenda,Dedicated time for co-counselors to plan and coordinate their activities for their companies.
+Monday,10:00 AM,11:00 AM,Agenda,Check-In Set Up,CH,Agenda,"Time to prepare the check-in area for participant arrival by setting out name cards, wristbands, shirts, and handbooks."
+Monday,11:00 AM,12:00 PM,Agenda,Participant Check-In 1,CH,Agenda,"The first shift of participant arrivals, check-in, and room assignments."
+Monday,12:00 PM,1:00 PM,Agenda,Participant Check-In 2,CH,Agenda,"The second shift of participant arrivals, check-in, and room assignments."
+Monday,1:00 PM,1:15:00 PM,Agenda,Transition,TR,Agenda,Wrap up Check-In and start room checks.
+Monday,1:15 PM,1:30 PM,Agenda,Participant Room Checks,RC,Agenda,Ensuring participants are settled in their rooms and check for damages.
+Monday,1:30 PM,2:20 PM,Agenda,Meet Your Counselor | Head Count,CO,Agenda,An initial meeting for participants to get to know their counselor and to set expectations for the week.
+Monday,2:20 PM,2:30 PM,Agenda,Travel to Meet Your Company,TR,Agenda,Participants and counselors travel to their designated company meeting spots.
+Monday,2:30 PM,3:00 PM,Agenda,Meet Your Company,CO,Agenda,"The first official meeting of each company, a time for introductions and icebreakers."
+Monday,3:00 PM,3:15 PM,Agenda,"Company Name, Scripture, and Chant",CO,Agenda,"Companies discuss together their unique name and scripture, along with a chant that they will use throughout the week."
+Monday,3:15 PM,3:30 PM,Agenda,Travel to Orientation,TR,Agenda,Movement of all companies to the main orientation location.
+Monday,3:30 PM,4:30 PM,Agenda,Orientation,OR,Agenda,"The official welcome and orientation to the FSY session, covering rules, schedules, and expectations."
+Monday,4:30 PM,6:00 PM,Agenda,Dinner,DI,Agenda,Dinner for all participants and staff.
+Monday,6:00 PM,6:15 PM,Agenda,Meet with Company & Travel to Home Evening,TR,Agenda,Companies gather and then travel together to the home evening lesson.
+Monday,6:15 PM,7:00 PM,Agenda,Home Evening Lesson,HL,Agenda,A spiritual lesson and presentation by the Session Adviser.
+Monday,7:00 PM,7:15 PM,Agenda,Travel to Company Spot,TR,Agenda,Companies travel back to their designated company spots.
+Monday,7:15 PM,8:00 PM,Agenda,Home Evening Games,HG,Agenda,Fun and interactive games for each company to play together.
+Monday,8:00 PM,8:45 PM,Agenda,Home Evening Goal-Setting,HG,Agenda,A time for participants to set company and personal goals for the week.
+Monday,8:45 PM,9:00 PM,Agenda,Travel,TR,Agenda,Movement to the dorms.
+Monday,9:00 PM,9:30 PM,Agenda,"Head Count, Reflect & Review, Journaling, Prayer",RR,Agenda,"A nightly routine of headcount, reflection on the day's events, journaling, and a company prayer."
+Monday,9:30 PM,10:15 PM,Agenda,Quiet Time - Get Ready for Bed,QU,Agenda,A designated time for participants to wind down and prepare for bed.
+Monday,10:15 PM,10:30 PM,Agenda,Lights Out,LO,Agenda,The official time for all lights to be out in the dorms.
+Tuesday,6:00 AM,7:10 AM,Agenda,Morning Exercise,EX,Agenda,Time for participants to exercise.
+Tuesday,7:10 AM,7:20 AM,Agenda,AC/CN Meeting,ME,Agenda,A meeting for Assistant Coordinators and Counselors.
+Tuesday,7:20 AM,7:30 AM,Agenda,Participant Devotional,DV,Agenda,A devotional led by the participants.
+Tuesday,7:30 AM,8:30 AM,Agenda,Breakfast,BR,Agenda,Breakfast for all participants and staff.
+Tuesday,8:30 AM,9:30 AM,Agenda,Gospel Study,GS,Agenda,Personal and group gospel study time for participants.
+Tuesday,9:30 AM,9:45 AM,Agenda,Travel to Morning Devotional,TR,Agenda,Movement to the location for the morning devotional.
+Tuesday,9:45 AM,10:30 AM,Agenda,Morning Devotional,DV,Agenda,"A short, spiritual devotional led by the Session Advisor to start the day."
+Tuesday,10:30 AM,10:45 AM,Agenda,Travel to Classes,TR,Agenda,Movement to the various classroom locations.
+Tuesday,10:45 AM,11:30 AM,Agenda,Classes - Hear Him!,CL,Agenda,A class focused on learning how to receive personal revelation.
+Tuesday,11:30 AM,11:45 AM,Agenda,Travel between Classes,TR,Agenda,Movement between the various classroom locations.
+Tuesday,11:45 AM,12:30 PM,Agenda,Classes - Finding Answers to Questions,CL,Agenda,A class focused on how to find answers to gospel questions.
+Tuesday,12:30 PM,1:30 PM,Agenda,Lunch,LU,Agenda,Lunch for all participants and staff.
+Tuesday,1:30 PM,1:45 PM,Agenda,Travel to Classes,TR,Agenda,Movement to the various classroom locations.
+Tuesday,1:45 PM,2:30 PM,Agenda,Classes,CL,Agenda,General class time for various gospel topics.
+Tuesday,2:30 PM,2:45 PM,Agenda,Travel between Classes,TR,Agenda,Movement between the various classroom locations.
+Tuesday,2:45 PM,3:30 PM,Agenda,Classes,CL,Agenda,General class time for various gospel topics.
+Tuesday,3:30 PM,6:00 PM,Agenda,Participant Flex Time and Dinner,FT,Agenda,A block of free time for participants to choose their own activities.
+Tuesday,6:00 PM,6:30 PM,Agenda,Taking Charge of Technology #ShareGoodness,SG,Agenda,A company activity focused on using technology for good.
+Tuesday,6:30 PM,7:00 PM,Agenda,Banner and Cheer Prep,BC,Agenda,Time for companies to work on their banners and cheers.
+Tuesday,7:00 PM,7:15 PM,Agenda,FSY Social Etiquette,SE,Agenda,A lesson and discussion on appropriate social etiquette and dance tips.
+Tuesday,7:15 PM,8:45 PM,Agenda,Dance,DA,Agenda,A fun and energetic dance for all participants.
+Tuesday,8:45 PM,9:00 PM,Agenda,Travel,TR,Agenda,Movement to the dorms.
+Tuesday,9:00 PM,9:30 PM,Agenda,"Head Count, Reflect & Review, Journaling, Prayer",RR,Agenda,"A nightly routine of headcount, reflection on the day's events, journaling, and a company prayer."
+Tuesday,9:30 PM,10:15 PM,Agenda,Quiet Time - Get Ready for Bed,QU,Agenda,A designated time for participants to wind down and prepare for bed.
+Tuesday,10:15 PM,10:30 PM,Agenda,Lights Out,LO,Agenda,The official time for all lights to be out in the dorms.
+Wednesday,6:00 AM,7:10 AM,Agenda,Morning Exercise,EX,Agenda,Time for participants to exercise.
+Wednesday,7:10 AM,7:20 AM,Agenda,AC/CN Meeting,ME,Agenda,A meeting for Assistant Coordinators and Counselors.
+Wednesday,7:20 AM,7:30 AM,Agenda,Participant Devotional,DV,Agenda,A devotional led by the participants.
+Wednesday,7:30 AM,8:30 AM,Agenda,Breakfast,BR,Agenda,Breakfast for all participants and staff.
+Wednesday,8:30 AM,9:30 AM,Agenda,Gospel Study,GS,Agenda,Personal and group gospel study time for participants.
+Wednesday,9:30 AM,9:45 AM,Agenda,Travel to Morning Devotional,TR,Agenda,Movement to the location for the morning devotional.
+Wednesday,9:45 AM,10:30 AM,Agenda,Morning Devotional,DV,Agenda,"A short, spiritual devotional led by the Session Advisor to start the day."
+Wednesday,10:30 AM,10:45 AM,Agenda,Travel to Classes,TR,Agenda,Movement to the various classroom locations.
+Wednesday,10:45 AM,11:30 AM,Agenda,Classes,CL,Agenda,General class time for various gospel topics.
+Wednesday,11:30 AM,11:45 AM,Agenda,Travel between Classes,TR,Agenda,Movement between the various classroom locations.
+Wednesday,11:45 AM,12:30 PM,Agenda,Classes,CL,Agenda,General class time for various gospel topics.
+Wednesday,12:30 PM,1:30 PM,Agenda,Lunch,LU,Agenda,Lunch for all participants and staff.
+Wednesday,1:30 PM,1:45 PM,Agenda,Travel to Classes,TR,Agenda,Movement to the various classroom locations.
+Wednesday,1:45 PM,2:30 PM,Agenda,Classes,CL,Agenda,General class time for various gospel topics.
+Wednesday,2:30 PM,2:45 PM,Agenda,Travel between Classes,TR,Agenda,Movement between the various classroom locations.
+Wednesday,2:45 PM,3:30 PM,Agenda,Classes,CL,Agenda,General class time for various gospel topics.
+Wednesday,3:30 PM,6:00 PM,Agenda,Participant Flex Time and Dinner,FT,Agenda,A block of free time for participants to choose their own activities.
+Wednesday,6:00 PM,6:30 PM,Agenda,Games Night Prep,GN,Agenda,Preparation for games night.
+Wednesday,6:30 PM,6:45 PM,Agenda,Travel to Games Night,TR,Agenda,Movement to the location for games night.
+Wednesday,6:45 PM,8:00 PM,Agenda,Games Night and Cheer-Off,GN,Agenda,An evening of fun games and a friendly cheer competition between companies.
+Wednesday,8:00 PM,8:15 PM,Agenda,Travel to Pizza Night,TR,Agenda,Movement to the dorms.
+Wednesday,8:15 PM,9:00 PM,Agenda,Pizza Night,PN,Agenda,A fun pizza party for all participants.
+Wednesday,9:00 PM,9:30 PM,Agenda,"Head Count, Reflect & Review, Journaling, Prayer",RR,Agenda,"A nightly routine of headcount, reflection on the day's events, journaling, and a company prayer."
+Wednesday,9:30 PM,10:15 PM,Agenda,Quiet Time - Get Ready for Bed,QU,Agenda,A designated time for participants to wind down and prepare for bed.
+Wednesday,10:15 PM,10:30 PM,Agenda,Lights Out,LO,Agenda,The official time for all lights to be out in the dorms.
+Thursday,6:00 AM,7:10 AM,Agenda,Morning Exercise,EX,Agenda,Time for participants to exercise.
+Thursday,7:10 AM,7:20 AM,Agenda,AC/CN Meeting,ME,Agenda,A meeting for Assistant Coordinators and Counselors.
+Thursday,7:20 AM,7:30 AM,Agenda,Participant Devotional,DV,Agenda,A devotional led by the participants.
+Thursday,7:30 AM,8:30 AM,Agenda,Breakfast,BR,Agenda,Breakfast for all participants and staff.
+Thursday,8:30 AM,9:30 AM,Agenda,Gospel Study,GS,Agenda,Personal and group gospel study time for participants.
+Thursday,9:30 AM,9:45 AM,Agenda,Travel,TR,Agenda,Movement to the location for the YM/YW Activities.
+Thursday,9:45 AM,11:00 AM,Agenda,Young Men Morning Devotional and Young Women Activity,YM,Agenda,A morning devotional specifically for the young men while the young women complete the activity on the family.
+Thursday,11:00 AM,11:15 AM,Agenda,Travel between Devotional and Activity,TR,Agenda,Movement between the location for the YM/YW Activities.
+Thursday,11:15 AM,12:30 PM,Agenda,Young Women Morning Devotional and Young Men Activity,YW,Agenda,A morning devotional specifically for the young women while the young men complete the activity on the family.
+Thursday,12:30 PM,1:30 PM,Agenda,Lunch,LU,Agenda,Lunch for all participants and staff.
+Thursday,1:30 PM,2:00 PM,Agenda,Variety Show Guidelines,VS,Agenda,Reviewing the guidelines for the variety show.
+Thursday,2:00 PM,2:15 PM,Agenda,Travel to Variety Show,TR,Agenda,Movement to the location of the variety show.
+Thursday,2:15 PM,3:30 PM,Agenda,Variety Show,VS,Agenda,A showcase of the variety of the FSY participants.
+Thursday,3:30 PM,5:50 PM,Agenda,Participant Flex Time and Dinner,FT,Agenda,A block of free time for participants to choose their own activities.
+Thursday,5:50 PM,6:05 PM,Agenda,Reverence-Testimony Discussion,RT,Agenda,A discussion about reverence and the sacred nature of testimony meetings.
+Thursday,6:05 PM,6:20 PM,Agenda,Seating for Musical Program and Evening Devotional,MP,Agenda,Participants and staff get seated for the evening's events.
+Thursday,6:20 PM,6:55 PM,Agenda,Musical Program,MP,Agenda,A musical performance by the participants.
+Thursday,6:55 PM,7:30 PM,Agenda,Evening Devotional,DV,Agenda,An evening devotional for all participants.
+Thursday,7:30 PM,7:40 PM,Agenda,Testimony Writing,TE,Agenda,A quiet time for participants to reflect and write their testimonies.
+Thursday,7:40 PM,7:50 PM,Agenda,Seating for Testimony Meetings,TE,Agenda,Participants and staff get seated for the testimony meetings.
+Thursday,7:50 PM,8:40 PM,Agenda,Testimony Meetings,TE,Agenda,A sacred meeting where participants can share their testimonies.
+Thursday,8:40 PM,9:00 PM,Agenda,Travel,TR,Agenda,Movement to the dorms.
+Thursday,9:00 PM,9:30 PM,Agenda,"Head Count, Reflect & Review, Journaling, Prayer",RR,Agenda,"A nightly routine of headcount, reflection on the day's events, journaling, and a company prayer."
+Thursday,9:30 PM,10:15 PM,Agenda,Quiet Time - Get Ready for Bed,QU,Agenda,A designated time for participants to wind down and prepare for bed.
+Thursday,10:15 PM,10:30 PM,Agenda,Lights Out,LO,Agenda,The official time for all lights to be out in the dorms.
+Friday,6:00 AM,7:10 AM,Agenda,Morning Exercise,EX,Agenda,Time for participants to exercise.
+Friday,7:10 AM,7:20 AM,Agenda,AC/CN Meeting,ME,Agenda,A meeting for Assistant Coordinators and Counselors.
+Friday,7:20 AM,7:30 AM,Agenda,Participant Devotional,DV,Agenda,A devotional led by the participants.
+Friday,7:30 AM,8:30 AM,Agenda,Breakfast,BR,Agenda,Breakfast for all participants and staff.
+Friday,8:30 AM,9:30 AM,Agenda,Gospel Study,GS,Agenda,Personal and group gospel study time for participants.
+Friday,9:30 AM,9:45 AM,Agenda,Travel to Morning Devotional,TR,Agenda,Movement to the location for the morning devotional.
+Friday,9:45 AM,10:30 AM,Agenda,Morning Devotional,DV,Agenda,"A short, spiritual devotional by the Session Advisor to start the day."
+Friday,10:30 AM,10:45 AM,Agenda,Travel,TR,Agenda,Movement to company spots.
+Friday,10:45 AM,12:00 PM,Agenda,Sharing the Gospel Activity,SH,Agenda,An activity focused on learning how to share the gospel with others.
+Friday,12:00 PM,12:30 PM,Agenda,#ShareGoodness Debrief,SG,Agenda,A debrief and discussion about the #ShareGoodness initiative.
+Friday,12:30 PM,1:30 PM,Agenda,Lunch,LU,Agenda,Lunch for all participants and staff.
+Friday,1:30 PM,1:45 PM,Agenda,Travel to Slide Show and Taking It Home Showcase,TR,Agenda,Movement to the location of the final events.
+Friday,1:45 PM,2:45 PM,Agenda,Taking It Home Showcase and Slideshow,TH,Agenda,A final showcase to help participants take the lessons of FSY home with them.
+Friday,2:45 PM,3:00 PM,Agenda,Travel,TR,Agenda,Movement to copmpany spots.
+Friday,3:00 PM,3:30 PM,Agenda,Goal-Setting Review,GR,Agenda,A review of the goals that were set at the beginning of the week.
+Friday,3:30 PM,6:00 PM,Agenda,"Participant Flex Time, Packing, and Dinner",FT,Agenda,A block of free time for participants to choose their own activities and pack.
+Friday,6:00 PM,6:15 PM,Agenda,Picture Taking,PI,Agenda,A time for group pictures.
+Friday,6:15 PM,8:00 PM,Agenda,Dance,DA,Agenda,A fun and energetic dance for all participants.
+Friday,8:00 PM,8:15 PM,Agenda,Transition Time,TR,Agenda,Gather as a company and review lost and found.
+Friday,8:15 PM,8:45 PM,Agenda,Taking It Home Message,TH,Agenda,"A final, uplifting message by the Session Advisor to conclude the FSY session."
+Friday,8:45 PM,9:00 PM,Agenda,Travel to Company Spots,TR,Agenda,Companies travel to their company spots for the last time.
+Friday,9:00 PM,9:30 PM,Agenda,Company Taking It Home,CO,Agenda,A final company meeting to discuss how to apply the lessons learned at FSY.
+Friday,9:30 PM,9:45 PM,Agenda,Travel,TR,Agenda,Movement to the dorms.
+Friday,9:45 PM,10:15 PM,Agenda,Head Count | Quiet Time—Get Ready for Bed Announcements | Prayer,RR,Agenda,The final nightly routine.
+Friday,10:15 PM,10:30 PM,Agenda,Lights Out,LO,Agenda,The official time for all lights to be out in the dorms.
+Friday,10:30 PM,10:50 PM,Agenda,Night Watch,NW,Agenda,Staff will monitor the dorms throughout the night to ensure safety and security.
+Saturday,6:30 AM,7:00 AM,Agenda,Prepare to Leave,PR,Agenda,Ensuring all participants are ready to leave the dorms and have their belongings packed.
+Saturday,7:00 AM,7:30 AM,Agenda,Post-session Room Checks,RC,Agenda,Checking rooms for cleanliness and damages after participants have left.
+Saturday,7:30 AM,7:45 AM,Agenda,Mandatory Wrap-up Meeting,ME,Agenda,A mandatory final meeting for all staff to wrap up the session.
+Saturday,7:45 AM,8:30 AM,Agenda,Staff Breakfast,BR,Agenda,An optional breakfast for staff members to conclude the session.

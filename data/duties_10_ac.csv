@@ -1,0 +1,1356 @@
+Weekday,Start Time,End Time,Role,Event Name,Event Abbreviation,Event Type,Event Description
+Sunday,6:00 PM,6:45 PM,AC 1,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,6:00 PM,6:45 PM,AC 2,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,6:00 PM,6:45 PM,AC 3,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,6:00 PM,6:45 PM,AC 4,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,6:00 PM,6:45 PM,AC 5,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,6:00 PM,6:45 PM,AC 6,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,6:00 PM,6:45 PM,AC 7,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,6:00 PM,6:45 PM,AC 8,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,6:00 PM,6:45 PM,AC 9,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,6:00 PM,6:45 PM,AC 10,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,6:00 PM,7:00 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:00 PM,7:00 PM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:00 PM,7:00 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:00 PM,7:00 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:00 PM,7:00 PM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:00 PM,7:00 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:00 PM,7:00 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:00 PM,7:00 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:00 PM,7:00 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:00 PM,7:00 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:45 PM,7:00 PM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:45 PM,7:00 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:45 PM,7:00 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:45 PM,7:00 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:45 PM,7:00 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:45 PM,7:00 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:45 PM,7:00 PM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:45 PM,7:00 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:45 PM,7:00 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,6:45 PM,7:00 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:00 PM,7:50 PM,CN A,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,CN B,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,CN C,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,CN D,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,CN E,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,CN F,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,CN G,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,CN H,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,CN I,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,CN J,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,AC 1,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,AC 2,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,AC 3,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,AC 4,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,AC 5,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,AC 6,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,AC 7,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,AC 8,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,AC 9,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:00 PM,7:50 PM,AC 10,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,7:50 PM,8:00 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,7:50 PM,8:00 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,8:00 PM,8:15 PM,CN A,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,CN B,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,CN C,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,CN D,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,CN E,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,CN F,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,CN G,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,CN H,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,CN I,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,CN J,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,AC 1,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,AC 2,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,AC 3,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,AC 4,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,AC 5,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,AC 6,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,AC 7,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,AC 8,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,AC 9,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:00 PM,8:15 PM,AC 10,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Sunday,8:15 PM,9:15 PM,AC 1,Interviews,IN,duty,A specific duty or task: Interviews.
+Sunday,8:15 PM,9:15 PM,AC 2,Interviews,IN,duty,A specific duty or task: Interviews.
+Sunday,8:15 PM,9:15 PM,AC 3,Interviews,IN,duty,A specific duty or task: Interviews.
+Sunday,8:15 PM,9:15 PM,AC 4,Interviews,IN,duty,A specific duty or task: Interviews.
+Sunday,8:15 PM,9:15 PM,AC 5,Interviews,IN,duty,A specific duty or task: Interviews.
+Sunday,8:15 PM,9:15 PM,AC 6,Interviews,IN,duty,A specific duty or task: Interviews.
+Sunday,8:15 PM,9:15 PM,AC 7,Interviews,IN,duty,A specific duty or task: Interviews.
+Sunday,8:15 PM,9:15 PM,AC 8,Interviews,IN,duty,A specific duty or task: Interviews.
+Sunday,8:15 PM,9:15 PM,AC 9,Interviews,IN,duty,A specific duty or task: Interviews.
+Sunday,8:15 PM,9:15 PM,AC 10,Interviews,IN,duty,A specific duty or task: Interviews.
+Sunday,8:15 PM,9:55 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,8:15 PM,9:55 PM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,8:15 PM,9:55 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,8:15 PM,9:55 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,8:15 PM,9:55 PM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,8:15 PM,9:55 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,8:15 PM,9:55 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,8:15 PM,9:55 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,8:15 PM,9:55 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,8:15 PM,9:55 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,9:15 PM,9:55 PM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,9:15 PM,9:55 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,9:15 PM,9:55 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,9:15 PM,9:55 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,9:15 PM,9:55 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,9:15 PM,9:55 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,9:15 PM,9:55 PM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,9:15 PM,9:55 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,9:15 PM,9:55 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Sunday,9:15 PM,9:55 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,8:00 AM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,8:00 AM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,8:00 AM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,8:00 AM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,8:00 AM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,8:00 AM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,8:00 AM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,8:00 AM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,8:00 AM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,8:00 AM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:00 AM,8:25 AM,AC 1,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:00 AM,8:25 AM,AC 2,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:00 AM,8:25 AM,AC 3,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:00 AM,8:25 AM,AC 4,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:00 AM,8:25 AM,AC 5,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:00 AM,8:25 AM,AC 6,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:00 AM,8:25 AM,AC 7,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:00 AM,8:25 AM,AC 8,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:00 AM,8:25 AM,AC 9,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:00 AM,8:25 AM,AC 10,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:25 AM,8:30 AM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:25 AM,8:30 AM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:25 AM,8:30 AM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:25 AM,8:30 AM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:25 AM,8:30 AM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:25 AM,8:30 AM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:25 AM,8:30 AM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:25 AM,8:30 AM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:25 AM,8:30 AM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:25 AM,8:30 AM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:30 AM,9:15 AM,AC 1,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:30 AM,9:15 AM,AC 2,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:30 AM,9:15 AM,AC 3,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:30 AM,9:15 AM,AC 4,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:30 AM,9:15 AM,AC 5,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:30 AM,9:15 AM,AC 6,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:30 AM,9:15 AM,AC 7,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:30 AM,9:15 AM,AC 8,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:30 AM,9:15 AM,AC 9,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,8:30 AM,9:15 AM,AC 10,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,7:30 AM,10:00 AM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,10:00 AM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,9:15 AM,10:00 AM,AC 1,Interviews,IN,duty,A specific duty or task: Interviews.
+Monday,9:15 AM,10:00 AM,AC 2,Interviews,IN,duty,A specific duty or task: Interviews.
+Monday,9:15 AM,10:00 AM,AC 3,Interviews,IN,duty,A specific duty or task: Interviews.
+Monday,9:15 AM,10:00 AM,AC 4,Interviews,IN,duty,A specific duty or task: Interviews.
+Monday,9:15 AM,10:00 AM,AC 5,Interviews,IN,duty,A specific duty or task: Interviews.
+Monday,9:15 AM,10:00 AM,AC 6,Interviews,IN,duty,A specific duty or task: Interviews.
+Monday,9:15 AM,10:00 AM,AC 7,Interviews,IN,duty,A specific duty or task: Interviews.
+Monday,9:15 AM,10:00 AM,AC 8,Interviews,IN,duty,A specific duty or task: Interviews.
+Monday,9:15 AM,10:00 AM,AC 9,Interviews,IN,duty,A specific duty or task: Interviews.
+Monday,9:15 AM,10:00 AM,AC 10,Interviews,IN,duty,A specific duty or task: Interviews.
+Monday,7:30 AM,11:00 AM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,11:00 AM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,11:00 AM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,11:00 AM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,10:00 AM,11:00 AM,CN E,Check-In Set Up,CH,duty,A specific duty or task: Check-In Set Up.
+Monday,10:00 AM,11:00 AM,CN F,Check-In Set Up,CH,duty,A specific duty or task: Check-In Set Up.
+Monday,7:30 AM,11:00 AM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,11:00 AM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,11:00 AM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:30 AM,11:00 AM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,10:00 AM,11:00 AM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,10:00 AM,11:00 AM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,10:00 AM,11:00 AM,AC 3,Check-In Set Up,CH,duty,A specific duty or task: Check-In Set Up.
+Monday,10:00 AM,11:00 AM,AC 4,Music Performance Coordinator (Singers),MU,duty,A specific duty or task: Music Performance Coordinator (Singers).
+Monday,10:00 AM,11:00 AM,AC 6,Check-In Set Up,CH,duty,A specific duty or task: Check-In Set Up.
+Monday,10:00 AM,11:00 AM,AC 8,Check-In Set Up,CH,duty,A specific duty or task: Check-In Set Up.
+Monday,10:00 AM,11:00 AM,AC 10,Counselor Dance,CO,duty,A specific duty or task: Counselor Dance.
+Monday,11:00 AM,12:00 PM,CN A,Check-in #1,CH,duty,Task related to participant check-in or out: Check-in #1.
+Monday,11:00 AM,12:00 PM,CN B,Check-in #1,CH,duty,Task related to participant check-in or out: Check-in #1.
+Monday,11:00 AM,12:00 PM,CN C,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,11:00 AM,12:00 PM,CN D,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,11:00 AM,12:00 PM,CN G,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,11:00 AM,12:00 PM,CN H,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,11:00 AM,12:00 PM,CN I,Check-in #1,CH,duty,Task related to participant check-in or out: Check-in #1.
+Monday,11:00 AM,12:00 PM,CN J,Check-in #1,CH,duty,Task related to participant check-in or out: Check-in #1.
+Monday,11:00 AM,12:00 PM,AC 1,Check-in #1,CH,duty,Task related to participant check-in or out: Check-in #1.
+Monday,11:00 AM,12:00 PM,AC 2,Check-in #1,CH,duty,Task related to participant check-in or out: Check-in #1.
+Monday,11:00 AM,12:00 PM,AC 3,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,11:00 AM,12:00 PM,AC 4,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,11:00 AM,12:00 PM,AC 6,Check-in #1,CH,duty,Task related to participant check-in or out: Check-in #1.
+Monday,10:00 AM,12:00 PM,AC 7,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,11:00 AM,12:00 PM,AC 8,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,11:00 AM,12:00 PM,AC 10,Check-in #1,CH,duty,Task related to participant check-in or out: Check-in #1.
+Monday,12:00 PM,1:00 PM,CN A,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,12:00 PM,1:00 PM,CN B,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,12:00 PM,1:00 PM,CN C,Check-in #2,CH,duty,Task related to participant check-in or out: Check-in #2.
+Monday,12:00 PM,1:00 PM,CN D,Check-in #2,CH,duty,Task related to participant check-in or out: Check-in #2.
+Monday,11:00 AM,1:00 PM,CN E,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,11:00 AM,1:00 PM,CN F,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,12:00 PM,1:00 PM,CN G,Check-in #2,CH,duty,Task related to participant check-in or out: Check-in #2.
+Monday,12:00 PM,1:00 PM,CN H,Check-in #2,CH,duty,Task related to participant check-in or out: Check-in #2.
+Monday,12:00 PM,1:00 PM,CN I,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,12:00 PM,1:00 PM,CN J,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,12:00 PM,1:00 PM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,12:00 PM,1:00 PM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,12:00 PM,1:00 PM,AC 3,Check-in #2,CH,duty,Task related to participant check-in or out: Check-in #2.
+Monday,12:00 PM,1:00 PM,AC 4,Check-in #2,CH,duty,Task related to participant check-in or out: Check-in #2.
+Monday,10:00 AM,1:00 PM,AC 5,Check-In Coordinator,CH,duty,A specific duty or task: Check-In Coordinator.
+Monday,12:00 PM,1:00 PM,AC 7,Check-in #2,CH,duty,Task related to participant check-in or out: Check-in #2.
+Monday,12:00 PM,1:00 PM,AC 8,Check-in #2,CH,duty,Task related to participant check-in or out: Check-in #2.
+Monday,10:00 AM,1:00 PM,AC 9,Bus Arrival,BU,duty,A specific duty or task: Bus Arrival.
+Monday,12:00 PM,1:00 PM,AC 10,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,1:00 PM,1:30 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,1:30 PM,3:00 PM,AC 5,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,12:00 PM,3:00 PM,AC 6,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,1:00 PM,3:00 PM,AC 7,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,1:00 PM,3:00 PM,AC 9,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,1:00 PM,3:15 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,1:00 PM,3:15 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,3:00 PM,3:15 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,3:00 PM,3:15 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,3:00 PM,3:15 PM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,1:00 PM,3:15 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,3:00 PM,3:15 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,3:15 PM,3:30 PM,AC 3,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,3:15 PM,3:30 PM,AC 4,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,3:15 PM,3:30 PM,AC 5,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,3:15 PM,3:30 PM,AC 6,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,3:15 PM,3:30 PM,AC 7,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,3:15 PM,3:30 PM,AC 8,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,3:15 PM,3:30 PM,AC 9,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,1:00 PM,3:30 PM,AC 10,Orientation Prep,OR,duty,Activity related to participant orientation.
+Monday,3:30 PM,4:15 PM,AC 3,Orientation,OR,duty,Activity related to participant orientation.
+Monday,3:30 PM,4:15 PM,AC 4,Orientation,OR,duty,Activity related to participant orientation.
+Monday,3:30 PM,4:15 PM,AC 8,Orientation,OR,duty,Activity related to participant orientation.
+Monday,3:30 PM,4:15 PM,AC 9,Orientation,OR,duty,Activity related to participant orientation.
+Monday,1:00 PM,4:30 PM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,1:00 PM,4:30 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,1:00 PM,4:30 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,1:00 PM,4:30 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,1:00 PM,4:30 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,1:00 PM,4:30 PM,AC 2,Site-office,SI,duty,A specific duty or task: Site-office.
+Monday,3:30 PM,4:30 PM,AC 5,Orientation/Hallway Supervision,OR,duty,Activity related to participant orientation.
+Monday,3:30 PM,4:30 PM,AC 6,Orientation/Hallway Supervision,OR,duty,Activity related to participant orientation.
+Monday,3:30 PM,4:30 PM,AC 7,Orientation,OR,duty,Activity related to participant orientation.
+Monday,3:30 PM,4:30 PM,AC 10,Devotional Coordinator,DE,duty,A specific duty or task: Devotional Coordinator.
+Monday,4:30 PM,5:30 PM,CN B,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,4:30 PM,5:30 PM,CN D,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,4:30 PM,5:30 PM,CN F,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,4:30 PM,5:30 PM,CN H,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,4:30 PM,5:30 PM,CN J,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,1:00 PM,6:00 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,1:00 PM,6:00 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,1:00 PM,6:00 PM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,1:00 PM,6:00 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,1:00 PM,6:00 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,1:00 PM,6:00 PM,AC 1,Site-office,SI,duty,A specific duty or task: Site-office.
+Monday,4:30 PM,6:00 PM,AC 2,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Monday,4:15 PM,6:00 PM,AC 3,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Monday,4:15 PM,6:00 PM,AC 4,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Monday,4:30 PM,6:00 PM,AC 5,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,4:30 PM,6:00 PM,AC 6,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Monday,4:30 PM,6:00 PM,AC 7,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Monday,4:15 PM,6:00 PM,AC 8,Dinner Coordinator,DI,duty,Support task related to mealtime: Dinner Coordinator.
+Monday,4:15 PM,6:00 PM,AC 9,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Monday,4:30 PM,6:00 PM,AC 10,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Monday,6:00 PM,6:15 PM,AC 1,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,6:00 PM,6:15 PM,AC 2,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,6:00 PM,6:15 PM,AC 3,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,6:00 PM,6:15 PM,AC 4,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,6:00 PM,6:15 PM,AC 5,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,6:00 PM,6:15 PM,AC 6,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,6:00 PM,6:15 PM,AC 8,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,6:00 PM,6:15 PM,AC 9,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,6:00 PM,6:15 PM,AC 10,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Monday,6:00 PM,7:00 PM,CN A,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,6:00 PM,7:00 PM,CN C,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,6:00 PM,7:00 PM,CN E,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,6:00 PM,7:00 PM,CN G,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,6:00 PM,7:00 PM,CN I,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,6:15 PM,7:00 PM,AC 5,Hallway Supervision,HA,duty,A specific duty or task: Hallway Supervision.
+Monday,6:15 PM,7:00 PM,AC 6,Hallway Supervision,HA,duty,A specific duty or task: Hallway Supervision.
+Monday,6:15 PM,7:00 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,6:15 PM,8:00 PM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,6:15 PM,8:00 PM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,6:15 PM,8:00 PM,AC 3,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,6:15 PM,8:00 PM,AC 4,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,7:00 PM,8:00 PM,AC 5,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,6:15 PM,8:00 PM,AC 8,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,7:00 PM,8:00 PM,AC 9,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,6:15 PM,8:00 PM,AC 10,Time-off,OF,break,Scheduled break or personal time away from duties.
+Monday,8:00 PM,9:30 PM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:00 PM,9:30 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:00 PM,9:30 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:00 PM,9:30 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:00 PM,9:30 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:00 PM,9:30 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:00 PM,9:30 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:00 PM,9:30 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,8:00 PM,9:30 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:00 PM,10:15 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,5:30 PM,10:15 PM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:00 PM,10:15 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,5:30 PM,10:15 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:00 PM,10:15 PM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,5:30 PM,10:15 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:00 PM,10:15 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,5:30 PM,10:15 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,7:00 PM,10:15 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,5:30 PM,10:15 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Monday,9:30 PM,10:15 PM,AC 1,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,9:30 PM,10:15 PM,AC 2,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,9:30 PM,10:15 PM,AC 3,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,9:30 PM,10:15 PM,AC 4,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,9:30 PM,10:15 PM,AC 5,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,9:30 PM,10:15 PM,AC 6,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,6:00 PM,10:15 PM,AC 7,Site-office,SI,duty,A specific duty or task: Site-office.
+Monday,9:30 PM,10:15 PM,AC 8,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,9:30 PM,10:15 PM,AC 9,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,9:30 PM,10:15 PM,AC 10,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Monday,10:15 PM,10:25 PM,CN A,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,CN B,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,CN C,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,CN D,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,CN E,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,CN F,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,CN G,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,CN H,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,CN I,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,CN J,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,AC 1,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,AC 2,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,AC 3,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,AC 4,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,AC 5,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,AC 6,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,AC 7,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,AC 8,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,AC 9,Lights Out,LI,free,End-of-day procedure.
+Monday,10:15 PM,10:25 PM,AC 10,Lights Out,LI,free,End-of-day procedure.
+Tuesday,7:10 AM,7:20 AM,AC 1,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,7:10 AM,7:20 AM,AC 2,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,7:10 AM,7:20 AM,AC 3,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,7:10 AM,7:20 AM,AC 4,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,7:10 AM,7:20 AM,AC 5,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,7:10 AM,7:20 AM,AC 6,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,7:10 AM,7:20 AM,AC 7,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,7:10 AM,7:20 AM,AC 8,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,7:10 AM,7:20 AM,AC 9,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,7:10 AM,7:20 AM,AC 10,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,7:20 AM,7:30 AM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,7:20 AM,8:30 AM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,7:20 AM,8:30 AM,AC 4,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Tuesday,7:20 AM,8:30 AM,AC 5,Breakfast Coordinator,BR,duty,Support task related to mealtime: Breakfast Coordinator.
+Tuesday,7:20 AM,8:30 AM,AC 6,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Tuesday,7:20 AM,8:30 AM,AC 7,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Tuesday,7:20 AM,8:30 AM,AC 8,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Tuesday,7:20 AM,8:30 AM,AC 9,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,7:10 AM,9:00 AM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,7:10 AM,9:00 AM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,7:10 AM,9:00 AM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,7:10 AM,9:00 AM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,7:10 AM,9:00 AM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,7:20 AM,9:00 AM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,8:30 AM,9:00 AM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,8:30 AM,9:00 AM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,8:30 AM,9:00 AM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,8:30 AM,9:00 AM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,8:30 AM,9:00 AM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,8:30 AM,9:00 AM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,9:00 AM,9:30 AM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,9:00 AM,9:30 AM,AC 4,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,9:00 AM,9:30 AM,AC 5,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,9:00 AM,9:30 AM,AC 6,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,9:00 AM,9:30 AM,AC 7,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,8:30 AM,9:30 AM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,9:30 AM,9:45 AM,AC 1,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Tuesday,9:30 AM,9:45 AM,AC 5,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Tuesday,9:30 AM,9:45 AM,AC 6,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Tuesday,9:30 AM,9:45 AM,AC 7,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Tuesday,9:30 AM,9:45 AM,AC 9,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Tuesday,9:00 AM,10:15 AM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,9:00 AM,10:30 AM,CN A,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,7:10 AM,10:30 AM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,9:00 AM,10:30 AM,CN C,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,7:10 AM,10:30 AM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,7:10 AM,10:30 AM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,9:00 AM,10:30 AM,CN F,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,9:00 AM,10:30 AM,CN G,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,7:10 AM,10:30 AM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,9:00 AM,10:30 AM,CN I,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,7:10 AM,10:30 AM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,9:45 AM,10:30 AM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,10:15 AM,10:30 AM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,7:30 AM,10:30 AM,AC 3,Site-Office,SI,duty,A specific duty or task: Site-Office.
+Tuesday,9:30 AM,10:30 AM,AC 4,Music Performance Coordinator (Singers),MU,duty,A specific duty or task: Music Performance Coordinator (Singers).
+Tuesday,9:45 AM,10:30 AM,AC 5,Hallway Supervision,HA,duty,A specific duty or task: Hallway Supervision.
+Tuesday,9:45 AM,10:30 AM,AC 6,Hallway Supervision,HA,duty,A specific duty or task: Hallway Supervision.
+Tuesday,9:45 AM,10:30 AM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,9:45 AM,10:30 AM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,7:20 AM,10:30 AM,AC 10,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,9:00 AM,11:15 AM,AC 8,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,10:30 AM,11:30 AM,CN A,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,10:30 AM,11:30 AM,CN B,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,10:30 AM,11:30 AM,CN C,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,10:30 AM,11:30 AM,CN D,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,10:30 AM,11:30 AM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,10:30 AM,11:30 AM,CN H,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,10:30 AM,11:30 AM,AC 1,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,10:30 AM,11:30 AM,AC 2,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,10:30 AM,11:30 AM,AC 3,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,10:30 AM,11:30 AM,AC 4,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,10:30 AM,11:30 AM,AC 7,Class Coordinator,CL,duty,A specific duty or task: Class Coordinator.
+Tuesday,11:15 AM,11:30 AM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,11:30 AM,12:15 PM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,11:30 AM,12:15 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,11:30 AM,12:15 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,10:30 AM,12:15 PM,AC 5,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,10:30 AM,12:15 PM,AC 6,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,10:30 AM,12:15 PM,AC 10,Site-Office,SI,duty,A specific duty or task: Site-Office.
+Tuesday,11:30 AM,12:30 PM,CN A,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,11:30 AM,12:30 PM,CN C,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,11:30 AM,12:30 PM,CN D,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,10:30 AM,12:30 PM,CN E,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,10:30 AM,12:30 PM,CN F,Class Support,CL,duty,A specific duty or task: Class Support.
+Tuesday,11:30 AM,12:30 PM,CN G,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,11:30 AM,12:30 PM,CN H,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,10:30 AM,12:30 PM,CN I,Class Support,CL,duty,A specific duty or task: Class Support.
+Tuesday,10:30 AM,12:30 PM,CN J,Class Support,CL,duty,A specific duty or task: Class Support.
+Tuesday,11:30 AM,12:30 PM,AC 7,Class Coordinator / CN Coordination Meeting,CL,duty,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,11:30 AM,12:30 PM,AC 8,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,10:30 AM,12:30 PM,AC 9,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,12:30 PM,1:00 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,12:30 PM,1:15 PM,AC 7,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,12:15 PM,1:15 PM,AC 10,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,12:30 PM,1:30 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,11:30 AM,1:30 PM,CN B,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,12:30 PM,1:30 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,12:30 PM,1:30 PM,CN E,Lunch Support,LU,duty,Support task related to mealtime: Lunch Support.
+Tuesday,12:30 PM,1:30 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,12:30 PM,1:30 PM,CN H,Lunch Support,LU,duty,Support task related to mealtime: Lunch Support.
+Tuesday,12:30 PM,1:30 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,12:30 PM,1:30 PM,CN J,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,12:15 PM,1:30 PM,AC 1,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Tuesday,12:15 PM,1:30 PM,AC 2,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Tuesday,12:15 PM,1:30 PM,AC 3,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Tuesday,12:15 PM,1:30 PM,AC 5,Site-Office,SI,duty,A specific duty or task: Site-Office.
+Tuesday,12:15 PM,1:30 PM,AC 6,Lunch Coordinator,LU,duty,Support task related to mealtime: Lunch Coordinator.
+Tuesday,12:30 PM,1:30 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,1:15 PM,1:30 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,12:30 PM,2:30 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,1:30 PM,2:30 PM,CN E,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,1:30 PM,2:30 PM,CN F,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,12:30 PM,2:30 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,1:30 PM,2:30 PM,CN I,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,1:30 PM,2:30 PM,CN J,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,1:30 PM,2:30 PM,AC 5,Site-Office / CN Coordination Meeting,SI,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,1:30 PM,2:30 PM,AC 6,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,1:00 PM,2:30 PM,AC 8,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,1:30 PM,2:30 PM,AC 9,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,1:30 PM,2:30 PM,AC 10,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,1:30 PM,2:45 PM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,1:30 PM,2:45 PM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,1:30 PM,2:45 PM,AC 3,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,11:30 AM,2:45 PM,AC 4,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,2:30 PM,2:45 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,2:30 PM,2:45 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,2:30 PM,2:45 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,2:30 PM,2:45 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,1:30 PM,3:30 PM,CN A,Class Support,CL,duty,A specific duty or task: Class Support.
+Tuesday,1:30 PM,3:30 PM,CN B,Class Support,CL,duty,A specific duty or task: Class Support.
+Tuesday,1:30 PM,3:30 PM,CN C,Class Support,CL,duty,A specific duty or task: Class Support.
+Tuesday,2:30 PM,3:30 PM,CN D,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,2:30 PM,3:30 PM,CN E,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,2:30 PM,3:30 PM,CN F,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,2:30 PM,3:30 PM,CN G,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,1:30 PM,3:30 PM,CN H,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,2:30 PM,3:30 PM,CN I,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,2:30 PM,3:30 PM,CN J,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,2:45 PM,3:30 PM,AC 1,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,2:45 PM,3:30 PM,AC 2,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,2:45 PM,3:30 PM,AC 3,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,2:45 PM,3:30 PM,AC 4,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,2:30 PM,3:30 PM,AC 5,Site-Office,SI,duty,A specific duty or task: Site-Office.
+Tuesday,2:45 PM,3:30 PM,AC 6,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,1:15 PM,3:30 PM,AC 7,Class Coordinator,CL,duty,A specific duty or task: Class Coordinator.
+Tuesday,2:45 PM,3:30 PM,AC 8,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,2:45 PM,3:30 PM,AC 9,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,2:45 PM,3:30 PM,AC 10,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,3:30 PM,4:30 PM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,3:30 PM,4:30 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,3:30 PM,4:30 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,3:30 PM,5:00 PM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,3:30 PM,5:00 PM,CN D,Flex Time Support,FL,duty,A specific duty or task: Flex Time Support.
+Tuesday,3:30 PM,5:00 PM,CN G,Flex Time Support,FL,duty,A specific duty or task: Flex Time Support.
+Tuesday,3:30 PM,5:00 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,3:30 PM,5:00 PM,AC 1,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Tuesday,3:30 PM,5:00 PM,AC 2,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Tuesday,3:30 PM,5:00 PM,AC 3,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Tuesday,3:30 PM,5:00 PM,AC 5,Variety Show Coordinator,VA,duty,A specific duty or task: Variety Show Coordinator.
+Tuesday,3:30 PM,5:00 PM,AC 6,Variety Show Coordinator,VA,duty,A specific duty or task: Variety Show Coordinator.
+Tuesday,3:30 PM,5:30 PM,AC 7,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,5:00 PM,6:00 PM,CN B,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,5:00 PM,6:00 PM,CN D,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,4:30 PM,6:00 PM,CN E,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Tuesday,4:30 PM,6:00 PM,CN H,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Tuesday,5:00 PM,6:00 PM,CN J,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,5:00 PM,6:00 PM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,3:30 PM,6:00 PM,AC 4,Site-Office,SI,duty,A specific duty or task: Site-Office.
+Tuesday,5:00 PM,6:00 PM,AC 5,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,5:00 PM,6:00 PM,AC 6,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,4:30 PM,6:00 PM,AC 8,Dinner Coordinator,DI,duty,Support task related to mealtime: Dinner Coordinator.
+Tuesday,3:30 PM,6:00 PM,AC 9,Flex Time Coordinator,FL,duty,A specific duty or task: Flex Time Coordinator.
+Tuesday,3:30 PM,6:00 PM,AC 10,Flex Time Coordinator,FL,duty,A specific duty or task: Flex Time Coordinator.
+Tuesday,6:00 PM,6:30 PM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,5:00 PM,6:30 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,6:00 PM,6:30 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,6:00 PM,6:30 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,6:00 PM,6:45 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,3:30 PM,6:45 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,5:00 PM,7:00 PM,AC 3,Time-off,OF,break,Scheduled break or personal time away from duties.
+Tuesday,3:30 PM,7:45 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,6:45 PM,7:45 PM,CN D,Dance Support,DA,duty,A specific duty or task: Dance Support.
+Tuesday,6:45 PM,7:45 PM,CN F,Dance Support,DA,duty,A specific duty or task: Dance Support.
+Tuesday,3:30 PM,7:45 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,6:30 PM,8:40 PM,AC 9,Dance Accomodations,DA,duty,A specific duty or task: Dance Accomodations.
+Tuesday,7:45 PM,8:45 PM,CN A,Dance Support,DA,duty,A specific duty or task: Dance Support.
+Tuesday,7:45 PM,8:45 PM,CN I,Dance Support,DA,duty,A specific duty or task: Dance Support.
+Tuesday,8:40 PM,8:45 PM,AC 9,Dance Accommodations,DA,duty,A specific duty or task: Dance Accommodations.
+Tuesday,6:30 PM,8:45 PM,AC 10,Dance Accomodations,DA,duty,A specific duty or task: Dance Accomodations.
+Tuesday,6:30 PM,9:00 PM,AC 1,Dance DJ,DA,duty,A specific duty or task: Dance DJ.
+Tuesday,6:30 PM,9:00 PM,AC 2,Dance Coordinator,DA,duty,A specific duty or task: Dance Coordinator.
+Tuesday,9:00 PM,9:30 PM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,9:00 PM,9:30 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,7:00 PM,9:30 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,6:00 PM,9:30 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,6:00 PM,9:30 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,6:00 PM,9:30 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,5:30 PM,9:30 PM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,8:45 PM,9:30 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,8:45 PM,9:30 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,8:45 PM,10:15 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,6:00 PM,10:15 PM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,3:30 PM,10:15 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,7:45 PM,10:15 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,6:00 PM,10:15 PM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,7:45 PM,10:15 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,5:00 PM,10:15 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,6:00 PM,10:15 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,8:45 PM,10:15 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,6:00 PM,10:15 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Tuesday,9:30 PM,10:15 PM,AC 1,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,9:30 PM,10:15 PM,AC 2,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,9:30 PM,10:15 PM,AC 3,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,9:30 PM,10:15 PM,AC 4,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,9:30 PM,10:15 PM,AC 5,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,9:30 PM,10:15 PM,AC 6,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,9:30 PM,10:15 PM,AC 7,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,6:00 PM,10:15 PM,AC 8,Site-Office,SI,duty,A specific duty or task: Site-Office.
+Tuesday,9:30 PM,10:15 PM,AC 9,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,9:30 PM,10:15 PM,AC 10,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Tuesday,10:15 PM,10:25 PM,CN A,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,CN B,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,CN C,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,CN D,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,CN E,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,CN F,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,CN G,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,CN H,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,CN I,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,CN J,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,AC 1,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,AC 2,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,AC 3,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,AC 4,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,AC 5,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,AC 6,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,AC 7,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,AC 8,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,AC 9,Lights Out,LI,free,End-of-day procedure.
+Tuesday,10:15 PM,10:25 PM,AC 10,Lights Out,LI,free,End-of-day procedure.
+Wednesday,7:10 AM,7:20 AM,AC 1,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,7:10 AM,7:20 AM,AC 2,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,7:10 AM,7:20 AM,AC 3,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,7:10 AM,7:20 AM,AC 4,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,7:10 AM,7:20 AM,AC 5,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,7:10 AM,7:20 AM,AC 6,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,7:10 AM,7:20 AM,AC 7,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,7:10 AM,7:20 AM,AC 8,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,7:10 AM,7:20 AM,AC 9,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,7:10 AM,7:20 AM,AC 10,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,7:20 AM,7:30 AM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,7:20 AM,8:30 AM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,7:20 AM,8:30 AM,AC 2,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Wednesday,7:20 AM,8:30 AM,AC 3,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,7:20 AM,8:30 AM,AC 4,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Wednesday,7:20 AM,8:30 AM,AC 5,Breakfast Coordinator,BR,duty,Support task related to mealtime: Breakfast Coordinator.
+Wednesday,7:20 AM,8:30 AM,AC 6,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Wednesday,7:20 AM,8:30 AM,AC 7,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,7:20 AM,8:30 AM,AC 8,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,7:20 AM,8:30 AM,AC 9,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Wednesday,7:10 AM,9:00 AM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,7:10 AM,9:00 AM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,7:10 AM,9:00 AM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,7:10 AM,9:00 AM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,7:10 AM,9:00 AM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,8:30 AM,9:00 AM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,8:30 AM,9:00 AM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,8:30 AM,9:00 AM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,8:30 AM,9:00 AM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,8:30 AM,9:00 AM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,8:30 AM,9:00 AM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,8:30 AM,9:15 AM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,9:00 AM,9:30 AM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,8:30 AM,9:30 AM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,9:00 AM,9:30 AM,AC 3,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,9:00 AM,9:30 AM,AC 5,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,9:00 AM,9:30 AM,AC 7,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,8:30 AM,9:30 AM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,9:00 AM,9:30 AM,AC 9,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,9:30 AM,9:45 AM,AC 1,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Wednesday,9:30 AM,9:45 AM,AC 2,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Wednesday,9:30 AM,9:45 AM,AC 3,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Wednesday,9:30 AM,9:45 AM,AC 5,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Wednesday,9:00 AM,9:45 AM,AC 6,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,9:30 AM,9:45 AM,AC 7,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Wednesday,9:30 AM,9:45 AM,AC 8,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Wednesday,9:30 AM,9:45 AM,AC 9,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Wednesday,9:45 AM,10:15 AM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,7:10 AM,10:30 AM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,9:00 AM,10:30 AM,CN B,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,7:10 AM,10:30 AM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,9:00 AM,10:30 AM,CN D,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,9:00 AM,10:30 AM,CN E,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,7:10 AM,10:30 AM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,7:10 AM,10:30 AM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,7:10 AM,10:30 AM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,9:00 AM,10:30 AM,CN J,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,9:45 AM,10:30 AM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,9:45 AM,10:30 AM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,9:45 AM,10:30 AM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,9:15 AM,10:30 AM,AC 4,Music Performance Coordinator (Singers),MU,duty,A specific duty or task: Music Performance Coordinator (Singers).
+Wednesday,9:45 AM,10:30 AM,AC 5,Hallway Supervision,HA,duty,A specific duty or task: Hallway Supervision.
+Wednesday,9:45 AM,10:30 AM,AC 6,Hallway Supervision,HA,duty,A specific duty or task: Hallway Supervision.
+Wednesday,7:30 AM,10:30 AM,AC 10,Site-office,SI,duty,A specific duty or task: Site-office.
+Wednesday,9:45 AM,11:00 AM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,9:45 AM,11:15 AM,AC 8,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,10:30 AM,11:30 AM,CN A,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,10:30 AM,11:30 AM,CN B,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,10:30 AM,11:30 AM,CN C,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,10:30 AM,11:30 AM,CN D,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,10:30 AM,11:30 AM,CN G,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,9:00 AM,11:30 AM,CN H,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,10:30 AM,11:30 AM,AC 1,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,10:30 AM,11:30 AM,AC 2,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,10:30 AM,11:30 AM,AC 3,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,10:30 AM,11:30 AM,AC 6,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,10:15 AM,11:30 AM,AC 7,Class Coordinator,CL,duty,A specific duty or task: Class Coordinator.
+Wednesday,11:15 AM,11:30 AM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,10:30 AM,12:00 PM,AC 10,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,11:30 AM,12:15 PM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,11:30 AM,12:15 PM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,11:30 AM,12:15 PM,AC 3,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,11:30 AM,12:15 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,11:30 AM,12:30 PM,CN A,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,11:30 AM,12:30 PM,CN B,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,11:30 AM,12:30 PM,CN D,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,10:30 AM,12:30 PM,CN E,Class Support,CL,duty,A specific duty or task: Class Support.
+Wednesday,10:30 AM,12:30 PM,CN F,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,11:30 AM,12:30 PM,CN G,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,11:30 AM,12:30 PM,CN H,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,10:30 AM,12:30 PM,CN I,Class Support,CL,duty,A specific duty or task: Class Support.
+Wednesday,10:30 AM,12:30 PM,CN J,Class Support,CL,duty,A specific duty or task: Class Support.
+Wednesday,12:15 PM,12:30 PM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,12:15 PM,12:30 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,12:15 PM,12:30 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,10:30 AM,12:30 PM,AC 5,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,11:30 AM,12:30 PM,AC 7,Class Coordinator / CN Coordination Meeting,CL,duty,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,11:30 AM,12:30 PM,AC 8,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,12:30 PM,1:15 PM,AC 7,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,11:00 AM,1:15 PM,AC 9,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,12:30 PM,1:30 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,12:30 PM,1:30 PM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,11:30 AM,1:30 PM,CN C,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,12:30 PM,1:30 PM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,12:30 PM,1:30 PM,CN F,Lunch Support,LU,duty,Support task related to mealtime: Lunch Support.
+Wednesday,12:30 PM,1:30 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,12:30 PM,1:30 PM,CN H,Lunch Support,LU,duty,Support task related to mealtime: Lunch Support.
+Wednesday,12:30 PM,1:30 PM,CN I,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,12:30 PM,1:30 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,12:30 PM,1:30 PM,AC 1,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Wednesday,12:30 PM,1:30 PM,AC 2,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Wednesday,12:30 PM,1:30 PM,AC 3,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Wednesday,10:30 AM,1:30 PM,AC 4,Site-office,SI,duty,A specific duty or task: Site-office.
+Wednesday,12:30 PM,1:30 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,12:15 PM,1:30 PM,AC 6,Lunch Coordinator,LU,duty,Support task related to mealtime: Lunch Coordinator.
+Wednesday,12:30 PM,1:30 PM,AC 8,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,1:15 PM,1:30 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,12:00 PM,1:30 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,1:30 PM,2:30 PM,CN E,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,1:30 PM,2:30 PM,CN F,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,1:30 PM,2:30 PM,CN H,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,1:30 PM,2:30 PM,CN I,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,1:30 PM,2:30 PM,CN J,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,1:30 PM,2:30 PM,AC 5,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,1:30 PM,2:30 PM,AC 6,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,1:30 PM,2:30 PM,AC 9,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,1:30 PM,2:30 PM,AC 10,CN Coordination Meeting,CN,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,1:30 PM,2:45 PM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,1:30 PM,2:45 PM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,1:30 PM,2:45 PM,AC 3,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,1:30 PM,2:45 PM,AC 4,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,2:30 PM,2:45 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,2:30 PM,2:45 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,2:30 PM,2:45 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,2:30 PM,2:45 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,1:30 PM,3:30 PM,CN A,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,1:30 PM,3:30 PM,CN B,Class Support,CL,duty,A specific duty or task: Class Support.
+Wednesday,1:30 PM,3:30 PM,CN C,Class Support,CL,duty,A specific duty or task: Class Support.
+Wednesday,12:30 PM,3:30 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,2:30 PM,3:30 PM,CN F,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,1:30 PM,3:30 PM,CN G,Class Support,CL,duty,A specific duty or task: Class Support.
+Wednesday,2:30 PM,3:30 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,2:30 PM,3:30 PM,CN I,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,2:45 PM,3:30 PM,AC 1,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,2:45 PM,3:30 PM,AC 2,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,2:45 PM,3:30 PM,AC 3,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,2:45 PM,3:30 PM,AC 4,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,2:45 PM,3:30 PM,AC 5,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,2:45 PM,3:30 PM,AC 6,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,1:15 PM,3:30 PM,AC 7,Class Coordinator,CL,duty,A specific duty or task: Class Coordinator.
+Wednesday,2:45 PM,3:30 PM,AC 9,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,2:45 PM,3:30 PM,AC 10,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,3:30 PM,4:30 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,2:30 PM,4:30 PM,CN E,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,2:30 PM,4:30 PM,CN J,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,3:30 PM,4:30 PM,AC 7,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,1:30 PM,4:30 PM,AC 8,Site-office,SI,duty,A specific duty or task: Site-office.
+Wednesday,3:30 PM,5:00 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,3:30 PM,5:00 PM,CN D,Flex Time Support,FL,duty,A specific duty or task: Flex Time Support.
+Wednesday,3:30 PM,5:00 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,3:30 PM,5:00 PM,CN H,Flex Time Support,FL,duty,A specific duty or task: Flex Time Support.
+Wednesday,3:30 PM,5:00 PM,AC 1,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Wednesday,3:30 PM,5:00 PM,AC 2,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Wednesday,3:30 PM,5:00 PM,AC 3,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Wednesday,3:30 PM,5:00 PM,AC 4,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,3:30 PM,5:00 PM,AC 5,Variety Show Coordinator,VA,duty,A specific duty or task: Variety Show Coordinator.
+Wednesday,3:30 PM,5:00 PM,AC 6,Variety Show Coordinator,VA,duty,A specific duty or task: Variety Show Coordinator.
+Wednesday,4:30 PM,6:00 PM,CN A,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Wednesday,5:00 PM,6:00 PM,CN C,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,5:00 PM,6:00 PM,CN G,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,4:30 PM,6:00 PM,CN J,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Wednesday,5:00 PM,6:00 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,4:30 PM,6:00 PM,AC 8,Dinner Coordinator,DI,duty,Support task related to mealtime: Dinner Coordinator.
+Wednesday,3:30 PM,6:00 PM,AC 9,Flex Time Coordinator,FL,duty,A specific duty or task: Flex Time Coordinator.
+Wednesday,3:30 PM,6:00 PM,AC 10,Flex Time Coordinator,FL,duty,A specific duty or task: Flex Time Coordinator.
+Wednesday,5:00 PM,6:30 PM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,5:00 PM,6:30 PM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,5:00 PM,6:30 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,5:00 PM,6:30 PM,AC 5,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,5:00 PM,6:30 PM,AC 6,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,6:00 PM,6:30 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,6:00 PM,6:30 PM,AC 9,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,6:30 PM,7:15 PM,AC 3,Games Night Accomodations,GA,duty,A specific duty or task: Games Night Accomodations.
+Wednesday,6:30 PM,8:00 PM,AC 1,Games Night Accomodations,GA,duty,A specific duty or task: Games Night Accomodations.
+Wednesday,6:30 PM,8:00 PM,AC 2,Games Night Support,GA,duty,A specific duty or task: Games Night Support.
+Wednesday,6:30 PM,8:00 PM,AC 5,Games Night Support,GA,duty,A specific duty or task: Games Night Support.
+Wednesday,6:30 PM,8:00 PM,AC 6,Games Night Support,GA,duty,A specific duty or task: Games Night Support.
+Wednesday,4:30 PM,8:00 PM,AC 7,Site-office,SI,duty,A specific duty or task: Site-office.
+Wednesday,6:30 PM,8:00 PM,AC 8,Games Night Support,GA,duty,A specific duty or task: Games Night Support.
+Wednesday,6:30 PM,8:00 PM,AC 9,Games Night Support,GA,duty,A specific duty or task: Games Night Support.
+Wednesday,6:00 PM,8:00 PM,AC 10,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,6:00 PM,8:15 PM,AC 4,Games Night Coordinator,GA,duty,A specific duty or task: Games Night Coordinator.
+Wednesday,8:00 PM,8:30 PM,AC 5,Pizza Night Support,PI,duty,A specific duty or task: Pizza Night Support.
+Wednesday,7:15 PM,9:00 PM,AC 3,Pizza Night Coordinator,PI,duty,A specific duty or task: Pizza Night Coordinator.
+Wednesday,8:15 PM,9:00 PM,AC 4,Time-off,OF,break,Scheduled break or personal time away from duties.
+Wednesday,8:00 PM,9:30 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,9:00 PM,9:30 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,9:00 PM,9:30 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,8:30 PM,9:30 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,8:00 PM,9:30 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,8:00 PM,9:30 PM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,8:00 PM,9:30 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,8:00 PM,9:30 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,8:00 PM,9:30 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,6:00 PM,10:15 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,3:30 PM,10:15 PM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,6:00 PM,10:15 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,5:00 PM,10:15 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,4:30 PM,10:15 PM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,3:30 PM,10:15 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,6:00 PM,10:15 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,5:00 PM,10:15 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,3:30 PM,10:15 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,6:00 PM,10:15 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Wednesday,8:00 PM,10:15 PM,AC 1,Site-office,SI,duty,A specific duty or task: Site-office.
+Wednesday,9:30 PM,10:15 PM,AC 2,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,9:30 PM,10:15 PM,AC 3,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,9:30 PM,10:15 PM,AC 4,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,9:30 PM,10:15 PM,AC 5,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,9:30 PM,10:15 PM,AC 6,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,9:30 PM,10:15 PM,AC 7,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,9:30 PM,10:15 PM,AC 8,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,9:30 PM,10:15 PM,AC 9,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,9:30 PM,10:15 PM,AC 10,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Wednesday,10:15 PM,10:25 PM,CN A,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,CN B,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,CN C,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,CN D,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,CN E,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,CN F,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,CN G,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,CN H,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,CN I,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,CN J,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,AC 1,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,AC 2,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,AC 3,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,AC 4,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,AC 5,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,AC 6,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,AC 7,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,AC 8,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,AC 9,Lights out,LI,duty,A specific duty or task: Lights out.
+Wednesday,10:15 PM,10:25 PM,AC 10,Lights out,LI,duty,A specific duty or task: Lights out.
+Thursday,7:10 AM,7:20 AM,AC 1,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,7:10 AM,7:20 AM,AC 2,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,7:10 AM,7:20 AM,AC 3,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,7:10 AM,7:20 AM,AC 4,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,7:10 AM,7:20 AM,AC 5,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,7:10 AM,7:20 AM,AC 6,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,7:10 AM,7:20 AM,AC 7,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,7:10 AM,7:20 AM,AC 8,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,7:10 AM,7:20 AM,AC 9,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,7:10 AM,7:20 AM,AC 10,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,7:20 AM,7:30 AM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,7:20 AM,8:30 AM,AC 1,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Thursday,7:20 AM,8:30 AM,AC 2,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Thursday,7:20 AM,8:30 AM,AC 3,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,7:20 AM,8:30 AM,AC 4,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Thursday,7:20 AM,8:30 AM,AC 5,Breakfast Coordinator,BR,duty,Support task related to mealtime: Breakfast Coordinator.
+Thursday,7:20 AM,8:30 AM,AC 6,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,7:20 AM,8:30 AM,AC 7,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,7:20 AM,8:30 AM,AC 8,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,7:20 AM,8:30 AM,AC 10,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Thursday,8:30 AM,9:00 AM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,8:30 AM,9:00 AM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,8:30 AM,9:00 AM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,8:30 AM,9:00 AM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,8:30 AM,9:15 AM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,9:00 AM,9:30 AM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,8:30 AM,9:30 AM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,9:00 AM,9:30 AM,AC 3,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,8:30 AM,9:30 AM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,8:30 AM,9:30 AM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,9:00 AM,9:30 AM,AC 7,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,9:00 AM,9:30 AM,AC 8,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,8:30 AM,9:30 AM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,7:10 AM,9:45 AM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,7:10 AM,9:45 AM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,7:10 AM,9:45 AM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,7:10 AM,9:45 AM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,7:10 AM,9:45 AM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,7:10 AM,9:45 AM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,9:45 AM,11:00 AM,CN B,YW Activity / Time-Off,YW,duty,A specific duty or task: YW Activity / Time-Off.
+Thursday,9:45 AM,11:00 AM,CN D,YW Activity / Time-Off,YW,duty,A specific duty or task: YW Activity / Time-Off.
+Thursday,9:45 AM,11:00 AM,CN E,YW Activity / Time-Off,YW,duty,A specific duty or task: YW Activity / Time-Off.
+Thursday,9:45 AM,11:00 AM,CN G,YW Activity / Time-Off,YW,duty,A specific duty or task: YW Activity / Time-Off.
+Thursday,9:45 AM,11:00 AM,CN H,YW Activity / Time-Off,YW,duty,A specific duty or task: YW Activity / Time-Off.
+Thursday,9:45 AM,11:00 AM,CN I,YW Activity / Time-Off,YW,duty,A specific duty or task: YW Activity / Time-Off.
+Thursday,11:00 AM,11:15 AM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,11:00 AM,11:15 AM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,11:00 AM,11:15 AM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,11:00 AM,11:15 AM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,11:00 AM,11:15 AM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,11:00 AM,11:15 AM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,11:15 AM,12:30 PM,CN B,YM Activity / Time-Off,YM,duty,A specific duty or task: YM Activity / Time-Off.
+Thursday,7:10 AM,12:30 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,11:15 AM,12:30 PM,CN D,YM Activity / Time-Off,YM,duty,A specific duty or task: YM Activity / Time-Off.
+Thursday,11:15 AM,12:30 PM,CN E,YM Activity / Time-Off,YM,duty,A specific duty or task: YM Activity / Time-Off.
+Thursday,11:15 AM,12:30 PM,CN G,YM Activity / Time-Off,YM,duty,A specific duty or task: YM Activity / Time-Off.
+Thursday,11:15 AM,12:30 PM,CN H,YM Activity / Time-Off,YM,duty,A specific duty or task: YM Activity / Time-Off.
+Thursday,11:15 AM,12:30 PM,CN I,YM Activity / Time-Off,YM,duty,A specific duty or task: YM Activity / Time-Off.
+Thursday,7:10 AM,12:30 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,9:30 AM,12:30 PM,AC 1,YM//YW Activity Support,YM,duty,A specific duty or task: YM//YW Activity Support.
+Thursday,9:30 AM,12:30 PM,AC 2,YM//YW Activity Support,YM,duty,A specific duty or task: YM//YW Activity Support.
+Thursday,9:30 AM,12:30 PM,AC 3,YM//YW Activity Support,YM,duty,A specific duty or task: YM//YW Activity Support.
+Thursday,9:15 AM,12:30 PM,AC 4,YM/YW Activity Coordinator,YM,duty,A specific duty or task: YM/YW Activity Coordinator.
+Thursday,9:30 AM,12:30 PM,AC 5,YM//YW Activity Support,YM,duty,A specific duty or task: YM//YW Activity Support.
+Thursday,9:30 AM,12:30 PM,AC 6,YM//YW Activity Support,YM,duty,A specific duty or task: YM//YW Activity Support.
+Thursday,9:30 AM,12:30 PM,AC 7,YM//YW Activity Support,YM,duty,A specific duty or task: YM//YW Activity Support.
+Thursday,9:30 AM,12:30 PM,AC 8,YM//YW Activity Support,YM,duty,A specific duty or task: YM//YW Activity Support.
+Thursday,7:30 AM,12:30 PM,AC 9,Site-Office,SI,duty,A specific duty or task: Site-Office.
+Thursday,9:30 AM,12:30 PM,AC 10,YM//YW Activity Support,YM,duty,A specific duty or task: YM//YW Activity Support.
+Thursday,12:30 PM,1:30 PM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,12:30 PM,1:30 PM,CN C,Lunch Support,LU,duty,Support task related to mealtime: Lunch Support.
+Thursday,12:30 PM,1:30 PM,CN G,Lunch Support,LU,duty,Support task related to mealtime: Lunch Support.
+Thursday,12:30 PM,1:30 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,12:30 PM,1:30 PM,CN J,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,12:30 PM,1:30 PM,AC 1,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Thursday,12:30 PM,1:30 PM,AC 2,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Thursday,12:30 PM,1:30 PM,AC 3,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Thursday,12:30 PM,1:30 PM,AC 10,Lunch Coordinator,LU,duty,Support task related to mealtime: Lunch Coordinator.
+Thursday,1:30 PM,2:00 PM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,1:30 PM,2:00 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,12:30 PM,2:00 PM,AC 4,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,12:30 PM,2:00 PM,AC 8,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,12:30 PM,2:00 PM,AC 9,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,2:00 PM,2:15 PM,AC 1,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Thursday,2:00 PM,2:15 PM,AC 3,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Thursday,2:00 PM,2:15 PM,AC 4,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Thursday,2:00 PM,2:15 PM,AC 8,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Thursday,2:00 PM,2:15 PM,AC 9,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Thursday,2:15 PM,3:15 PM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,1:30 PM,3:15 PM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,2:15 PM,3:15 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,2:15 PM,3:15 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,1:30 PM,3:15 PM,AC 10,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,1:30 PM,3:30 PM,CN B,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,12:30 PM,3:30 PM,CN E,Variety Show Support,VA,duty,A specific duty or task: Variety Show Support.
+Thursday,1:30 PM,3:30 PM,CN G,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,1:30 PM,3:30 PM,CN I,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,2:15 PM,3:30 PM,AC 4,Hallway Supervision,HA,duty,A specific duty or task: Hallway Supervision.
+Thursday,12:30 PM,3:30 PM,AC 5,Variety Show Coordinator,VA,duty,A specific duty or task: Variety Show Coordinator.
+Thursday,12:30 PM,3:30 PM,AC 6,Variety Show Coordinator,VA,duty,A specific duty or task: Variety Show Coordinator.
+Thursday,12:30 PM,3:30 PM,AC 7,Site-Office,SI,duty,A specific duty or task: Site-Office.
+Thursday,2:15 PM,3:30 PM,AC 8,Hallway Supervision,HA,duty,A specific duty or task: Hallway Supervision.
+Thursday,3:30 PM,4:00 PM,AC 4,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,3:30 PM,4:00 PM,AC 5,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,3:30 PM,4:00 PM,AC 6,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,3:30 PM,4:00 PM,AC 7,Site-Office/Meeting,SI,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,3:30 PM,4:00 PM,AC 8,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,4:00 PM,4:15 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,1:30 PM,4:30 PM,CN C,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,12:30 PM,4:30 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,3:30 PM,4:30 PM,CN E,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,12:30 PM,4:30 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,7:10 AM,5:00 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,3:30 PM,5:00 PM,CN B,Flex Time Support,FL,duty,A specific duty or task: Flex Time Support.
+Thursday,7:10 AM,5:00 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,3:30 PM,5:00 PM,CN I,Flex Time Support,FL,duty,A specific duty or task: Flex Time Support.
+Thursday,3:15 PM,5:00 PM,AC 1,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Thursday,3:15 PM,5:00 PM,AC 2,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Thursday,3:15 PM,5:00 PM,AC 3,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Thursday,5:00 PM,5:30 PM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,5:00 PM,5:30 PM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,5:00 PM,5:30 PM,AC 3,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,4:30 PM,5:50 PM,CN D,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Thursday,4:30 PM,5:50 PM,CN H,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Thursday,1:30 PM,5:50 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,4:15 PM,5:50 PM,AC 8,Dinner Coordinator,DI,duty,Support task related to mealtime: Dinner Coordinator.
+Thursday,3:15 PM,5:50 PM,AC 9,Flex Time Coordinator,FL,duty,A specific duty or task: Flex Time Coordinator.
+Thursday,3:15 PM,5:50 PM,AC 10,Flex Time Coordinator,FL,duty,A specific duty or task: Flex Time Coordinator.
+Thursday,4:00 PM,6:00 PM,AC 7,Site-Office,SI,duty,A specific duty or task: Site-Office.
+Thursday,5:50 PM,6:00 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,5:50 PM,6:00 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,5:50 PM,6:00 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,4:00 PM,6:05 PM,AC 4,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,4:00 PM,6:05 PM,AC 5,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,4:00 PM,6:05 PM,AC 6,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,6:05 PM,6:20 PM,AC 4,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Thursday,6:05 PM,6:20 PM,AC 5,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Thursday,6:05 PM,6:20 PM,AC 6,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Thursday,5:30 PM,6:55 PM,AC 1,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Thursday,5:30 PM,6:55 PM,AC 2,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Thursday,5:30 PM,6:55 PM,AC 3,Musical Program Coordinator,MU,duty,A specific duty or task: Musical Program Coordinator.
+Thursday,6:20 PM,7:15 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,5:00 PM,7:30 PM,CN A,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,5:50 PM,7:30 PM,CN D,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,5:00 PM,7:30 PM,CN F,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,5:50 PM,7:30 PM,CN H,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,5:50 PM,7:30 PM,CN J,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,6:20 PM,7:40 PM,AC 5,Hallway Supervision,HA,duty,A specific duty or task: Hallway Supervision.
+Thursday,6:20 PM,7:40 PM,AC 6,Hallway Supervision,HA,duty,A specific duty or task: Hallway Supervision.
+Thursday,6:00 PM,7:40 PM,AC 7,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,7:40 PM,7:45 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,6:55 PM,7:50 PM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,6:00 PM,8:00 PM,AC 9,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,6:00 PM,8:00 PM,AC 10,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,6:55 PM,8:50 PM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,7:50 PM,8:50 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,6:55 PM,8:50 PM,AC 3,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,7:15 PM,8:50 PM,AC 4,Testimony Rooms Coordinator,TE,duty,A specific duty or task: Testimony Rooms Coordinator.
+Thursday,7:45 PM,8:50 PM,AC 5,Time-off,OF,break,Scheduled break or personal time away from duties.
+Thursday,7:40 PM,8:50 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,7:40 PM,8:50 PM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,8:00 PM,8:50 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,8:00 PM,8:50 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,8:50 PM,9:00 PM,AC 1,Travel Assist,TR,duty,A specific duty or task: Travel Assist.
+Thursday,8:50 PM,9:00 PM,AC 2,Travel Assist,TR,duty,A specific duty or task: Travel Assist.
+Thursday,8:50 PM,9:00 PM,AC 3,Travel Assist,TR,duty,A specific duty or task: Travel Assist.
+Thursday,8:50 PM,9:00 PM,AC 4,Travel Assist,TR,duty,A specific duty or task: Travel Assist.
+Thursday,8:50 PM,9:00 PM,AC 5,Travel Assist,TR,duty,A specific duty or task: Travel Assist.
+Thursday,8:50 PM,9:00 PM,AC 6,Travel Assist,TR,duty,A specific duty or task: Travel Assist.
+Thursday,8:50 PM,9:00 PM,AC 7,Travel Assist,TR,duty,A specific duty or task: Travel Assist.
+Thursday,8:50 PM,9:00 PM,AC 9,Travel Assist,TR,duty,A specific duty or task: Travel Assist.
+Thursday,8:50 PM,9:00 PM,AC 10,Travel Assist,TR,duty,A specific duty or task: Travel Assist.
+Thursday,9:00 PM,9:30 PM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,9:00 PM,9:30 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,9:00 PM,9:30 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,9:00 PM,9:30 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,9:00 PM,9:30 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,9:00 PM,9:30 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,9:00 PM,9:30 PM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,9:00 PM,9:30 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,9:00 PM,9:30 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,7:30 PM,10:15 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,5:00 PM,10:15 PM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,4:30 PM,10:15 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,7:30 PM,10:15 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,4:30 PM,10:15 PM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,7:30 PM,10:15 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,3:30 PM,10:15 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,7:30 PM,10:15 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,5:00 PM,10:15 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,7:30 PM,10:15 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,9:30 PM,10:15 PM,AC 1,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,9:30 PM,10:15 PM,AC 2,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,9:30 PM,10:15 PM,AC 3,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,9:30 PM,10:15 PM,AC 4,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,9:30 PM,10:15 PM,AC 5,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,9:30 PM,10:15 PM,AC 6,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,9:30 PM,10:15 PM,AC 7,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,6:00 PM,10:15 PM,AC 8,Site-Office,SI,duty,A specific duty or task: Site-Office.
+Thursday,9:30 PM,10:15 PM,AC 9,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,9:30 PM,10:15 PM,AC 10,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Thursday,10:15 PM,10:30 PM,CN A,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,CN B,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,CN C,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,CN D,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,CN E,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,CN F,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,CN G,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,CN H,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,CN I,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,CN J,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,AC 1,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,AC 2,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,AC 3,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,AC 4,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,AC 5,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,AC 6,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,AC 7,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,AC 8,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,AC 9,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:15 PM,10:30 PM,AC 10,Lights Out,LI,free,End-of-day procedure.
+Thursday,10:30 PM,10:30 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Thursday,10:30 PM,10:30 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:10 AM,7:20 AM,AC 1,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,7:10 AM,7:20 AM,AC 2,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,7:10 AM,7:20 AM,AC 3,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,7:10 AM,7:20 AM,AC 4,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,7:10 AM,7:20 AM,AC 5,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,7:10 AM,7:20 AM,AC 6,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,7:10 AM,7:20 AM,AC 7,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,7:10 AM,7:20 AM,AC 8,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,7:10 AM,7:20 AM,AC 9,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,7:10 AM,7:20 AM,AC 10,AC/CN Meeting,AC,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,7:20 AM,7:30 AM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:20 AM,8:30 AM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,7:20 AM,8:30 AM,AC 3,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Friday,7:20 AM,8:30 AM,AC 4,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Friday,7:20 AM,8:30 AM,AC 5,Breakfast Coordinator,BR,duty,Support task related to mealtime: Breakfast Coordinator.
+Friday,7:20 AM,8:30 AM,AC 7,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Friday,7:20 AM,8:30 AM,AC 8,Breakfast Support,BR,duty,Support task related to mealtime: Breakfast Support.
+Friday,7:20 AM,8:30 AM,AC 9,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,7:10 AM,9:00 AM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:10 AM,9:00 AM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:10 AM,9:00 AM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:10 AM,9:00 AM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:10 AM,9:00 AM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:20 AM,9:00 AM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,8:30 AM,9:00 AM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,8:30 AM,9:00 AM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,8:30 AM,9:00 AM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,8:30 AM,9:00 AM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,8:30 AM,9:15 AM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,9:00 AM,9:30 AM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,9:00 AM,9:30 AM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,9:00 AM,9:30 AM,AC 3,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,8:30 AM,9:30 AM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:20 AM,9:30 AM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,8:30 AM,9:30 AM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,9:30 AM,9:45 AM,AC 1,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Friday,9:30 AM,9:45 AM,AC 2,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Friday,9:30 AM,9:45 AM,AC 3,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Friday,9:30 AM,9:45 AM,AC 5,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Friday,9:30 AM,9:45 AM,AC 6,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Friday,9:30 AM,9:45 AM,AC 9,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Friday,9:45 AM,10:00 AM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:30 AM,10:00 AM,AC 10,Site Office,SI,duty,A specific duty or task: Site Office.
+Friday,9:00 AM,10:30 AM,CN B,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,9:00 AM,10:30 AM,CN C,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,9:00 AM,10:30 AM,CN E,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,9:00 AM,10:30 AM,CN H,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,9:00 AM,10:30 AM,CN J,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,9:15 AM,10:30 AM,AC 4,Music Performance Coordinator (Singers),MU,duty,A specific duty or task: Music Performance Coordinator (Singers).
+Friday,9:45 AM,10:30 AM,AC 5,Hallway Supervision,HA,duty,A specific duty or task: Hallway Supervision.
+Friday,9:45 AM,10:30 AM,AC 6,Hallway Supervision,HA,duty,A specific duty or task: Hallway Supervision.
+Friday,9:00 AM,10:45 AM,AC 7,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,9:00 AM,10:45 AM,AC 8,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,9:45 AM,12:00 PM,AC 3,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,10:30 AM,12:00 PM,AC 5,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,10:30 AM,12:00 PM,AC 6,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,9:45 AM,12:00 PM,AC 9,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,12:00 PM,12:15 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:10 AM,12:30 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,10:30 AM,12:30 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:10 AM,12:30 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,10:30 AM,12:30 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,10:30 AM,12:30 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,10:00 AM,12:30 PM,AC 1,Site Office,SI,duty,A specific duty or task: Site Office.
+Friday,9:45 AM,12:30 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,12:00 PM,12:30 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,10:45 AM,12:30 PM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,10:45 AM,12:30 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,12:00 PM,12:30 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,10:00 AM,12:30 PM,AC 10,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,12:30 PM,1:30 PM,CN A,Lunch Support,LU,duty,Support task related to mealtime: Lunch Support.
+Friday,12:30 PM,1:30 PM,CN C,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,7:10 AM,1:30 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,12:30 PM,1:30 PM,CN F,Lunch Support,LU,duty,Support task related to mealtime: Lunch Support.
+Friday,7:10 AM,1:30 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,12:30 PM,1:30 PM,CN H,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,7:10 AM,1:30 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,12:30 PM,1:30 PM,CN J,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,10:30 AM,1:30 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,12:00 PM,1:30 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,12:15 PM,1:30 PM,AC 6,Lunch Coordinator,LU,duty,Support task related to mealtime: Lunch Coordinator.
+Friday,12:30 PM,1:30 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,1:30 PM,1:45 PM,AC 4,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Friday,1:30 PM,1:45 PM,AC 5,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Friday,1:30 PM,1:45 PM,AC 10,Seating Support,SE,duty,A specific duty or task: Seating Support.
+Friday,12:30 PM,2:45 PM,AC 2,Showcase Support,SH,duty,A specific duty or task: Showcase Support.
+Friday,12:30 PM,2:45 PM,AC 7,Showcase Coordinator,SH,duty,A specific duty or task: Showcase Coordinator.
+Friday,12:30 PM,2:45 PM,AC 8,Slideshow,SL,duty,A specific duty or task: Slideshow.
+Friday,12:30 PM,2:45 PM,AC 9,Showcase Support,SH,duty,A specific duty or task: Showcase Support.
+Friday,1:30 PM,3:00 PM,CN A,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,1:30 PM,3:00 PM,CN D,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,1:30 PM,3:00 PM,CN F,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,1:30 PM,3:00 PM,CN G,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,1:30 PM,3:00 PM,CN I,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,3:00 PM,3:30 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,3:00 PM,3:30 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,3:00 PM,3:30 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,12:30 PM,3:30 PM,AC 1,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,2:45 PM,3:30 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,1:45 PM,3:30 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,1:45 PM,3:30 PM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,1:30 PM,3:30 PM,AC 6,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,2:45 PM,3:30 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,1:45 PM,3:30 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,2:45 PM,4:15 PM,AC 7,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,2:45 PM,4:15 PM,AC 8,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,1:30 PM,4:30 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,3:30 PM,4:30 PM,CN D,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,3:00 PM,4:30 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,3:30 PM,4:30 PM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,3:30 PM,5:00 PM,CN A,Flex Time Support,FL,duty,A specific duty or task: Flex Time Support.
+Friday,10:30 AM,5:00 PM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,3:30 PM,5:00 PM,CN G,Flex Time Support,FL,duty,A specific duty or task: Flex Time Support.
+Friday,3:00 PM,5:00 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,12:30 PM,5:30 PM,AC 3,Site Office,SI,duty,A specific duty or task: Site Office.
+Friday,3:30 PM,5:30 PM,AC 4,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,3:30 PM,5:30 PM,AC 5,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,3:30 PM,5:30 PM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,3:30 PM,5:45 PM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,4:30 PM,5:45 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,5:30 PM,5:45 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,4:15 PM,5:45 PM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,5:00 PM,6:00 PM,CN B,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,4:30 PM,6:00 PM,CN C,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Friday,4:30 PM,6:00 PM,CN F,Dinner Support,DI,duty,Support task related to mealtime: Dinner Support.
+Friday,5:00 PM,6:00 PM,CN G,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,1:30 PM,6:00 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,5:00 PM,6:00 PM,CN I,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,4:15 PM,6:00 PM,AC 8,Dinner Coordinator,DI,duty,Support task related to mealtime: Dinner Coordinator.
+Friday,3:30 PM,6:00 PM,AC 9,Flex Time Coordinator,FL,duty,A specific duty or task: Flex Time Coordinator.
+Friday,3:30 PM,6:00 PM,AC 10,Flex Time Coordinator,FL,duty,A specific duty or task: Flex Time Coordinator.
+Friday,6:00 PM,7:00 PM,CN B,Dance Support,DA,duty,A specific duty or task: Dance Support.
+Friday,4:30 PM,7:00 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,6:00 PM,7:00 PM,CN H,Dance Support,DA,duty,A specific duty or task: Dance Support.
+Friday,1:30 PM,7:00 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,5:00 PM,8:00 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:00 PM,8:00 PM,CN D,Dance Support,DA,duty,A specific duty or task: Dance Support.
+Friday,6:00 PM,8:00 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,6:00 PM,8:00 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:00 PM,8:00 PM,CN J,Dance Support,DA,duty,A specific duty or task: Dance Support.
+Friday,5:45 PM,8:00 PM,AC 1,Dance Coordinator,DA,duty,A specific duty or task: Dance Coordinator.
+Friday,5:45 PM,8:00 PM,AC 2,Dance DJ,DA,duty,A specific duty or task: Dance DJ.
+Friday,5:45 PM,8:00 PM,AC 4,Dance Accomodations,DA,duty,A specific duty or task: Dance Accomodations.
+Friday,5:45 PM,8:00 PM,AC 7,Dance Accomodations,DA,duty,A specific duty or task: Dance Accomodations.
+Friday,6:00 PM,8:00 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,8:00 PM,9:00 PM,CN A,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,8:00 PM,9:00 PM,CN F,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,8:00 PM,9:00 PM,CN I,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,8:00 PM,9:00 PM,AC 2,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,8:00 PM,9:00 PM,AC 4,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,8:00 PM,9:00 PM,AC 10,Time-off,OF,break,Scheduled break or personal time away from duties.
+Friday,8:00 PM,9:30 PM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,9:00 PM,9:30 PM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,5:30 PM,9:30 PM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,9:00 PM,9:30 PM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,8:00 PM,9:30 PM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,6:00 PM,9:30 PM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,6:00 PM,9:30 PM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,9:00 PM,9:30 PM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,9:00 PM,10:15 PM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:00 PM,10:15 PM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,6:00 PM,10:15 PM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,8:00 PM,10:15 PM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,10:30 AM,10:15 PM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,9:00 PM,10:15 PM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,6:00 PM,10:15 PM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,7:00 PM,10:15 PM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,9:00 PM,10:15 PM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,8:00 PM,10:15 PM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Friday,9:30 PM,10:15 PM,AC 1,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,9:30 PM,10:15 PM,AC 2,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,9:30 PM,10:15 PM,AC 3,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,9:30 PM,10:15 PM,AC 4,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,5:30 PM,10:15 PM,AC 5,Site Office,SI,duty,A specific duty or task: Site Office.
+Friday,5:30 PM,10:15 PM,AC 6,Site Office,SI,duty,A specific duty or task: Site Office.
+Friday,9:30 PM,10:15 PM,AC 7,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,9:30 PM,10:15 PM,AC 8,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,9:30 PM,10:15 PM,AC 9,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,9:30 PM,10:15 PM,AC 10,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Friday,10:15 PM,10:30 PM,CN A,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,CN B,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,CN C,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,CN D,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,CN E,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,CN F,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,CN G,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,CN H,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,CN I,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,CN J,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,AC 1,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,AC 2,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,AC 3,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,AC 4,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,AC 5,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,AC 6,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,AC 7,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,AC 8,Lights Out,LI,free,End-of-day procedure.
+Friday,10:15 PM,10:30 PM,AC 10,Lights Out,LI,free,End-of-day procedure.
+Friday,10:30 PM,10:45 PM,CN A,Night Watch,NI,duty,A specific duty or task: Night Watch.
+Friday,10:30 PM,10:45 PM,CN B,Night Watch,NI,duty,A specific duty or task: Night Watch.
+Friday,10:30 PM,10:45 PM,CN C,Night Watch,NI,duty,A specific duty or task: Night Watch.
+Friday,10:30 PM,10:45 PM,CN D,Night Watch,NI,duty,A specific duty or task: Night Watch.
+Friday,10:30 PM,10:45 PM,CN E,Night Watch,NI,duty,A specific duty or task: Night Watch.
+Friday,10:30 PM,10:45 PM,CN F,Night Watch,NI,duty,A specific duty or task: Night Watch.
+Friday,10:30 PM,10:45 PM,CN G,Night Watch,NI,duty,A specific duty or task: Night Watch.
+Friday,10:30 PM,10:45 PM,CN H,Night Watch,NI,duty,A specific duty or task: Night Watch.
+Friday,10:30 PM,10:45 PM,CN I,Night Watch,NI,duty,A specific duty or task: Night Watch.
+Friday,10:30 PM,10:45 PM,CN J,Night Watch,NI,duty,A specific duty or task: Night Watch.
+Friday,10:30 PM,10:45 PM,AC 1,Night Watch Support,NI,duty,A specific duty or task: Night Watch Support.
+Friday,10:30 PM,10:45 PM,AC 2,Night Watch Support,NI,duty,A specific duty or task: Night Watch Support.
+Friday,10:30 PM,10:45 PM,AC 3,Night Watch Support,NI,duty,A specific duty or task: Night Watch Support.
+Friday,10:30 PM,10:45 PM,AC 4,Night Watch Support,NI,duty,A specific duty or task: Night Watch Support.
+Friday,10:30 PM,10:45 PM,AC 5,Night Watch Support,NI,duty,A specific duty or task: Night Watch Support.
+Friday,10:30 PM,10:45 PM,AC 6,Night Watch Support,NI,duty,A specific duty or task: Night Watch Support.
+Friday,10:30 PM,10:45 PM,AC 7,Night Watch Support,NI,duty,A specific duty or task: Night Watch Support.
+Friday,10:30 PM,10:45 PM,AC 8,Night Watch Support,NI,duty,A specific duty or task: Night Watch Support.
+Friday,10:15 PM,10:45 PM,AC 9,Night Watch Coordinator,NI,duty,A specific duty or task: Night Watch Coordinator.
+Friday,10:30 PM,10:45 PM,AC 10,Night Watch Support,NI,duty,A specific duty or task: Night Watch Support.
+Saturday,6:30 AM,7:30 AM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,6:30 AM,7:30 AM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:30 AM,7:45 AM,CN A,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,CN B,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,CN C,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,CN D,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,CN E,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,CN F,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,CN G,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,CN H,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,CN I,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,CN J,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,AC 1,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,6:30 AM,7:45 AM,AC 2,Bus Departure,BU,duty,A specific duty or task: Bus Departure.
+Saturday,7:30 AM,7:45 AM,AC 3,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,6:30 AM,7:45 AM,AC 4,Bus Departure,BU,duty,A specific duty or task: Bus Departure.
+Saturday,7:30 AM,7:45 AM,AC 5,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,AC 6,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,AC 7,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,AC 8,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,AC 9,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:30 AM,7:45 AM,AC 10,Meeting,ME,meeting,"A scheduled meeting for coordination, planning, or discussion."
+Saturday,7:45 AM,8:25 AM,CN A,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,CN B,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,CN C,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,CN D,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,CN E,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,CN F,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,CN G,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,CN H,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,CN I,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,CN J,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,AC 1,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,AC 2,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,AC 3,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,AC 4,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,AC 5,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,AC 6,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,AC 7,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,AC 8,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,AC 9,No Duty,ND,free,Time without duty but still actively participating in the session.
+Saturday,7:45 AM,8:25 AM,AC 10,No Duty,ND,free,Time without duty but still actively participating in the session.
+

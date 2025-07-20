@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef, useCallback } from 'react';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
 import Swiper from 'swiper';
 import { Navigation } from 'swiper/modules';
 // Fixed Swiper CSS imports for Swiper v11
@@ -48,6 +48,7 @@ const App = () => {
 
     const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
     const [isRoleModalOpen, setIsRoleModalOpen] = useState(false);
+    const [tempFilterRoles, setTempFilterRoles] = useState({});
     const [selectedEvent, setSelectedEvent] = useState(null);
     const [isDutiesSummaryModalOpen, setIsDutiesSummaryModalOpen] = useState(false);
 
@@ -59,7 +60,6 @@ const App = () => {
 
     const [nameSearchInput, setNameSearchInput] = useState('');
     const [nameSearchDropdownActive, setNameSearchDropdownActive] = useState(false);
-    const [filteredSearchNames, setFilteredSearchNames] = useState([]);
     const [selectedSearchNameData, setSelectedSearchNameData] = useState(null); // Changed to useState
 
     // --- Firebase Initialization and Data Fetching ---
@@ -328,7 +328,7 @@ const App = () => {
             eventAbbreviation: event.eventAbbreviation,
             eventType: event.eventType,
             eventDescription: event.eventDescription,
-            assignedRoles: event.assignedRoles || []
+            assignedRoles: event.assignedRoles || (event.role ? [event.role] : [])
         }));
     }, []);
 
@@ -706,14 +706,35 @@ const App = () => {
 
     // --- Filter Logic ---
     const handleFilterChange = useCallback((roleClass, isChecked) => {
-        setActiveFilterRoles(prev => ({ ...prev, [roleClass]: isChecked }));
+        setTempFilterRoles(prev => ({ ...prev, [roleClass]: isChecked }));
+    }, []);
+
+    const applyFilters = useCallback(() => {
+        setActiveFilterRoles(tempFilterRoles);
         // If name search is active, clear it when manual filter changes
         if (selectedSearchNameData) {
             clearNameSearch();
         }
         // Save preferences immediately on filter change
-        localStorage.setItem(CONFIG.LOCAL_STORAGE_KEY, JSON.stringify({ filters: Object.entries(activeFilterRoles).map(([value, checked]) => ({ value, checked })), isCardView: viewMode === 'card' }));
-    }, [activeFilterRoles, selectedSearchNameData, viewMode, clearNameSearch]);
+        localStorage.setItem(CONFIG.LOCAL_STORAGE_KEY, JSON.stringify({ filters: Object.entries(tempFilterRoles).map(([value, checked]) => ({ value, checked })), isCardView: viewMode === 'card' }));
+    }, [tempFilterRoles, selectedSearchNameData, viewMode, clearNameSearch]);
+
+    const handleFilterModalOpen = useCallback(() => {
+        // Initialize temp filters with current active filters when opening modal
+        setTempFilterRoles({...activeFilterRoles});
+        setIsFilterModalOpen(true);
+    }, [activeFilterRoles]);
+
+    const handleFilterModalClose = useCallback(() => {
+        // Apply the temporary filters when closing modal
+        applyFilters();
+        setIsFilterModalOpen(false);
+    }, [applyFilters]);
+
+    const handleFilterModalCancel = useCallback(() => {
+        // Close modal without applying changes
+        setIsFilterModalOpen(false);
+    }, []);
 
 
     const handleFilterControl = useCallback((action) => {
@@ -727,14 +748,8 @@ const App = () => {
                 newFilters[roleClass] = action === 'select-all';
             }
         });
-        setActiveFilterRoles(newFilters);
-        // If name search is active, clear it when bulk filter changes
-        if (selectedSearchNameData) {
-            clearNameSearch();
-        }
-        // Save preferences immediately on bulk filter change
-        localStorage.setItem(CONFIG.LOCAL_STORAGE_KEY, JSON.stringify({ filters: Object.entries(newFilters).map(([value, checked]) => ({ value, checked })), isCardView: viewMode === 'card' }));
-    }, [roles, selectedSearchNameData, viewMode, clearNameSearch]);
+        setTempFilterRoles(newFilters);
+    }, [roles]);
 
     // --- View Toggle Logic ---
     const handleViewToggle = useCallback(() => {
@@ -768,20 +783,24 @@ const App = () => {
     }, []);
 
     // --- Name Search Logic ---
+    // Memoize filtered search names to avoid recalculating on every render
+    const filteredSearchNames = useMemo(() => {
+        if (nameSearchInput.length === 0) return [];
+        return allNames.filter(nameData =>
+            nameData.searchText.includes(nameSearchInput.toLowerCase())
+        );
+    }, [allNames, nameSearchInput]);
+
     const handleNameSearchChange = useCallback((e) => {
         const searchTerm = e.target.value;
         setNameSearchInput(searchTerm);
         if (searchTerm.length > 0) {
-            const filtered = allNames.filter(nameData =>
-                nameData.searchText.includes(searchTerm.toLowerCase())
-            );
-            setFilteredSearchNames(filtered);
             setNameSearchDropdownActive(true);
         } else {
             setNameSearchDropdownActive(false);
             clearNameSearch(); // Clear search and reset filters when input is empty
         }
-    }, [allNames, clearNameSearch]);
+    }, [clearNameSearch]);
 
     const selectName = useCallback((nameData) => {
         setSelectedSearchNameData(nameData);
@@ -1259,13 +1278,13 @@ const App = () => {
                             type="checkbox"
                             id={`dd-role-${roleClass}`}
                             value={roleClass}
-                            checked={activeFilterRoles[roleClass] !== false}
+                            checked={tempFilterRoles[roleClass] !== false}
                             onChange={(e) => handleFilterChange(roleClass, e.target.checked)}
                             className="hidden"
                         />
                         <label
                             htmlFor={`dd-role-${roleClass}`}
-                            className={`block p-2 rounded-md bg-gray-100 text-gray-800 cursor-pointer transition-all duration-200 border border-gray-300 select-none text-center text-sm w-full box-border ${activeFilterRoles[roleClass] !== false ? 'bg-green-600 text-white border-green-600' : ''}`}
+                            className={`block p-2 rounded-md bg-gray-100 text-gray-800 cursor-pointer transition-all duration-200 border border-gray-300 select-none text-center text-sm w-full box-border ${tempFilterRoles[roleClass] !== false ? 'bg-green-600 text-white border-green-600' : ''}`}
                         >
                             {displayName}
                         </label>
@@ -1284,13 +1303,13 @@ const App = () => {
                             type="checkbox"
                             id={`dd-role-${roleClass}`}
                             value={roleClass}
-                            checked={activeFilterRoles[roleClass] !== false}
+                            checked={tempFilterRoles[roleClass] !== false}
                             onChange={(e) => handleFilterChange(roleClass, e.target.checked)}
                             className="hidden"
                         />
                         <label
                             htmlFor={`dd-role-${roleClass}`}
-                            className={`block p-2 rounded-md bg-gray-100 text-gray-800 cursor-pointer transition-all duration-200 border border-gray-300 select-none text-center text-sm w-full box-border ${activeFilterRoles[roleClass] !== false ? 'bg-blue-600 text-white border-blue-600' : ''}`}
+                            className={`block p-2 rounded-md bg-gray-100 text-gray-800 cursor-pointer transition-all duration-200 border border-gray-300 select-none text-center text-sm w-full box-border ${tempFilterRoles[roleClass] !== false ? 'bg-blue-600 text-white border-blue-600' : ''}`}
                         >
                             {cnRole}
                         </label>
@@ -1321,13 +1340,13 @@ const App = () => {
                         type="checkbox"
                         id={`dd-role-${roleClass}`}
                         value={roleClass}
-                        checked={activeFilterRoles[roleClass] !== false}
+                        checked={tempFilterRoles[roleClass] !== false}
                         onChange={(e) => handleFilterChange(roleClass, e.target.checked)}
                         className="hidden"
                     />
                     <label
                         htmlFor={`dd-role-${roleClass}`}
-                        className={`block p-2 rounded-md bg-gray-100 text-gray-800 cursor-pointer transition-all duration-200 border border-gray-300 select-none text-center text-sm w-full box-border ${activeFilterRoles[roleClass] !== false ? 'bg-purple-600 text-white border-purple-600' : ''}`}
+                        className={`block p-2 rounded-md bg-gray-100 text-gray-800 cursor-pointer transition-all duration-200 border border-gray-300 select-none text-center text-sm w-full box-border ${tempFilterRoles[roleClass] !== false ? 'bg-purple-600 text-white border-purple-600' : ''}`}
                     >
                         {displayName}
                     </label>
@@ -1347,9 +1366,11 @@ const App = () => {
                 </div>
             </>
         );
-    }, [roles, roleAssignments, activeFilterRoles, handleFilterChange, handleFilterControl]);
+    }, [roles, roleAssignments, tempFilterRoles, handleFilterChange, handleFilterControl]);
 
-    const dutiesData = {
+
+    // Duties data for 10 AC roles (memoized)
+    const dutiesData10 = useMemo(() => ({
         'AC 1': ['Music Program', 'Dance Prep (T)', 'Dance DJ (T)', 'Games Night', 'Dance Lead (F)', 'Wednesday Exercise Coordinator'],
         'AC 2': ['Music Program', 'Dance Prep (T)', 'Dance Lead (T)', 'Games Night Accom', 'TIHS Assist', 'Wednesday Exercise Coordinator', 'Bus Bye Bye', 'Friday Exercise Coordinator'],
         'AC 3': ['Music Program', 'Games Night', 'Pizza Night', 'Site Office', 'Communications Coordinator', 'Wednesday Exercise Coordinator'],
@@ -1360,7 +1381,51 @@ const App = () => {
         'AC 8': ['Dinner Lead', 'Games Night', 'Hall Monitor', 'TIHS - Slideshow', 'Social Media Coordinator', 'Thursday Exercise Coordinator', 'Tuesday Exercise Coordinator'],
         'AC 9': ['Bus Welcome', 'Flex-Time Lead', 'Dance Accom (T)', 'Games Night', 'TIHS - Assist', 'Tech Bag Coordinator', 'Tuesday Exercise Coordinator'],
         'AC 10': ['Dance', 'Orientation Prep', 'Orientation Assist', 'Flex-Time Lead', 'Dance Accom (T)', 'Lunch Lead Assist (Th)']
-    };
+    }), []);
+
+    // Duties data for 8 AC roles (memoized)
+    const dutiesData8 = useMemo(() => ({
+        'AC 1': ['Bus Welcome','Music Program','Dance Accommodations (T)','Games Night Accommodations','Dance Lead (F)','Tech Bag Coordinator','Thursday Exercise Coordinator',],
+        'AC 2': ['Musical Program','Dance Lead (T)','Games Night','TIHS - Assist','Dance DJ (F)','Friday Exercise Coordinator',],
+        'AC 3': ['Bus Welcome','Music Program','Games Night','Pizza Night','Check-In Dance','Wednesday Exercise Coordinator',],
+        'AC 4': ['Singers','Orientation','Flex-Time','Games Night Lead','Bus Bye-Bye','Lost & Found Coordinator','Tuesday Exercise Coordinator',],
+        'AC 5': ['Check-In Lead','Orientation','Varitey Show','Dance DJ (T)','Games Night','Thursday Exercise Coordinator',],
+        'AC 6': ['Hall Monitor','Variety Show','Games Night','Testimony Rooms','Communications Coordinator','Tuesday Exercise Coordinator',],
+        'AC 7': ['Orientation','Class Duty Lead','TIHS - Slideshow','Dance Accommodations (F)','Thank You-Notes Coordinator','Wednesday Exercise Coordinator',],
+        'AC 8': ['Orientation','Games Night','TIHS - Lead','Social Media Coordinator','Friday Exercise Coordinator',]
+    }), []);
+
+
+    
+    // Determine which dutiesData to use based on number of AC roles (memoized)
+    const acRolesCount = useMemo(() => roles.filter(role => role.startsWith('AC ')).length, [roles]);
+    const dutiesData = useMemo(() => {
+        return acRolesCount === 10 ? dutiesData10 : (acRolesCount === 8 ? dutiesData8 : {});
+    }, [acRolesCount, dutiesData10, dutiesData8]);
+
+    // Memoize day navigation buttons for better performance
+    const dayButtons = useMemo(() => CONFIG.DAYS_ORDER.map(day => (
+        <button
+            key={day}
+            data-day={day}
+            onClick={() => swiperRef.current?.slideTo(CONFIG.DAYS_ORDER.indexOf(day))}
+            className="quick-nav-btn flex-grow px-2 py-2 border border-gray-300 bg-white rounded-md cursor-pointer transition-all duration-200 text-sm text-center whitespace-nowrap hover:bg-blue-600 hover:text-white hover:border-blue-600"
+        >
+            {day.substring(0, 3)}
+        </button>
+    )), []);
+
+    // Memoize swiper slides for better performance
+    const swiperSlides = useMemo(() => CONFIG.DAYS_ORDER.map(day => (
+        <div key={day} className="swiper-slide" data-day={day}>
+            <div className={`h-full ${viewMode === 'table' ? 'block' : 'hidden'}`}>
+                {renderCalendarForDay(day)}
+            </div>
+            <div className={`h-full ${viewMode === 'card' ? 'flex' : 'hidden'}`}>
+                {generateCardViewForDay(day)}
+            </div>
+        </div>
+    )), [viewMode, renderCalendarForDay, generateCardViewForDay]);
 
     if (loading) {
         return (
@@ -1396,7 +1461,7 @@ const App = () => {
                                     clearNameSearch();
                                 }
                             }}
-                            onFocus={() => nameSearchInput.length > 0 && setFilteredSearchNames(allNames.filter(nameData => nameData.searchText.includes(nameSearchInput.toLowerCase()))) && setNameSearchDropdownActive(true)}
+                            onFocus={() => nameSearchInput.length > 0 && setNameSearchDropdownActive(true)}
                             onBlur={() => setTimeout(() => setNameSearchDropdownActive(false), 200)}
                         />
                         {nameSearchDropdownActive && filteredSearchNames.length > 0 && (
@@ -1423,7 +1488,7 @@ const App = () => {
                         </button>
                     </div>
                     <div className="flex-1 min-w-0 flex justify-center">
-                        <button onClick={() => setIsFilterModalOpen(true)} className="px-3 py-1 text-sm border border-gray-300 bg-white rounded-md cursor-pointer transition-all duration-200 whitespace-nowrap overflow-hidden text-ellipsis w-full max-w-xs hover:bg-blue-600 hover:text-white hover:border-blue-600">
+                        <button onClick={handleFilterModalOpen} className="px-3 py-1 text-sm border border-gray-300 bg-white rounded-md cursor-pointer transition-all duration-200 whitespace-nowrap overflow-hidden text-ellipsis w-full max-w-xs hover:bg-blue-600 hover:text-white hover:border-blue-600">
                             Filter Roles
                         </button>
                     </div>
@@ -1445,16 +1510,7 @@ const App = () => {
                 <nav className="flex justify-center items-center gap-2 mt-2">
                     <button className="swiper-button-prev relative w-auto h-auto text-blue-600 after:text-lg after:font-bold"></button>
                     <div className="flex flex-grow justify-center gap-1.5">
-                        {CONFIG.DAYS_ORDER.map(day => (
-                            <button
-                                key={day}
-                                data-day={day}
-                                onClick={() => swiperRef.current?.slideTo(CONFIG.DAYS_ORDER.indexOf(day))}
-                                className="quick-nav-btn flex-grow px-2 py-2 border border-gray-300 bg-white rounded-md cursor-pointer transition-all duration-200 text-sm text-center whitespace-nowrap hover:bg-blue-600 hover:text-white hover:border-blue-600"
-                            >
-                                {day.substring(0, 3)}
-                            </button>
-                        ))}
+                        {dayButtons}
                     </div>
                     <button className="swiper-button-next relative w-auto h-auto text-blue-600 after:text-lg after:font-bold"></button>
                 </nav>
@@ -1463,16 +1519,7 @@ const App = () => {
             <main className="flex-grow min-h-0 relative">
                 <div className="swiper h-full">
                     <div className="swiper-wrapper">
-                        {CONFIG.DAYS_ORDER.map(day => (
-                            <div key={day} className="swiper-slide" data-day={day}>
-                                <div className={`h-full ${viewMode === 'table' ? 'block' : 'hidden'}`}>
-                                    {renderCalendarForDay(day)}
-                                </div>
-                                <div className={`h-full ${viewMode === 'card' ? 'flex' : 'hidden'}`}>
-                                    {generateCardViewForDay(day)}
-                                </div>
-                            </div>
-                        ))}
+                        {swiperSlides}
                     </div>
                 </div>
             </main>
@@ -1483,14 +1530,22 @@ const App = () => {
 
             {/* Filter Modal */}
             {isFilterModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 z-[2000] flex justify-center items-center p-2 box-border" onClick={() => setIsFilterModalOpen(false)}>
+                <div className="fixed inset-0 bg-black bg-opacity-50 z-[2000] flex justify-center items-center p-2 box-border" onClick={handleFilterModalCancel}>
                     <div className="bg-white rounded-lg p-4 max-w-5xl w-full max-h-[95vh] overflow-y-auto shadow-xl relative" onClick={(e) => e.stopPropagation()}>
-                        <button onClick={() => setIsFilterModalOpen(false)} className="absolute top-2 right-2 bg-transparent border-none text-gray-600 text-xl cursor-pointer w-6 h-6 flex items-center justify-center rounded-full transition-colors duration-200 hover:bg-gray-100">&times;</button>
+                        <button onClick={handleFilterModalCancel} className="absolute top-2 right-2 bg-transparent border-none text-gray-600 text-xl cursor-pointer w-6 h-6 flex items-center justify-center rounded-full transition-colors duration-200 hover:bg-gray-100">&times;</button>
                         <div className="mb-3 pr-6">
                             <h2 className="text-xl font-bold text-gray-800 m-0">Filter Roles</h2>
                         </div>
-                        <div>
+                        <div className="mb-4">
                             {populateFilters()}
+                        </div>
+                        <div className="flex gap-2 justify-end pt-3 border-t border-gray-200">
+                            <button onClick={handleFilterModalCancel} className="px-4 py-2 border border-gray-300 bg-white rounded-md cursor-pointer transition-all duration-200 text-sm hover:bg-gray-100 hover:text-gray-800 hover:border-gray-400">
+                                Cancel
+                            </button>
+                            <button onClick={handleFilterModalClose} className="px-4 py-2 border border-blue-600 bg-blue-600 text-white rounded-md cursor-pointer transition-all duration-200 text-sm hover:bg-blue-700 hover:border-blue-700">
+                                Apply Filters
+                            </button>
                         </div>
                     </div>
                 </div>
@@ -1584,14 +1639,15 @@ const App = () => {
                                                     const staff = roleFullNames[role] || [];
                                                     if (staff.length > 0) {
                                                         const isAcRole = role.startsWith('AC ');
-                                                        return (
-                                                            <span key={role} className={`px-1.5 py-0.5 rounded-full text-xs font-medium ${isAcRole ? 'bg-green-600' : 'bg-blue-600'} text-white`}>
-                                                                {staff[0]} {/* Show first assigned name for brevity */}
+                                                        // Show all staff members for each role
+                                                        return staff.map(staffName => (
+                                                            <span key={`${role}-${staffName}`} className={`px-1.5 py-0.5 rounded-full text-xs font-medium ${isAcRole ? 'bg-green-600' : 'bg-blue-600'} text-white`}>
+                                                                {staffName}
                                                             </span>
-                                                        );
+                                                        ));
                                                     }
                                                     return null;
-                                                })}
+                                                }).flat()}
                                             </div>
                                         </div>
                                     ))}
@@ -1603,6 +1659,7 @@ const App = () => {
             )}
 
             {/* Duties Summary Modal */}
+
             {isDutiesSummaryModalOpen && (
                 <div className="fixed inset-0 bg-black bg-opacity-50 z-[2000] flex justify-center items-center p-2 box-border" onClick={() => setIsDutiesSummaryModalOpen(false)}>
                     <div className="bg-white rounded-lg p-4 max-w-5xl w-full max-h-[95vh] overflow-y-auto shadow-xl relative" onClick={(e) => e.stopPropagation()}>
@@ -1611,63 +1668,69 @@ const App = () => {
                             <h2 className="text-xl font-bold text-gray-800 m-0">AC Role Duties Summary</h2>
                         </div>
                         <div className="flex flex-col gap-2 mt-2">
-                            {/* Paired AC roles layout */}
-                            {[1, 3, 5, 7, 9].map(acNumber => {
-                                const role1 = `AC ${acNumber}`;
-                                const role2 = `AC ${acNumber + 1}`;
-                                const duties1 = dutiesData[role1] || [];
-                                const duties2 = dutiesData[role2] || [];
-                                const assignments1 = roleAssignments[role1];
-                                const assignments2 = roleAssignments[role2];
-                                const assignedName1 = assignments1 && assignments1.length > 0 ? ` (${assignments1[0]})` : '';
-                                const assignedName2 = assignments2 && assignments2.length > 0 ? ` (${assignments2[0]})` : '';
-
-                                return (
-                                    <div key={`pair-${acNumber}`} className="grid grid-cols-2 gap-2">
-                                        {/* First AC role */}
-                                        <div className="bg-gray-100 rounded-md p-2 border-l-4 border-gray-300">
-                                            <h3 
-                                                className="text-sm font-bold text-white bg-green-600 p-1.5 rounded-md text-center mb-2 cursor-pointer hover:bg-green-700 transition-colors duration-200"
-                                                onClick={() => {
-                                                    const nameData = allNames.find(n => n.role === role1);
-                                                    if (nameData) {
-                                                        setIsDutiesSummaryModalOpen(false);
-                                                        setTimeout(() => selectName(nameData), 100);
-                                                    }
-                                                }}
-                                            >{role1}{assignedName1}</h3>
-                                            <ul className="list-none p-0 m-0">
-                                                {duties1.map((duty, idx) => (
-                                                    <li key={idx} className="py-0.5 border-b border-gray-200 text-xs text-gray-800 last:border-b-0 before:content-['•_'] before:font-bold before:text-gray-800 before:mr-1">{duty}</li>
-                                                ))}
-                                            </ul>
-                                        </div>
-                                        
-                                        {/* Second AC role */}
-                                        {duties2.length > 0 ? (
+                            {/* Flexible AC role pairing layout */}
+                            {(() => {
+                                // Get all AC role keys and sort numerically
+                                const acRoleKeys = Object.keys(dutiesData)
+                                    .filter(key => key.startsWith('AC '))
+                                    .sort((a, b) => parseInt(a.split(' ')[1]) - parseInt(b.split(' ')[1]));
+                                const pairs = [];
+                                for (let i = 0; i < acRoleKeys.length; i += 2) {
+                                    const role1 = acRoleKeys[i];
+                                    const role2 = acRoleKeys[i + 1];
+                                    const duties1 = dutiesData[role1] || [];
+                                    const duties2 = role2 ? dutiesData[role2] || [] : [];
+                                    const assignments1 = roleAssignments[role1];
+                                    const assignments2 = role2 ? roleAssignments[role2] : undefined;
+                                    const assignedName1 = assignments1 && assignments1.length > 0 ? ` (${assignments1[0]})` : '';
+                                    const assignedName2 = assignments2 && assignments2.length > 0 ? ` (${assignments2[0]})` : '';
+                                    pairs.push(
+                                        <div key={`pair-${role1}`} className="grid grid-cols-2 gap-2">
+                                            {/* First AC role */}
                                             <div className="bg-gray-100 rounded-md p-2 border-l-4 border-gray-300">
                                                 <h3 
                                                     className="text-sm font-bold text-white bg-green-600 p-1.5 rounded-md text-center mb-2 cursor-pointer hover:bg-green-700 transition-colors duration-200"
                                                     onClick={() => {
-                                                        const nameData = allNames.find(n => n.role === role2);
+                                                        const nameData = allNames.find(n => n.role === role1);
                                                         if (nameData) {
                                                             setIsDutiesSummaryModalOpen(false);
                                                             setTimeout(() => selectName(nameData), 100);
                                                         }
                                                     }}
-                                                >{role2}{assignedName2}</h3>
+                                                >{role1}{assignedName1}</h3>
                                                 <ul className="list-none p-0 m-0">
-                                                    {duties2.map((duty, idx) => (
+                                                    {duties1.map((duty, idx) => (
                                                         <li key={idx} className="py-0.5 border-b border-gray-200 text-xs text-gray-800 last:border-b-0 before:content-['•_'] before:font-bold before:text-gray-800 before:mr-1">{duty}</li>
                                                     ))}
                                                 </ul>
                                             </div>
-                                        ) : (
-                                            <div></div>
-                                        )}
-                                    </div>
-                                );
-                            })}
+                                            {/* Second AC role */}
+                                            {role2 ? (
+                                                <div className="bg-gray-100 rounded-md p-2 border-l-4 border-gray-300">
+                                                    <h3 
+                                                        className="text-sm font-bold text-white bg-green-600 p-1.5 rounded-md text-center mb-2 cursor-pointer hover:bg-green-700 transition-colors duration-200"
+                                                        onClick={() => {
+                                                            const nameData = allNames.find(n => n.role === role2);
+                                                            if (nameData) {
+                                                                setIsDutiesSummaryModalOpen(false);
+                                                                setTimeout(() => selectName(nameData), 100);
+                                                            }
+                                                        }}
+                                                    >{role2}{assignedName2}</h3>
+                                                    <ul className="list-none p-0 m-0">
+                                                        {duties2.map((duty, idx) => (
+                                                            <li key={idx} className="py-0.5 border-b border-gray-200 text-xs text-gray-800 last:border-b-0 before:content-['•_'] before:font-bold before:text-gray-800 before:mr-1">{duty}</li>
+                                                        ))}
+                                                    </ul>
+                                                </div>
+                                            ) : (
+                                                <div></div>
+                                            )}
+                                        </div>
+                                    );
+                                }
+                                return pairs;
+                            })()}
                         </div>
                     </div>
                 </div>

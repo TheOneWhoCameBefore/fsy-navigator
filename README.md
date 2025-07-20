@@ -164,14 +164,6 @@ The application uses three Firebase Firestore collections:
 - `npm run dev` - Start development server
 - `npm run build` - Build for production
 - `npm run preview` - Preview production build
-- `npm run upload-data` - Upload CSV data to Firebase
-- `npm run clear-data` - Clear all Firebase collections
-- `npm run reset-data` - Clear and re-upload all data
-
-## 📁 Data Files
-
-- `role_assignments.csv` - Maps staff members to their roles (AC 1, CN A, etc.)
-- `duties_and_agenda.csv` - All schedule events, duties, breaks, and agenda items
 
 ## 🎨 Features
 
@@ -185,7 +177,7 @@ The application uses three Firebase Firestore collections:
 
 ## 🏗️ Architecture
 
-- **Frontend:** React 18 with Vite build system
+- **Frontend:** React 22 with Vite build system
 - **Backend:** Firebase Firestore for data storage
 - **Authentication:** Firebase Anonymous Authentication
 - **Styling:** Tailwind CSS (via CDN)
