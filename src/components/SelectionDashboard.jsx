@@ -90,7 +90,11 @@ const SelectionDashboard = ({ db }) => {
         
         setOutdoorLocations(locations);
         if (L && mapInstanceRef.current) {
-          updateMapMarkers(locations);
+          // Add a small delay to prevent rapid successive updates
+          setTimeout(() => {
+            console.log('Updating markers from data change');
+            updateMapMarkers(locations);
+          }, 200);
         }
       },
       (error) => {
@@ -227,7 +231,8 @@ const SelectionDashboard = ({ db }) => {
   // Initialize map when Leaflet is loaded
   useEffect(() => {
     const initMap = () => {
-      if (L && mapRef.current && !mapInstanceRef.current) {
+      if (L && mapRef.current && !mapInstanceRef.current && !showManagement) {
+        console.log('Initializing map...');
         // Initialize map centered on a default location (you can adjust coordinates)
         mapInstanceRef.current = L.map(mapRef.current, {
           zoomControl: true,
@@ -242,19 +247,33 @@ const SelectionDashboard = ({ db }) => {
           attribution: '© OpenStreetMap contributors'
         }).addTo(mapInstanceRef.current);
         
-        // Update markers if we already have data
-        if (outdoorLocations.length > 0) {
-          updateMapMarkers(outdoorLocations);
-        }
+        // Wait for map to be fully initialized before adding markers
+        mapInstanceRef.current.whenReady(() => {
+          console.log('Map is ready, checking for data...');
+          if (outdoorLocations.length > 0) {
+            console.log('Adding markers on map ready');
+            updateMapMarkers(outdoorLocations);
+          }
+        });
       }
     };
 
-    if (L) {
-      initMap();
-    } else {
-      // Retry initialization after a short delay if Leaflet isn't loaded yet
-      const timer = setTimeout(initMap, 1000);
-      return () => clearTimeout(timer);
+    // Clean up map when switching to management view
+    if (showManagement && mapInstanceRef.current) {
+      console.log('Cleaning up map for management view...');
+      mapInstanceRef.current.remove();
+      mapInstanceRef.current = null;
+    }
+
+    // Initialize or re-initialize map when not in management view
+    if (!showManagement) {
+      if (L) {
+        initMap();
+      } else {
+        // Retry initialization after a short delay if Leaflet isn't loaded yet
+        const timer = setTimeout(initMap, 1000);
+        return () => clearTimeout(timer);
+      }
     }
 
     // Cleanup map on unmount
@@ -264,7 +283,7 @@ const SelectionDashboard = ({ db }) => {
         mapInstanceRef.current = null;
       }
     };
-  }, [L, outdoorLocations]);
+  }, [L, outdoorLocations, showManagement]);
 
   // Create custom icons (only when L is available)
   const createIcons = () => {
@@ -298,10 +317,18 @@ const SelectionDashboard = ({ db }) => {
 
   // Update map markers when outdoor locations change
   const updateMapMarkers = (locations) => {
-    if (!L || !mapInstanceRef.current) return;
+    if (!L || !mapInstanceRef.current) {
+      console.log('Map not ready for markers:', { L: !!L, map: !!mapInstanceRef.current });
+      return;
+    }
 
     const { availableIcon, claimedIcon } = createIcons();
-    if (!availableIcon || !claimedIcon) return;
+    if (!availableIcon || !claimedIcon) {
+      console.log('Icons not ready');
+      return;
+    }
+
+    console.log('Updating map markers with', locations.length, 'locations');
 
     // Clear existing markers
     markersRef.current.forEach(marker => {
@@ -310,42 +337,60 @@ const SelectionDashboard = ({ db }) => {
     markersRef.current.clear();
 
     // Add new markers
-    locations.forEach(location => {
-      if (location.lat && location.lon) {
-        const icon = location.status === 'available' ? availableIcon : claimedIcon;
-        const marker = L.marker([location.lat, location.lon], { icon })
-          .addTo(mapInstanceRef.current);
+    const validLocations = locations.filter(location => location.lat && location.lon);
+    
+    validLocations.forEach(location => {
+      const icon = location.status === 'available' ? availableIcon : claimedIcon;
+      const marker = L.marker([location.lat, location.lon], { icon })
+        .addTo(mapInstanceRef.current);
 
-        // Create popup content
-        const popupContent = `
-          <div>
-            <h3>${location.name}</h3>
-            <p>${location.description || 'No description available'}</p>
-            <p><strong>Status:</strong> ${location.status}</p>
-            ${location.claimedBy ? `
-              <p><strong>Claimed by:</strong> ${location.claimedBy}</p>
-              ${location.cnCounselors && location.cnCounselors.length > 0 ? 
-                `<p><strong>CN Counselors:</strong> ${location.cnCounselors.map(cn => cn.name).join(', ')}</p>` : ''
-              }
-            ` : ''}
-          </div>
-        `;
-        marker.bindPopup(popupContent);
+      // Create popup content
+      const popupContent = `
+        <div>
+          <h3>${location.name}</h3>
+          <p>${location.description || 'No description available'}</p>
+          <p><strong>Status:</strong> ${location.status}</p>
+          ${location.claimedBy ? `
+            <p><strong>Claimed by:</strong> ${location.claimedBy}</p>
+            ${location.cnCounselors && location.cnCounselors.length > 0 ? 
+              `<p><strong>CN Counselors:</strong> ${location.cnCounselors.map(cn => cn.name).join(', ')}</p>` : ''
+            }
+          ` : ''}
+        </div>
+      `;
+      marker.bindPopup(popupContent);
 
-        // Handle marker click for selection
-        marker.on('click', () => {
-          console.log('Marker clicked!', location.name, 'Status:', location.status);
-          if (location.status === 'available') {
-            console.log('Handling selection for:', location.name);
-            handleOutdoorSelection(location);
-          } else {
-            console.log('Location not available:', location.name, location.status);
-          }
-        });
+      // Handle marker click for selection - ensure this is properly bound
+      marker.on('click', (e) => {
+        console.log('Marker clicked!', location.name, 'Status:', location.status);
+        e.originalEvent?.stopPropagation(); // Prevent event bubbling
+        if (location.status === 'available') {
+          console.log('Handling selection for:', location.name);
+          handleOutdoorSelection(location);
+        } else {
+          console.log('Location not available:', location.name, location.status);
+        }
+      });
 
-        markersRef.current.set(location.id, marker);
-      }
+      markersRef.current.set(location.id, marker);
     });
+
+    // Center map on all markers if we have locations
+    if (validLocations.length > 0) {
+      // Add a small delay to ensure markers are fully added before centering
+      setTimeout(() => {
+        if (validLocations.length === 1) {
+          // If only one location, center on it with a reasonable zoom
+          const location = validLocations[0];
+          mapInstanceRef.current.setView([location.lat, location.lon], 16);
+        } else {
+          // If multiple locations, calculate center point and use fixed zoom
+          const avgLat = validLocations.reduce((sum, loc) => sum + loc.lat, 0) / validLocations.length;
+          const avgLon = validLocations.reduce((sum, loc) => sum + loc.lon, 0) / validLocations.length;
+          mapInstanceRef.current.setView([avgLat, avgLon], 15); // Fixed zoom level for campus view
+        }
+      }, 100);
+    }
   };
 
   // Modal helper functions
@@ -368,9 +413,9 @@ const SelectionDashboard = ({ db }) => {
     setSelection(prev => ({ ...prev, outdoor: location }));
     closeModal('outdoor');
     
-    // Pan map to selected location and open popup
+    // Pan map to selected location and open popup without changing zoom
     if (mapInstanceRef.current && location.lat && location.lon) {
-      mapInstanceRef.current.setView([location.lat, location.lon], 15);
+      mapInstanceRef.current.panTo([location.lat, location.lon]);
       const marker = markersRef.current.get(location.id);
       if (marker) {
         marker.openPopup();
@@ -594,7 +639,7 @@ const SelectionDashboard = ({ db }) => {
       <div className="p-3 max-w-7xl mx-auto">
         <div className="flex justify-between items-center mb-6">
           <h2 className="text-2xl font-bold text-gray-800">
-            Interactive Company Spot Selection Dashboard
+            Company Spot Dashboard
           </h2>
           <button
             onClick={() => setShowManagement(true)}
@@ -885,7 +930,7 @@ const SelectionDashboard = ({ db }) => {
                       >
                         <div className="font-semibold text-gray-800">{location.name}</div>
                         {location.description && (
-                          <div className="text-sm text-gray-600 mt-2">{location.description}</div>
+                          <div className="text-sm text-gray-600 mt-1 leading-relaxed">{location.description}</div>
                         )}
                         {location.status === 'claimed' && (
                           <div className="text-sm mt-2 text-gray-500">

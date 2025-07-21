@@ -543,56 +543,68 @@ const App = () => {
 
     // --- Swiper Initialization and Lifecycle ---
     useEffect(() => {
-        if (roles.length > 0 && Object.keys(processedData).length > 0) {
+        // Only initialize Swiper when on calendar page and data is ready
+        if (currentPage === 'calendar' && roles.length > 0 && Object.keys(processedData).length > 0) {
             if (swiperRef.current) {
                 swiperRef.current.destroy(true, true);
             }
 
-            const swiperInstance = new Swiper('.swiper', {
-                modules: [Navigation],
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                keyboard: {
-                    enabled: true,
-                },
-                on: {
-                    slideChange: function () {
-                        const currentDay = this.slides[this.activeIndex]?.dataset.day;
-                        if (currentDay) {
-                            updateActiveDayButton(currentDay);
-                        }
-                    },
-                    slideChangeTransitionEnd: function () {
-                        const currentDay = this.slides[this.activeIndex]?.dataset.day;
-                        if (currentDay) {
-                            updateActiveDayButton(currentDay);
-                            updateCurrentTimeIndicator(this);
-                        }
-                    },
-                    transitionStart: function () {
-                        const currentDay = this.slides[this.activeIndex]?.dataset.day;
-                        if (currentDay) {
-                            updateActiveDayButton(currentDay);
-                        }
-                    },
-                },
-            });
-            swiperRef.current = swiperInstance;
+            // Add a small delay to ensure DOM is ready
+            const timer = setTimeout(() => {
+                const swiperElement = document.querySelector('.swiper');
+                if (!swiperElement) return;
 
-            const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
-            const todayIndex = CONFIG.DAYS_ORDER.indexOf(today);
-            if (todayIndex !== -1) {
-                swiperInstance.slideTo(todayIndex, 0);
-            }
-            if (swiperInstance.slides.length > 0) {
-                swiperInstance.emit('slideChangeTransitionEnd');
-            }
+                const swiperInstance = new Swiper('.swiper', {
+                    modules: [Navigation],
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    keyboard: {
+                        enabled: true,
+                    },
+                    on: {
+                        slideChange: function () {
+                            const currentDay = this.slides[this.activeIndex]?.dataset.day;
+                            if (currentDay) {
+                                updateActiveDayButton(currentDay);
+                            }
+                        },
+                        slideChangeTransitionEnd: function () {
+                            const currentDay = this.slides[this.activeIndex]?.dataset.day;
+                            if (currentDay) {
+                                updateActiveDayButton(currentDay);
+                                updateCurrentTimeIndicator(this);
+                            }
+                        },
+                        transitionStart: function () {
+                            const currentDay = this.slides[this.activeIndex]?.dataset.day;
+                            if (currentDay) {
+                                updateActiveDayButton(currentDay);
+                            }
+                        },
+                    },
+                });
+                swiperRef.current = swiperInstance;
 
-            const intervalId = setInterval(() => updateCurrentTimeIndicator(swiperInstance), 60000);
+                const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+                const todayIndex = CONFIG.DAYS_ORDER.indexOf(today);
+                if (todayIndex !== -1) {
+                    swiperInstance.slideTo(todayIndex, 0);
+                }
+                if (swiperInstance.slides.length > 0) {
+                    swiperInstance.emit('slideChangeTransitionEnd');
+                }
+            }, 100);
+
+            const intervalId = setInterval(() => {
+                if (swiperRef.current) {
+                    updateCurrentTimeIndicator(swiperRef.current);
+                }
+            }, 60000);
 
             return () => {
+                clearTimeout(timer);
                 clearInterval(intervalId);
                 if (swiperRef.current) {
                     swiperRef.current.destroy(true, true);
@@ -600,7 +612,7 @@ const App = () => {
                 }
             };
         }
-    }, [roles, processedData]); // Re-initialize swiper when roles or processedData changes
+    }, [currentPage, roles, processedData]); // Include currentPage in dependencies
 
     // --- UI Update Functions ---
     const updateActiveDayButton = useCallback((currentDay) => {

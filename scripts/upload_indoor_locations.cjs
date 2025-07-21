@@ -37,18 +37,34 @@ async function uploadIndoorLocations() {
       fs.createReadStream(csvFilePath)
         .pipe(csv())
         .on('data', (row) => {
+          // Debug: log the first row to see field names
+          if (locations.length === 0) {
+            console.log('📋 CSV field names detected:', Object.keys(row));
+          }
+          
           // Clean up the data (remove extra spaces, handle CSV formatting)
+          // Handle both "description" and " description" (with space) field names
+          const description = row.description?.trim() || row[' description']?.trim() || '';
+          
           const location = {
             name: row.name?.trim(),
-            description: row.description?.trim() || '',
+            description: description,
             status: 'available', // Default status
             createdAt: new Date().toISOString()
           };
           
           // Validate required fields
           if (!location.name) {
-            console.warn('️  Skipping row with missing name:', row);
+            console.warn('⚠️  Skipping row with missing name:', row);
             return;
+          }
+          
+          // Debug: log first few locations to verify parsing
+          if (locations.length < 3) {
+            console.log(`🔍 Parsed location ${locations.length + 1}:`, {
+              name: location.name,
+              description: location.description
+            });
           }
           
           locations.push(location);
