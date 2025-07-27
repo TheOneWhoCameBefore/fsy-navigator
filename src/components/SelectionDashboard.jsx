@@ -463,7 +463,7 @@ const SelectionDashboard = ({ db }) => {
     return selection.outdoor && 
            selection.indoor && 
            selection.company &&
-           selection.cnCounselors.length > 0 &&
+           selection.cnCounselors.length >= 2 &&
            selection.outdoor.status === 'available' &&
            selection.indoor.status === 'available' &&
            selection.company.status === 'available';
@@ -686,6 +686,11 @@ const SelectionDashboard = ({ db }) => {
                   <div className={`text-sm mt-1 ${selection.company ? 'text-blue-700' : 'text-gray-500'}`}>
                     {selection.company?.name || 'Click to select'}
                   </div>
+                  {selection.company?.scripture_reference && (
+                    <div className="text-xs text-gray-500 mt-1">
+                      {selection.company.scripture_reference}
+                    </div>
+                  )}
                 </button>
 
                 {/* CN Counselors Button */}
@@ -763,7 +768,7 @@ const SelectionDashboard = ({ db }) => {
 
               {!canClaim() && !isClaiming && (
                 <p className="text-sm text-gray-500 text-center mt-3">
-                  Complete all selections to claim your spots
+                  Complete all selections (minimum 2 CN counselors) to claim your spots
                 </p>
               )}
             </div>
@@ -799,22 +804,25 @@ const SelectionDashboard = ({ db }) => {
         {/* Modal Components */}
         {/* Company Name Modal */}
         {modals.company && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
-              <div className="flex justify-between items-center p-6 border-b">
-                <h3 className="text-xl font-semibold text-gray-800">Choose Company Name</h3>
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 p-2 sm:p-4 overflow-y-auto"
+            onClick={(e) => e.target === e.currentTarget && closeModal('company')}
+          >
+            <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full my-4 sm:my-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] overflow-hidden">
+              <div className="flex justify-between items-center p-4 sm:p-6 border-b bg-gray-50">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800">Choose Company Name</h3>
                 <button
                   onClick={() => closeModal('company')}
-                  className="text-gray-500 hover:text-gray-700 text-2xl font-bold"
+                  className="text-gray-500 hover:text-gray-700 text-2xl font-bold p-1 hover:bg-gray-200 rounded"
                 >
                   ×
                 </button>
               </div>
-              <div className="p-6 overflow-y-auto max-h-96">
+              <div className="p-4 sm:p-6 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 8rem)' }}>
                 {companyNames.length === 0 ? (
                   <p className="text-gray-500 text-center">No company names available.</p>
                 ) : (
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                     {companyNames.map(company => (
                       <button
                         key={company.id}
@@ -829,6 +837,9 @@ const SelectionDashboard = ({ db }) => {
                         }`}
                       >
                         <div className="font-medium text-sm">{company.name}</div>
+                        {company.scripture_reference && (
+                          <div className="text-xs text-gray-500 mt-1">{company.scripture_reference}</div>
+                        )}
                         {company.status === 'claimed' && (
                           <div className="text-xs mt-1 text-gray-500">
                             Claimed by {company.claimedBy}
@@ -845,24 +856,27 @@ const SelectionDashboard = ({ db }) => {
 
         {/* CN Counselors Modal */}
         {modals.cnCounselors && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
-              <div className="flex justify-between items-center p-6 border-b">
-                <h3 className="text-xl font-semibold text-gray-800">
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 p-2 sm:p-4 overflow-y-auto"
+            onClick={(e) => e.target === e.currentTarget && closeModal('cnCounselors')}
+          >
+            <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full my-4 sm:my-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] overflow-hidden">
+              <div className="flex justify-between items-center p-4 sm:p-6 border-b bg-gray-50">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800">
                   Select CN Counselors
                 </h3>
                 <button
                   onClick={() => closeModal('cnCounselors')}
-                  className="text-gray-500 hover:text-gray-700 text-2xl font-bold"
+                  className="text-gray-500 hover:text-gray-700 text-2xl font-bold p-1 hover:bg-gray-200 rounded"
                 >
                   ×
                 </button>
               </div>
-              <div className="p-6 overflow-y-auto max-h-96">
+              <div className="p-4 sm:p-6 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 12rem)' }}>
                 {cnRoles.length === 0 ? (
                   <p className="text-gray-500 text-center">No CN counselors available.</p>
                 ) : (
-                  <div className="grid grid-cols-2 md:grid-cols-3 gap-3">
+                  <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-3 gap-3">
                     {cnRoles.map((counselor, index) => {
                       const isSelected = selection.cnCounselors.some(cn => cn.name === counselor);
                       return (
@@ -899,18 +913,21 @@ const SelectionDashboard = ({ db }) => {
 
         {/* Indoor Locations Modal */}
         {modals.indoor && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
-              <div className="flex justify-between items-center p-6 border-b">
-                <h3 className="text-xl font-semibold text-gray-800">Choose Indoor Location</h3>
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 p-2 sm:p-4 overflow-y-auto"
+            onClick={(e) => e.target === e.currentTarget && closeModal('indoor')}
+          >
+            <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full my-4 sm:my-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] overflow-hidden">
+              <div className="flex justify-between items-center p-4 sm:p-6 border-b bg-gray-50">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800">Choose Indoor Location</h3>
                 <button
                   onClick={() => closeModal('indoor')}
-                  className="text-gray-500 hover:text-gray-700 text-2xl font-bold"
+                  className="text-gray-500 hover:text-gray-700 text-2xl font-bold p-1 hover:bg-gray-200 rounded"
                 >
                   ×
                 </button>
               </div>
-              <div className="p-6 overflow-y-auto max-h-96">
+              <div className="p-4 sm:p-6 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 8rem)' }}>
                 {indoorLocations.length === 0 ? (
                   <p className="text-gray-500 text-center">No indoor locations available.</p>
                 ) : (
@@ -948,18 +965,21 @@ const SelectionDashboard = ({ db }) => {
 
         {/* Outdoor Locations Modal */}
         {modals.outdoor && (
-          <div className="fixed inset-0 bg-black bg-opacity-50 flex items-center justify-center z-50 p-4">
-            <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full max-h-[80vh] overflow-hidden">
-              <div className="flex justify-between items-center p-6 border-b">
-                <h3 className="text-xl font-semibold text-gray-800">Choose Outdoor Location</h3>
+          <div 
+            className="fixed inset-0 bg-black bg-opacity-50 flex items-start justify-center z-50 p-2 sm:p-4 overflow-y-auto"
+            onClick={(e) => e.target === e.currentTarget && closeModal('outdoor')}
+          >
+            <div className="bg-white rounded-lg shadow-2xl max-w-4xl w-full my-4 sm:my-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] overflow-hidden">
+              <div className="flex justify-between items-center p-4 sm:p-6 border-b bg-gray-50">
+                <h3 className="text-lg sm:text-xl font-semibold text-gray-800">Choose Outdoor Location</h3>
                 <button
                   onClick={() => closeModal('outdoor')}
-                  className="text-gray-500 hover:text-gray-700 text-2xl font-bold"
+                  className="text-gray-500 hover:text-gray-700 text-2xl font-bold p-1 hover:bg-gray-200 rounded"
                 >
                   ×
                 </button>
               </div>
-              <div className="p-6 overflow-y-auto max-h-96">
+              <div className="p-4 sm:p-6 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 8rem)' }}>
                 {outdoorLocations.length === 0 ? (
                   <p className="text-gray-500 text-center">No outdoor locations available.</p>
                 ) : (

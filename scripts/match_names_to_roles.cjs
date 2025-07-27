@@ -11,7 +11,7 @@ const fs = require('fs');
 // --- 1. Data Parsing Functions ---
 
 function parseRoleSchedules() {
-    const csv = fs.readFileSync('../data/duties_8_ac.csv', 'utf-8').split(/\r?\n/);
+    const csv = fs.readFileSync('data/duties_8_ac.csv', 'utf-8').split(/\r?\n/);
     const acRoles = {};
     const cnRoles = {};
 
@@ -46,7 +46,7 @@ function parseRoleSchedules() {
 }
 
 function parseObservedSchedules() {
-    const txt = fs.readFileSync('../data/Wednesday Copy.txt', 'utf-8').split(/\r?\n/);
+    const txt = fs.readFileSync('data/Wednesday Copy.txt', 'utf-8').split(/\r?\n/);
     const acSchedules = {};
     const cnGroupSchedules = {};
     const cnGroupMembers = {};
@@ -221,5 +221,5 @@ finalAssignments.sort((a,b) => a.role.localeCompare(b.role)).forEach(a => {
     csvRows.push(`"${a.role}","${a.names}","${new Date().toISOString()}"`);
 });
 
-fs.writeFileSync('../data/role_assignments.csv', csvRows.join("\n"));
+fs.writeFileSync('data/role_assignments.csv', csvRows.join("\n"));
 console.log("\n Saved final assignments to role_assignments.csv");

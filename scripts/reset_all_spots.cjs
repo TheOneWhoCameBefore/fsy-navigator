@@ -39,17 +39,26 @@ async function resetAllSpots() {
     const companiesSnapshot = await getDocs(collection(db, 'company_names'));
     
     for (const docSnap of companiesSnapshot.docs) {
-      await updateDoc(doc(db, 'company_names', docSnap.id), {
+      const data = docSnap.data();
+      
+      // Prepare update data - preserve core fields, reset status fields
+      const updateData = {
         status: 'available',
         claimedBy: null,           // CN counselor names
         cnCounselors: null,        // CN counselor objects
         companyName: null,         // Company name (when claimed)
         claimedAt: null,
         updatedAt: new Date().toISOString()
-      });
+      };
       
-      const data = docSnap.data();
-      console.log(`   Reset: ${data.name}`);
+      // Preserve scripture reference if it exists
+      if (data.scripture_reference) {
+        updateData.scripture_reference = data.scripture_reference;
+      }
+      
+      await updateDoc(doc(db, 'company_names', docSnap.id), updateData);
+      
+      console.log(`   Reset: ${data.name}${data.scripture_reference ? ` (${data.scripture_reference})` : ''}`);
     }
     
     console.log(' Successfully reset all company spots!');

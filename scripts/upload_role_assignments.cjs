@@ -2,9 +2,9 @@
 const path = require('path');
 const fs = require('fs');
 const { initializeApp } = require('firebase/app');
-const { getFirestore, collection, addDoc } = require('firebase/firestore');
+const { getFirestore, collection, addDoc, getDocs, deleteDoc } = require('firebase/firestore');
 
-const firebaseConfigModule = require('./src/firebase-config');
+const firebaseConfigModule = require('../src/firebase-config');
 const firebaseConfig = firebaseConfigModule.firebaseConfig || firebaseConfigModule;
 const appId = firebaseConfigModule.appId || '';
 
@@ -40,6 +40,14 @@ function parseCsv(content) {
   });
 }
 
+async function clearExistingRoleAssignments(db, colRef) {
+  console.log('Clearing existing role assignments...');
+  const snapshot = await getDocs(colRef);
+  const deletePromises = snapshot.docs.map(doc => deleteDoc(doc.ref));
+  await Promise.all(deletePromises);
+  console.log(`Cleared ${snapshot.docs.length} existing role assignments.`);
+}
+
 async function uploadRoleAssignments() {
   // Read and parse CSV
   const csvContent = fs.readFileSync(roleAssignmentsCsvPath, 'utf8');
@@ -48,6 +56,9 @@ async function uploadRoleAssignments() {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const colRef = collection(db, roleAssignmentsCollectionPath);
+
+  // Clear existing role assignments before uploading new ones
+  await clearExistingRoleAssignments(db, colRef);
 
   let successCount = 0;
   let failCount = 0;

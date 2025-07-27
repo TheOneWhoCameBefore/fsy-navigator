@@ -21,6 +21,7 @@ function showUsage() {
   console.log('');
   console.log('Expected CSV format:');
   console.log('  - company_name (required)');
+  console.log('  - scripture_reference (optional)');
   console.log('');
   console.log('Example:');
   console.log('  node scripts/upload_company_names.cjs ./data/company_names.csv');
@@ -40,6 +41,7 @@ function parseCompanyNamesCSV(filePath) {
       .pipe(csv())
       .on('data', (row) => {
         const name = row.company_name || row.Company_Name || row['Company Name'] || row.name;
+        const scriptureRef = row.scripture_reference || row.Scripture_Reference || row['Scripture Reference'] || row.scripture || row.Scripture;
 
         if (!name || !name.trim()) {
           console.warn('️  Skipping row with missing company name:', row);
@@ -53,10 +55,17 @@ function parseCompanyNamesCSV(filePath) {
           .replace(/-+/g, '-')
           .replace(/^-|-$/g, '');
 
-        companies.push({
+        const company = {
           id,
           name: name.trim()
-        });
+        };
+
+        // Add scripture reference if it exists
+        if (scriptureRef && scriptureRef.trim()) {
+          company.scripture_reference = scriptureRef.trim();
+        }
+
+        companies.push(company);
       })
       .on('end', () => {
         console.log(` Parsed ${companies.length} company names from CSV`);
@@ -74,13 +83,20 @@ async function uploadCompanyNames(companies) {
   
   const uploadPromises = companies.map(async (company) => {
     try {
-      await setDoc(doc(collection(db, 'company_names'), company.id), {
+      const docData = {
         name: company.name,
         status: 'available',
         claimedBy: null,
         updatedAt: new Date().toISOString()
-      });
-      console.log(` Uploaded: ${company.name}`);
+      };
+
+      // Add scripture reference if it exists
+      if (company.scripture_reference) {
+        docData.scripture_reference = company.scripture_reference;
+      }
+
+      await setDoc(doc(collection(db, 'company_names'), company.id), docData);
+      console.log(` Uploaded: ${company.name}${company.scripture_reference ? ` (${company.scripture_reference})` : ''}`);
     } catch (error) {
       console.error(` Error uploading ${company.name}:`, error);
       throw error;
@@ -120,7 +136,7 @@ async function uploadCompanyNamesFromCSV() {
     console.log('');
     console.log(' Company names to upload:');
     companies.forEach((company, index) => {
-      console.log(`   ${index + 1}. ${company.name}`);
+      console.log(`   ${index + 1}. ${company.name}${company.scripture_reference ? ` (${company.scripture_reference})` : ''}`);
     });
     console.log('');
 
@@ -139,7 +155,7 @@ async function uploadCompanyNamesFromCSV() {
     console.log('1. The CSV file exists and is readable');
     console.log('2. Your Firebase configuration is correct');
     console.log('3. You have write permissions to Firestore');
-    console.log('4. The CSV has the expected column (company_name)');
+    console.log('4. The CSV has the expected columns (company_name, scripture_reference)');
   }
 }
 
