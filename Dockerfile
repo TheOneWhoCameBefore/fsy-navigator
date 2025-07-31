@@ -4,6 +4,9 @@ FROM node:22-alpine
 # Set the working directory in the container
 WORKDIR /app
 
+# Install git (required for some npm dependencies)
+RUN apk add --no-cache git
+
 # Copy package.json and package-lock.json (if it exists)
 # to install dependencies first. This leverages Docker's layer caching.
 COPY package*.json ./
