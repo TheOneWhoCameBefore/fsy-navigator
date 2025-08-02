@@ -52,9 +52,14 @@ const useCalendarData = (schedules) => {
     // Memoize the complex event linking logic
     const findLinkedEvents = useCallback((currentEvent) => {
         const linkedEvents = [];
-        const currentEventName = currentEvent.eventName;
-        const currentEventType = currentEvent.eventType;
-        const currentWeekday = currentEvent.weekday;
+        const currentEventName = currentEvent?.eventName || '';
+        const currentEventType = currentEvent?.eventType || '';
+        const currentWeekday = currentEvent?.weekday || '';
+
+        // Return early if essential properties are missing
+        if (!currentEventName || !currentEventType || !currentWeekday) {
+            return linkedEvents;
+        }
 
         const filterAndAddEvents = (keywords, targetEventType, checkFn) => {
             if (keywords.length > 0) {

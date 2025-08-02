@@ -12,6 +12,7 @@ const Header = ({
     onViewToggle,
     onDutiesSummaryClick,
     onNameSelect,
+    onClearNameSearch,
     goToDay
 }) => {
     const [nameSearchDropdownActive, setNameSearchDropdownActive] = useState(false);
@@ -85,6 +86,11 @@ const Header = ({
             resetFilters[role.replace(/[^a-z0-9]/gi, '-').toLowerCase()] = true;
         });
         setActiveFilterRoles(resetFilters);
+        
+        // Save preferences with cleared name
+        if (onClearNameSearch) {
+            onClearNameSearch(resetFilters);
+        }
     };
 
     const handleNameSearchChange = (e) => {

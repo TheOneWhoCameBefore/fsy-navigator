@@ -8,6 +8,643 @@ import Header from './Header';
 import Modals from './Modals';
 import useCalendarData from '../hooks/useCalendarData';
 
+// ===== CHILD COMPONENTS FOR TABLE VIEW =====
+
+const CalendarHeader = memo(({ roles, activeFilterRoles, createMobileAbbreviation }) => (
+    <thead>
+        <tr>
+            <th className="time-col sticky left-0 top-0 bg-gray-200 p-1 font-bold border-b-2 border-gray-300 border-r border-gray-400 z-50 text-xs text-center" style={{width: '70px'}}>Time</th>
+            {roles.map(r => {
+                const roleClass = r.replace(/[^a-z0-9]/gi, '-').toLowerCase();
+                const mobileAbbr = createMobileAbbreviation(r);
+                const isRoleVisible = r === 'Agenda' || activeFilterRoles[roleClass] !== false;
+                return (
+                    <th key={r} className={`role-col sticky top-0 bg-gray-200 p-1 md:p-2 font-bold border-b-2 border-gray-300 border-r border-gray-300 shadow-sm z-30 text-xs ${isRoleVisible ? '' : 'hidden'}`} 
+                        data-role={roleClass}>
+                        <span className="full-text block md:hidden">{mobileAbbr}</span>
+                        <span className="mobile-abbr hidden md:block">{r}</span>
+                    </th>
+                );
+            })}
+        </tr>
+    </thead>
+));
+
+const EventCell = memo(({ event, role, roleClass, isRoleVisible, activeFilterRoles, roles, showRoleModal, eventsMap, getActivityColor }) => {
+    const rowspan = Math.max(1, Math.floor(event.duration / 5));
+    const eventKey = `${event.weekday}-${event.startTime}-${event.endTime}-${event.eventName}-${event.eventType}`;
+    const colors = getActivityColor(event);
+    const visibleRoleCount = roles.filter(r => activeFilterRoles[r.replace(/[^a-z0-9]/gi, '-').toLowerCase()] !== false && r !== 'Agenda').length;
+    
+    return (
+        <td
+            key={role}
+            className={`role-col h-10 p-0 text-center align-top break-words border-r border-gray-300 ${isRoleVisible ? '' : 'hidden'}`}
+            data-role={roleClass}
+            rowSpan={rowspan}
+        >
+            <div
+                className={`relative w-full h-full rounded-md text-left flex items-start box-border p-1 md:p-2 text-sm cursor-pointer transition-all duration-200 hover:translate-y-[-1px] hover:shadow-md z-0 hover:z-10 ${colors.backgroundColor} ${colors.borderColor} border-l-4`}
+                onClick={() => showRoleModal({
+                    eventKey,
+                    activity: `${event.eventAbbreviation} - ${event.eventName}`,
+                    description: event.eventDescription,
+                    eventTime: `${event.startTime} - ${event.endTime}`,
+                    eventName: event.eventName,
+                    eventType: event.eventType,
+                    mergedEvent: eventsMap.get(eventKey) // O(1) lookup instead of O(n) find
+                })}
+            >
+                <div className="sticky top-8 overflow-hidden text-ellipsis">
+                    <span className={`event-full ${visibleRoleCount <= 4 ? 'block' : 'hidden'} md:block`}><strong>{event.eventAbbreviation}</strong> - {event.eventName}</span>
+                    <span className={`event-abbr-only ${visibleRoleCount > 4 ? 'block' : 'hidden'} md:hidden text-xs`}><strong>{event.eventAbbreviation}</strong></span>
+                </div>
+            </div>
+        </td>
+    );
+});
+
+const EmptyCell = memo(({ role, roleClass, isRoleVisible }) => (
+    <td key={role} className={`role-col h-10 p-0 text-center align-top break-words border-r border-gray-300 ${isRoleVisible ? '' : 'hidden'}`} data-role={roleClass}></td>
+));
+
+const TableView = memo(({ day, processedData, roles, activeFilterRoles, showRoleModal, eventsMap, minutesToTime, createMobileAbbreviation, getActivityColor }) => {
+    const eventGridData = useMemo(() => {
+        const dayEvents = processedData[day];
+        if (!dayEvents || dayEvents.length === 0) {
+            return null;
+        }
+
+        const allTimes = dayEvents.flatMap(e => [e.startMins, e.endMins]).filter(t => t !== null);
+        if (allTimes.length === 0) return null;
+
+        const minTime = Math.min(...allTimes);
+        const maxTime = Math.max(...allTimes);
+        const eventGrid = {};
+        roles.forEach(role => { eventGrid[role] = {}; });
+
+        dayEvents.forEach(event => {
+            event.assignedRoles.forEach(role => {
+                if (!eventGrid[role] || event.endMins <= event.startMins) return;
+                eventGrid[role][event.startMins] = {
+                    ...event,
+                    isStart: true,
+                    duration: event.endMins - event.startMins,
+                    Role: role
+                };
+                for (let t = event.startMins + 5; t < event.endMins; t += 5) {
+                    eventGrid[role][t] = { isSpanned: true };
+                }
+            });
+        });
+
+        return { eventGrid, minTime, maxTime };
+    }, [day, processedData, roles]);
+
+    const tableRows = useMemo(() => {
+        if (!eventGridData) return [];
+
+        const { eventGrid, minTime, maxTime } = eventGridData;
+        const rows = [];
+
+        for (let t = minTime; t < maxTime; t += 5) {
+            const rowCells = [];
+            rowCells.push(<td key="time" className="time-col sticky left-0 bg-gray-100 p-1 font-bold w-[70px] text-xs text-center h-10 border-r border-gray-400">{minutesToTime(t)}</td>);
+            
+            roles.forEach(role => {
+                const eventAtTime = eventGrid[role]?.[t];
+                const roleClass = role.replace(/[^a-z0-9]/gi, '-').toLowerCase();
+                const isRoleVisible = role === 'Agenda' || activeFilterRoles[roleClass] !== false;
+
+                if (eventAtTime?.isStart) {
+                    rowCells.push(
+                        <EventCell 
+                            key={role}
+                            event={eventAtTime}
+                            role={role}
+                            roleClass={roleClass}
+                            isRoleVisible={isRoleVisible}
+                            activeFilterRoles={activeFilterRoles}
+                            roles={roles}
+                            showRoleModal={showRoleModal}
+                            eventsMap={eventsMap}
+                            getActivityColor={getActivityColor}
+                        />
+                    );
+                } else if (!eventAtTime?.isSpanned) {
+                    rowCells.push(<EmptyCell key={role} role={role} roleClass={roleClass} isRoleVisible={isRoleVisible} />);
+                }
+            });
+            rows.push(<tr key={t} data-time-minutes={t}>{rowCells}</tr>);
+        }
+        return rows;
+    }, [eventGridData, roles, activeFilterRoles, showRoleModal, eventsMap, minutesToTime, getActivityColor]);
+
+    if (!eventGridData) {
+        return <div className="flex items-center justify-center h-full"><p className="text-gray-600 italic">No events for {day}.</p></div>;
+    }
+
+    const manyColumnsClass = roles.filter(role => role === 'Agenda' || (activeFilterRoles[role.replace(/[^a-z0-9]/gi, '-').toLowerCase()] !== false && role !== 'Agenda')).length > 7 ? 'many-columns' : '';
+
+    return (
+        <div className="overflow-y-auto overflow-x-hidden h-full">
+            <table className={`w-full border-collapse table-fixed ${manyColumnsClass}`}>
+                <CalendarHeader 
+                    roles={roles} 
+                    activeFilterRoles={activeFilterRoles} 
+                    createMobileAbbreviation={createMobileAbbreviation} 
+                />
+                <tbody>{tableRows}</tbody>
+            </table>
+        </div>
+    );
+});
+
+// ===== CHILD COMPONENTS FOR CARD VIEW =====
+
+const TravelEventCard = memo(({ agendaEvent, index }) => (
+    <div key={index} 
+         data-event-time={`${agendaEvent.startMins}-${agendaEvent.endMins}`}
+         className="flex items-center justify-center gap-2 bg-white border border-gray-300 rounded-lg p-2 shadow-sm transition-all duration-200 hover:translate-y-[-1px] hover:shadow-md text-sm">
+        <span className="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-md text-xs font-semibold whitespace-nowrap">{agendaEvent.startTime}</span>
+        <span className="text-gray-700 font-medium text-center flex-grow text-sm">{agendaEvent.eventName}</span>
+    </div>
+));
+
+const RoleAssignment = memo(({ role, activityData, agendaEvent, getActivityColor, formatRoleNameForCard, showRoleModal, processedData, eventsMap }) => {
+    const colors = getActivityColor(activityData);
+    let displayText, timeIndicator = '';
+    let assignmentTime = `${agendaEvent.startTime} - ${agendaEvent.endTime}`;
+
+    if (typeof activityData === 'string') {
+        displayText = activityData;
+    } else {
+        displayText = activityData.activity;
+        assignmentTime = `${activityData.startTime} - ${activityData.endTime}`;
+        if (!activityData.isOverlapping) {
+            if (activityData.startsWithin) {
+                timeIndicator = ` (starts ${activityData.startTime})`;
+            } else {
+                timeIndicator = ` (${activityData.startTime} - ${activityData.endTime})`;
+            }
+        }
+    }
+
+    const eventType = typeof activityData === 'object' ? activityData.eventType : (activityData === 'No Duty' ? 'Free' : 'Duty');
+    const roleNameWithAssignments = formatRoleNameForCard(role);
+    const activityDescription = typeof activityData === 'object' ?
+        processedData[agendaEvent.weekday]?.find(e => e.assignedRoles.includes(role) && e.startMins < agendaEvent.endMins && e.endMins > agendaEvent.startMins)?.eventDescription || '' : '';
+
+    // Create event key to find the complete merged event with all assigned roles
+    let eventKey = '';
+    if (typeof activityData === 'object' && activityData.activity) {
+        const eventName = activityData.activity.split(' - ')[1] || activityData.activity;
+        eventKey = `${agendaEvent.weekday}-${activityData.startTime}-${activityData.endTime}-${eventName}-${activityData.eventType}`;
+    } else {
+        eventKey = `${agendaEvent.weekday}-${agendaEvent.startTime}-${agendaEvent.endTime}-${agendaEvent.eventName}-${agendaEvent.eventType}`;
+    }
+
+    // Find the complete event from eventsMap to get all assigned roles (O(1) lookup)
+    const completeEvent = typeof activityData === 'object' ? 
+        eventsMap.get(`${agendaEvent.weekday}-${activityData.startTime}-${activityData.endTime}-${activityData.activity.split(' - ')[1] || activityData.activity}-${activityData.eventType}`) || agendaEvent
+        : agendaEvent;
+    
+    return (
+        <div
+            key={role}
+            className={`flex-1 p-2 rounded-md border-l-4 cursor-pointer transition-all duration-200 hover:translate-y-[-1px] hover:shadow-md ${colors.backgroundColor} ${colors.borderColor}`}
+            onClick={() => showRoleModal({
+                eventKey,
+                activity: displayText,
+                description: activityDescription,
+                eventTime: assignmentTime,
+                eventName: agendaEvent.eventName,
+                eventType: eventType,
+                mergedEvent: completeEvent || agendaEvent // Pass the complete event with all roles
+            })}
+        >
+            <div 
+                className="font-bold text-gray-800 hover:text-blue-600 transition-colors duration-200" 
+                dangerouslySetInnerHTML={{ __html: roleNameWithAssignments }}
+            ></div>
+            <div className={`text-sm ${colors.textColor}`}>{displayText}{timeIndicator}</div>
+        </div>
+    );
+});
+
+const AgendaEventCard = memo(({ agendaEvent, index, roleActivities, getActivityColor, formatRoleNameForCard, showRoleModal, processedData, eventsMap }) => {
+    const roleEntries = Object.entries(roleActivities);
+
+    const acRoles = roleEntries.filter(([role]) => role.startsWith('AC ')).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }));
+    const cnRoles = roleEntries.filter(([role]) => role.startsWith('CN ')).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }));
+    const otherRoles = roleEntries.filter(([role]) => !role.startsWith('AC ') && !role.startsWith('CN '));
+
+    const acRoleMap = new Map(acRoles.map(([role, activity]) => [parseInt(role.match(/^AC (\d+)$/)[1]), [role, activity]]));
+    const cnRoleMap = new Map(cnRoles.map(([role, activity]) => {
+        const letterNumber = role.match(/^CN ([A-Z])$/)[1].charCodeAt(0) - 'A'.charCodeAt(0) + 1;
+        return [letterNumber, [role, activity]];
+    }));
+
+    const allAcNumbers = [...acRoleMap.keys(), ...cnRoleMap.keys()];
+    const maxAcNumber = allAcNumbers.length > 0 ? Math.max(...allAcNumbers) : 0;
+
+    let pairedRolesHTML = [];
+    for (let acNumber = 1; acNumber <= maxAcNumber; acNumber++) {
+        const acRole = acRoleMap.get(acNumber);
+        const cnRole = cnRoleMap.get(acNumber);
+
+        if (acRole || cnRole) {
+            pairedRolesHTML.push(
+                <div key={`pair-${acNumber}`} className="grid grid-cols-2 gap-1.5">
+                    {acRole ? <RoleAssignment role={acRole[0]} activityData={acRole[1]} agendaEvent={agendaEvent} getActivityColor={getActivityColor} formatRoleNameForCard={formatRoleNameForCard} showRoleModal={showRoleModal} processedData={processedData} eventsMap={eventsMap} /> : <div className="invisible"></div>}
+                    {cnRole ? <RoleAssignment role={cnRole[0]} activityData={cnRole[1]} agendaEvent={agendaEvent} getActivityColor={getActivityColor} formatRoleNameForCard={formatRoleNameForCard} showRoleModal={showRoleModal} processedData={processedData} eventsMap={eventsMap} /> : <div className="invisible"></div>}
+                </div>
+            );
+            if (acNumber % 2 === 0 && acNumber < maxAcNumber) {
+                pairedRolesHTML.push(<div key={`divider-${acNumber}`} className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent my-0.5 relative before:content-[''] before:absolute before:left-1/2 before:top-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full"></div>);
+            } else if (acNumber % 2 !== 0 && acNumber < maxAcNumber) {
+                const nextAcNum = acNumber + 1;
+                if (!acRoleMap.has(nextAcNum) && !cnRoleMap.has(nextAcNum)) {
+                    pairedRolesHTML.push(<div key={`divider-${acNumber}-single`} className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent my-0.5 relative before:content-[''] before:absolute before:left-1/2 before:top-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full"></div>);
+                }
+            }
+        }
+    }
+
+    let otherRolesHTML = [];
+    for (let i = 0; i < otherRoles.length; i += 2) {
+        otherRolesHTML.push(
+            <div key={`other-pair-${i}`} className="grid grid-cols-2 gap-1.5">
+                <RoleAssignment role={otherRoles[i][0]} activityData={otherRoles[i][1]} agendaEvent={agendaEvent} getActivityColor={getActivityColor} formatRoleNameForCard={formatRoleNameForCard} showRoleModal={showRoleModal} processedData={processedData} eventsMap={eventsMap} />
+                {otherRoles[i + 1] && <RoleAssignment role={otherRoles[i + 1][0]} activityData={otherRoles[i + 1][1]} agendaEvent={agendaEvent} getActivityColor={getActivityColor} formatRoleNameForCard={formatRoleNameForCard} showRoleModal={showRoleModal} processedData={processedData} eventsMap={eventsMap} />}
+            </div>
+        );
+    }
+
+    return (
+        <div key={index} 
+             data-event-time={`${agendaEvent.startMins}-${agendaEvent.endMins}`}
+             className="bg-white border-2 border-blue-500 rounded-lg p-3 shadow-md">
+            <div className="flex justify-between items-start mb-3 gap-3 flex-col md:flex-row">
+                <h3 className="text-lg font-bold text-gray-800 m-0">{agendaEvent.eventName}</h3>
+                <div className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-full whitespace-nowrap font-medium">{agendaEvent.startTime} - {agendaEvent.endTime}</div>
+            </div>
+            <div className="text-gray-700 mb-3 leading-relaxed text-sm">{agendaEvent.eventDescription}</div>
+            <div className="flex flex-col gap-1.5">
+                {pairedRolesHTML}
+                {otherRolesHTML}
+            </div>
+        </div>
+    );
+});
+
+const CardView = memo(({ day, processedData, getRoleActivitiesForAgendaEvent, getActivityColor, formatRoleNameForCard, showRoleModal, eventsMap, selectedRole, minutesToTime }) => {
+    const agendaCards = useMemo(() => {
+        const dayEvents = processedData[day];
+        if (!dayEvents?.length) {
+            return [];
+        }
+
+        const allAgendaEvents = dayEvents
+            .filter(event => event.eventType?.toLowerCase() === 'agenda')
+            .sort((a, b) => a.startMins - b.startMins);
+
+        if (!allAgendaEvents.length) {
+            return [];
+        }
+
+        return allAgendaEvents.map((agendaEvent, index) => {
+            const lowerEventName = agendaEvent.eventName.toLowerCase();
+            const isTravelEvent = lowerEventName.includes('travel') || lowerEventName.includes('transition') || lowerEventName.includes('move to') || lowerEventName.includes('roll call');
+
+            if (isTravelEvent) {
+                return <TravelEventCard key={index} agendaEvent={agendaEvent} index={index} />;
+            } else {
+                const roleActivities = getRoleActivitiesForAgendaEvent(agendaEvent);
+                return (
+                    <AgendaEventCard 
+                        key={index}
+                        agendaEvent={agendaEvent}
+                        index={index}
+                        roleActivities={roleActivities}
+                        getActivityColor={getActivityColor}
+                        formatRoleNameForCard={formatRoleNameForCard}
+                        showRoleModal={showRoleModal}
+                        processedData={processedData}
+                        eventsMap={eventsMap}
+                    />
+                );
+            }
+        });
+    }, [day, processedData, getRoleActivitiesForAgendaEvent, getActivityColor, formatRoleNameForCard, showRoleModal, eventsMap]);
+
+    const agendaEvents = useMemo(() => {
+        const dayEvents = processedData[day];
+        if (!dayEvents?.length) return [];
+        
+        return dayEvents
+            .filter(event => event.eventType?.toLowerCase() === 'agenda')
+            .sort((a, b) => a.startMins - b.startMins);
+    }, [day, processedData]);
+
+    if (!processedData[day]?.length) {
+        return <div className="p-4 text-center text-gray-600">No events for {day}.</div>;
+    }
+
+    if (agendaCards.length === 0) {
+        return <div className="p-4 text-center text-gray-600">No agenda events for {day}.</div>;
+    }
+
+    return (
+        <div className="flex h-full w-full relative pt-2">
+            {/* Single container with cards and inline timelines */}
+            <div className="flex-1 h-full overflow-y-auto">
+                <div className="p-1 flex flex-col gap-2">
+                    {agendaEvents.map((agendaEvent, index) => {
+                        const lowerEventName = agendaEvent.eventName.toLowerCase();
+                        const isTravelEvent = lowerEventName.includes('travel') || lowerEventName.includes('transition') || lowerEventName.includes('move to') || lowerEventName.includes('roll call');
+
+                        // Build timeline segments for this agenda event if role is selected
+                        let timelineContent = null;
+                        if (selectedRole) {
+                            if (isTravelEvent) {
+                                // Simple single segment for travel events - but determine proper color
+                                const dayEvents = processedData[day] || [];
+                                const overlappingEvents = dayEvents.filter(event => 
+                                    event.eventType && event.eventType.toLowerCase() !== 'agenda' &&
+                                    event.assignedRoles && 
+                                    event.assignedRoles.includes(selectedRole) &&
+                                    event.startMins < agendaEvent.endMins && 
+                                    event.endMins > agendaEvent.startMins
+                                );
+
+                                let bgColor = '#d1d5db'; // default gray for "No Duty"
+                                let title = `${agendaEvent.eventName}: Travel/No Duty`;
+                                let borderColor = 'border-gray-400'; // default border color
+                                
+                                if (overlappingEvents.length > 0) {
+                                    // There are duties during this travel period
+                                    const activeEvent = overlappingEvents[0]; // Use first overlapping event
+                                    const segmentActivity = {
+                                        activity: `${activeEvent.eventAbbreviation} - ${activeEvent.eventName}`,
+                                        eventType: activeEvent.eventType,
+                                        startTime: activeEvent.startTime,
+                                        endTime: activeEvent.endTime
+                                    };
+                                    const segmentColor = getActivityColor(segmentActivity);
+                                    
+                                    const colorMap = {
+                                        'bg-yellow-100': '#fbbf24',
+                                        'bg-cyan-100': '#22d3ee', 
+                                        'bg-green-100': '#4ade80',
+                                        'bg-green-50': '#86efac',
+                                        'bg-blue-100': '#60a5fa',
+                                        'bg-gray-50': '#d1d5db'
+                                    };
+                                    
+                                    const borderColorMap = {
+                                        'bg-yellow-100': 'border-yellow-600',
+                                        'bg-cyan-100': 'border-cyan-600', 
+                                        'bg-green-100': 'border-green-600',
+                                        'bg-green-50': 'border-green-400',
+                                        'bg-blue-100': 'border-blue-600',
+                                        'bg-gray-50': 'border-gray-400'
+                                    };
+                                    
+                                    bgColor = colorMap[segmentColor.backgroundColor] || '#d1d5db';
+                                    borderColor = borderColorMap[segmentColor.backgroundColor] || 'border-gray-400';
+                                    title = `${agendaEvent.eventName}: ${segmentActivity.activity}`;
+                                }
+
+                                timelineContent = (
+                                    <div 
+                                        className={`w-4 flex-shrink-0 border-l-2 ${borderColor} relative cursor-pointer`}
+                                        style={{ 
+                                            height: '100%', 
+                                            minHeight: '100%',
+                                            backgroundColor: bgColor
+                                        }}
+                                        title={title}
+                                        onClick={() => showRoleModal({
+                                            eventKey: `${agendaEvent.weekday}-${agendaEvent.startTime}-${agendaEvent.endTime}-${agendaEvent.eventName}-${agendaEvent.eventType}`,
+                                            activity: agendaEvent.eventName,
+                                            description: agendaEvent.eventDescription || '',
+                                            eventTime: `${agendaEvent.startTime} - ${agendaEvent.endTime}`,
+                                            eventName: agendaEvent.eventName,
+                                            eventType: 'Travel',
+                                            mergedEvent: {
+                                                ...agendaEvent,
+                                                eventName: agendaEvent.eventName || 'Travel Event',
+                                                weekday: agendaEvent.weekday,
+                                                assignedRoles: agendaEvent.assignedRoles || ['Agenda']
+                                            }
+                                        })}
+                                    />
+                                );
+                            } else {
+                                // Generate timeline segments for regular agenda events
+                                const dayEvents = processedData[day] || [];
+                                const overlappingEvents = dayEvents.filter(event => 
+                                    event.eventType && event.eventType.toLowerCase() !== 'agenda' &&
+                                    event.assignedRoles && 
+                                    event.assignedRoles.includes(selectedRole) &&
+                                    event.startMins < agendaEvent.endMins && 
+                                    event.endMins > agendaEvent.startMins
+                                );
+
+                                const agendaStart = agendaEvent.startMins;
+                                const agendaEnd = agendaEvent.endMins;
+                                const timelineSegments = [];
+                                let currentTime = agendaStart;
+                                
+                                const sortedEvents = overlappingEvents.sort((a, b) => a.startMins - b.startMins);
+                                
+                                while (currentTime < agendaEnd) {
+                                    const activeEvent = sortedEvents.find(event => 
+                                        event.startMins <= currentTime && event.endMins > currentTime
+                                    );
+                                    
+                                    let segmentEnd;
+                                    let segmentActivity = 'No Duty';
+                                    let segmentColor = { backgroundColor: 'bg-gray-50' };
+                                    
+                                    if (activeEvent) {
+                                        segmentEnd = Math.min(activeEvent.endMins, agendaEnd);
+                                        segmentActivity = {
+                                            activity: `${activeEvent.eventAbbreviation} - ${activeEvent.eventName}`,
+                                            eventType: activeEvent.eventType,
+                                            startTime: activeEvent.startTime,
+                                            endTime: activeEvent.endTime
+                                        };
+                                        segmentColor = getActivityColor(segmentActivity);
+                                    } else {
+                                        const nextEvent = sortedEvents.find(event => event.startMins > currentTime);
+                                        segmentEnd = nextEvent ? Math.min(nextEvent.startMins, agendaEnd) : agendaEnd;
+                                        
+                                        const hasAnyDuties = overlappingEvents.length > 0;
+                                        if (hasAnyDuties) {
+                                            segmentActivity = 'Free';
+                                            segmentColor = { backgroundColor: 'bg-green-50' };
+                                        } else {
+                                            segmentActivity = 'No Duty';
+                                            segmentColor = { backgroundColor: 'bg-gray-50' };
+                                        }
+                                    }
+                                    
+                                    let bgColor = '#d1d5db'; // default gray
+                                    let borderColor = 'border-gray-400'; // default border color
+                                    
+                                    if (segmentColor.backgroundColor) {
+                                        const colorMap = {
+                                            'bg-yellow-100': '#fbbf24',
+                                            'bg-cyan-100': '#22d3ee', 
+                                            'bg-green-100': '#4ade80',
+                                            'bg-green-50': '#86efac',
+                                            'bg-blue-100': '#60a5fa',
+                                            'bg-gray-50': '#d1d5db'
+                                        };
+                                        
+                                        const borderColorMap = {
+                                            'bg-yellow-100': 'border-yellow-600',
+                                            'bg-cyan-100': 'border-cyan-600', 
+                                            'bg-green-100': 'border-green-600',
+                                            'bg-green-50': 'border-green-400',
+                                            'bg-blue-100': 'border-blue-600',
+                                            'bg-gray-50': 'border-gray-400'
+                                        };
+                                        
+                                        bgColor = colorMap[segmentColor.backgroundColor] || '#d1d5db';
+                                        borderColor = borderColorMap[segmentColor.backgroundColor] || 'border-gray-400';
+                                    }
+                                    
+                                    const segmentDuration = segmentEnd - currentTime;
+                                    const agendaDuration = agendaEnd - agendaStart;
+                                    const flexGrow = segmentDuration / agendaDuration;
+                                    
+                                    timelineSegments.push({
+                                        startTime: currentTime,
+                                        endTime: segmentEnd,
+                                        flexGrow,
+                                        bgColor,
+                                        borderColor,
+                                        activity: segmentActivity,
+                                        title: `${agendaEvent.eventName} (${minutesToTime(currentTime)}-${minutesToTime(segmentEnd)}): ${typeof segmentActivity === 'object' ? segmentActivity.activity : segmentActivity}`
+                                    });
+                                    
+                                    currentTime = segmentEnd;
+                                }
+
+                                timelineContent = (
+                                    <div 
+                                        className={`w-4 flex-shrink-0 border-l-2 ${timelineSegments.length > 0 ? timelineSegments[0].borderColor : 'border-gray-400'} flex flex-col`}
+                                        style={{ height: '100%', minHeight: '100%' }}
+                                    >
+                                        {timelineSegments.map((segment) => (
+                                            <div
+                                                key={`segment-${segment.startTime}-${segment.endTime}`}
+                                                className="cursor-pointer"
+                                                style={{
+                                                    flex: `${segment.flexGrow} 1 0%`,
+                                                    backgroundColor: segment.bgColor,
+                                                    minHeight: '2px',
+                                                    position: 'relative'
+                                                }}
+                                                title={segment.title}
+                                                onClick={() => {
+                                                    // For segments with actual duties, show the duty details
+                                                    if (typeof segment.activity === 'object') {
+                                                        const eventName = segment.activity.activity.split(' - ')[1] || segment.activity.activity;
+                                                        const eventKey = `${agendaEvent.weekday}-${segment.activity.startTime}-${segment.activity.endTime}-${eventName}-${segment.activity.eventType}`;
+                                                        
+                                                        // Look up the complete event from eventsMap to get all assigned roles
+                                                        const completeEvent = eventsMap.get(eventKey);
+                                                        const fullEvent = completeEvent || {
+                                                            ...segment.activity,
+                                                            eventName: eventName,
+                                                            weekday: agendaEvent.weekday,
+                                                            assignedRoles: [selectedRole]
+                                                        };
+                                                        
+                                                        showRoleModal({
+                                                            eventKey,
+                                                            activity: segment.activity.activity,
+                                                            description: completeEvent?.eventDescription || '', 
+                                                            eventTime: `${segment.activity.startTime} - ${segment.activity.endTime}`,
+                                                            eventName: eventName,
+                                                            eventType: segment.activity.eventType,
+                                                            mergedEvent: fullEvent
+                                                        });
+                                                    } else {
+                                                        // For free time or no duty segments, show the agenda event
+                                                        const fullEvent = {
+                                                            ...agendaEvent,
+                                                            eventName: agendaEvent.eventName || 'Agenda Event',
+                                                            weekday: agendaEvent.weekday,
+                                                            assignedRoles: agendaEvent.assignedRoles || ['Agenda']
+                                                        };
+                                                        showRoleModal({
+                                                            eventKey: `${agendaEvent.weekday}-${agendaEvent.startTime}-${agendaEvent.endTime}-${agendaEvent.eventName}-${agendaEvent.eventType}`,
+                                                            activity: `${agendaEvent.eventName} (${segment.activity})`,
+                                                            description: agendaEvent.eventDescription || '',
+                                                            eventTime: `${agendaEvent.startTime} - ${agendaEvent.endTime}`,
+                                                            eventName: agendaEvent.eventName,
+                                                            eventType: agendaEvent.eventType,
+                                                            mergedEvent: fullEvent
+                                                        });
+                                                    }
+                                                }}
+                                            />
+                                        ))}
+                                    </div>
+                                );
+                            }
+                        }
+
+                        const cardContent = isTravelEvent ? (
+                            <TravelEventCard agendaEvent={agendaEvent} index={index} />
+                        ) : (
+                            <AgendaEventCard 
+                                agendaEvent={agendaEvent}
+                                index={index}
+                                roleActivities={getRoleActivitiesForAgendaEvent(agendaEvent)}
+                                getActivityColor={getActivityColor}
+                                formatRoleNameForCard={formatRoleNameForCard}
+                                showRoleModal={showRoleModal}
+                                processedData={processedData}
+                                eventsMap={eventsMap}
+                            />
+                        );
+
+                        return (
+                            <div key={`card-timeline-${agendaEvent.startMins}-${agendaEvent.endMins}`} 
+                                 data-event-time={`${agendaEvent.startMins}-${agendaEvent.endMins}`}
+                                 className="flex gap-1 relative">
+                                <div className={`flex-1 ${timelineContent ? 'mr-5' : ''}`}>
+                                    {cardContent}
+                                </div>
+                                {timelineContent && (
+                                    <div 
+                                        className="absolute right-0 top-0 bottom-0"
+                                        style={{
+                                            // Extend timeline 4px up and down to bridge gaps
+                                            top: index === 0 ? '0' : '-4px',
+                                            bottom: index === agendaEvents.length - 1 ? '0' : '-4px',
+                                            width: '16px', // w-4 equivalent
+                                            zIndex: 1
+                                        }}
+                                    >
+                                        {timelineContent}
+                                    </div>
+                                )}
+                            </div>
+                        );
+                    })}
+                </div>
+            </div>
+        </div>
+    );
+});
+
 const CONFIG = {
     DAYS_ORDER: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
     LOCAL_STORAGE_KEY: 'duties-calendar-preferences',
@@ -17,28 +654,42 @@ const loadSavedPreferences = () => {
     const saved = localStorage.getItem(CONFIG.LOCAL_STORAGE_KEY);
     if (saved) {
         try {
-            const { filters, isCardView } = JSON.parse(saved);
-            return { viewMode: isCardView ? 'card' : 'table', savedFilters: filters };
+            const { filters, isCardView, selectedName } = JSON.parse(saved);
+            return { 
+                viewMode: isCardView ? 'card' : 'table', 
+                savedFilters: filters,
+                savedSelectedName: selectedName || null
+            };
         } catch (e) { console.warn('Failed to parse saved preferences:', e); }
     }
-    return { viewMode: 'card', savedFilters: null };
+    return { viewMode: 'card', savedFilters: null, savedSelectedName: null };
+};
+
+const savePreferences = (filters, viewMode, selectedNameData = null) => {
+    const preferences = {
+        filters: Object.entries(filters).map(([value, checked]) => ({ value, checked })),
+        isCardView: viewMode === 'card',
+        selectedName: selectedNameData ? {
+            role: selectedNameData.role,
+            fullName: selectedNameData.fullName,
+            displayText: `${selectedNameData.role} - ${selectedNameData.fullName}`
+        } : null
+    };
+    localStorage.setItem(CONFIG.LOCAL_STORAGE_KEY, JSON.stringify(preferences));
 };
 
 const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNames }) => {
-    console.log('🔄 CalendarView render - schedules:', schedules?.length, 'roles:', roles?.length);
-    
     // --- State Management ---
-    const { viewMode: initialViewMode, savedFilters } = useMemo(() => {
-        console.log('💾 Loading saved preferences...');
+    const { viewMode: initialViewMode, savedFilters, savedSelectedName } = useMemo(() => {
         return loadSavedPreferences();
-    }, []); // Empty dependency array - only run once
+    }, []);
 
     const [viewMode, setViewMode] = useState(initialViewMode);
     const [activeFilterRoles, setActiveFilterRoles] = useState({});
     const [tempFilterRoles, setTempFilterRoles] = useState({});
     const [selectedEvent, setSelectedEvent] = useState(null);
-    const [nameSearchInput, setNameSearchInput] = useState('');
-    const [_selectedSearchNameData, setSelectedSearchNameData] = useState(null);
+    const [nameSearchInput, setNameSearchInput] = useState(savedSelectedName?.displayText || '');
+    const [selectedSearchNameData, setSelectedSearchNameData] = useState(savedSelectedName);
     const [filtersInitialized, setFiltersInitialized] = useState(false);
 
     // Modal State
@@ -48,11 +699,247 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
 
     // --- Refs and Custom Hooks ---
     const swiperRef = useRef(null);
-    const hasScrolledRef = useRef(false);
+    const hasInitiallyNavigatedRef = useRef(false); // Track if we've done the initial navigation (never resets)
+    const currentViewModeRef = useRef(viewMode); // Store current view mode without causing re-renders
+    
+    // Update the view mode ref whenever viewMode changes (without recreating functions)
+    useEffect(() => {
+        currentViewModeRef.current = viewMode;
+    }, [viewMode]);
     
     // Use calendar data hook directly
     const { processedData, mergedEvents, findLinkedEvents, timeToMinutes, minutesToTime } = useCalendarData(schedules);
-    console.log('📊 Processed data keys:', Object.keys(processedData || {}), 'Total events:', schedules?.length);
+    
+    // Performance Optimization: Create eventsMap for O(1) lookups
+    const eventsMap = useMemo(() => {
+        if (!mergedEvents) return new Map();
+        
+        const map = new Map();
+        mergedEvents.forEach(event => {
+            const key = `${event.weekday}-${event.startTime}-${event.endTime}-${event.eventName}-${event.eventType}`;
+            map.set(key, event);
+        });
+        return map;
+    }, [mergedEvents]);
+
+    // --- Core Navigation Callbacks (defined early to avoid hoisting issues) ---
+    // Define updateCurrentTimeIndicator as a regular function first to avoid hoisting issues
+    const updateCurrentTimeIndicatorFn = () => {
+        const now = new Date();
+        const today = now.toLocaleDateString('en-US', { weekday: 'long' });
+        const currentMinutes = now.getHours() * 60 + now.getMinutes();
+
+        // Remove existing indicators
+        document.querySelectorAll('.current-time-indicator').forEach(el => el.remove());
+
+        // Only show indicator if we're on today's slide
+        const activeSlide = document.querySelector('.swiper-slide-active');
+        if (activeSlide && activeSlide.dataset.day === today && viewMode === 'table') {
+            const targetMinutes = Math.floor(currentMinutes / 5) * 5;
+            const timeRow = activeSlide.querySelector(`tr[data-time-minutes="${targetMinutes}"]`);
+            if (timeRow) {
+                const indicator = document.createElement('div');
+                indicator.className = 'current-time-indicator absolute left-0 right-0 h-0.5 bg-red-500 z-10 shadow-md pointer-events-none';
+                
+                // Calculate precise position within the 5-minute slot
+                const minutesWithinSlot = currentMinutes % 5;
+                const slotProgress = minutesWithinSlot / 5;
+                indicator.style.top = `${slotProgress * timeRow.offsetHeight}px`;
+
+                const timeCell = timeRow.querySelector('.time-col');
+                if (timeCell) {
+                    timeCell.style.position = 'relative';
+                    timeCell.appendChild(indicator);
+                }
+            }
+        }
+    };
+    
+    const updateCurrentTimeIndicator = useCallback(updateCurrentTimeIndicatorFn, [viewMode]);
+    
+    // Create a stable navigation function that doesn't depend on viewMode
+    const performNavigation = useCallback((targetViewMode = null) => {
+        const attemptScroll = () => {
+            const activeSlide = document.querySelector('.swiper-slide-active');
+            if (!activeSlide) {
+                setTimeout(attemptScroll, 100);
+                return;
+            }
+
+            // Use current time for navigation
+            const now = new Date();
+            const currentMinutes = now.getHours() * 60 + now.getMinutes();
+            
+            // Use the passed targetViewMode, or fall back to the ref value, or detect from DOM
+            const currentViewMode = targetViewMode || currentViewModeRef.current || 
+                (activeSlide.querySelector('.h-full.hidden') ? 
+                    (activeSlide.querySelector('.h-full.hidden').classList.contains('flex') ? 'table' : 'card') :
+                    (activeSlide.querySelector('.h-full.block') ? 'table' : 'card'));
+
+            // Use a longer delay to ensure DOM is fully rendered
+            setTimeout(() => {
+                // Find the visible container based on current view mode
+                let container;
+                if (currentViewMode === 'card') {
+                    // For card view, find the card view container specifically
+                    const cardViewDiv = activeSlide.querySelector('.h-full.flex:not(.hidden)');
+                    
+                    if (cardViewDiv) {
+                        // Look for the overflow-y-auto container within the card view
+                        container = cardViewDiv.querySelector('.overflow-y-auto');
+                    }
+                    
+                    // Fallback: look for overflow-y-auto that's NOT inside a table
+                    if (!container) {
+                        const allOverflowContainers = activeSlide.querySelectorAll('.overflow-y-auto');
+                        
+                        for (const overflowContainer of allOverflowContainers) {
+                            // Check if this container is NOT inside a table
+                            if (!overflowContainer.querySelector('table') && !overflowContainer.closest('table')) {
+                                container = overflowContainer;
+                                break;
+                            }
+                        }
+                    }
+                } else {
+                    // Find the table view container (the visible one) 
+                    const tableViewDiv = activeSlide.querySelector('.h-full.block:not(.hidden)');
+                    container = tableViewDiv?.querySelector('.overflow-y-auto');
+                }
+                
+                if (!container) {
+                    return;
+                }
+
+                if (currentViewMode === 'table') {
+                    // Find the closest time row (search for nearby times if exact match not found)
+                    const targetMinutes = Math.floor(currentMinutes / 5) * 5;
+                    let timeRow = container.querySelector(`tr[data-time-minutes="${targetMinutes}"]`);
+                    
+                    // If exact time not found, look for the nearest earlier time
+                    if (!timeRow) {
+                        for (let offset = 5; offset <= 60; offset += 5) {
+                            timeRow = container.querySelector(`tr[data-time-minutes="${targetMinutes - offset}"]`);
+                            if (timeRow) {
+                                break;
+                            }
+                        }
+                    }
+                    
+                    if (timeRow) {
+                        const containerRect = container.getBoundingClientRect();
+                        const rowRect = timeRow.getBoundingClientRect();
+                        const scrollTop = container.scrollTop + rowRect.top - containerRect.top - containerRect.height / 3;
+                        container.scrollTo({ top: Math.max(0, scrollTop), behavior: 'smooth' });
+                        updateCurrentTimeIndicator();
+                    }
+                } else {
+                    const dayEvents = processedData[activeSlide.dataset.day] || [];
+                    
+                    const currentEvent = dayEvents.find(e => {
+                        // Look for agenda events that contain the current time
+                        if (e.eventType?.toLowerCase() !== 'agenda') return false;
+                        return currentMinutes >= e.startMins && currentMinutes < e.endMins;
+                    });
+                    
+                    if (currentEvent) {
+                        const targetCard = container.querySelector(`[data-event-time="${currentEvent.startMins}-${currentEvent.endMins}"]`);
+                        
+                        if (targetCard) {
+                            // Use smooth scrolling
+                            container.style.scrollBehavior = 'smooth';
+                            
+                            // Calculate the target scroll position to align card top with container top
+                            const containerRect = container.getBoundingClientRect();
+                            const targetRect = targetCard.getBoundingClientRect();
+                            const containerScrollTop = container.scrollTop;
+                            
+                            // Position the top of the target card at the top of the container with small offset
+                            const topOffset = 10; // Small padding from the top
+                            const targetPosition = containerScrollTop + targetRect.top - containerRect.top - topOffset;
+                            const finalScrollTop = Math.max(0, targetPosition);
+                            
+                            // Perform the scroll
+                            container.scrollTop = finalScrollTop;
+                        } else {
+                            // Fallback: scroll to first card if target not found
+                            const firstCard = container.querySelector('[data-event-time]');
+                            if (firstCard) {
+                                firstCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
+                            }
+                        }
+                    } else {
+                        // If no current event, scroll to the next upcoming event
+                        const upcomingEvent = dayEvents
+                            .filter(e => e.eventType?.toLowerCase() === 'agenda' && e.startMins > currentMinutes)
+                            .sort((a, b) => a.startMins - b.startMins)[0];
+                        
+                        if (upcomingEvent) {
+                            const targetCard = container.querySelector(`[data-event-time="${upcomingEvent.startMins}-${upcomingEvent.endMins}"]`);
+                            if (targetCard) {
+                                // Use smooth scrolling
+                                container.style.scrollBehavior = 'smooth';
+                                
+                                // Calculate the target scroll position to align card top with container top
+                                const containerRect = container.getBoundingClientRect();
+                                const targetRect = targetCard.getBoundingClientRect();
+                                const containerScrollTop = container.scrollTop;
+                                
+                                // Position the top of the target card at the top of the container with small offset
+                                const topOffset = 10; // Small padding from the top
+                                const targetPosition = containerScrollTop + targetRect.top - containerRect.top - topOffset;
+                                const finalScrollTop = Math.max(0, targetPosition);
+                                
+                                container.scrollTop = finalScrollTop;
+                            }
+                        } else {
+                            // Fallback: scroll to the first event card
+                            const firstCard = container.querySelector('[data-event-time]');
+                            if (firstCard) {
+                                container.style.scrollBehavior = 'smooth';
+                                
+                                // Calculate scroll position to align first card with top of container
+                                const containerRect = container.getBoundingClientRect();
+                                const targetRect = firstCard.getBoundingClientRect();
+                                const containerScrollTop = container.scrollTop;
+                                
+                                // Position at top of container with small offset
+                                const topOffset = 10;
+                                const targetPosition = containerScrollTop + targetRect.top - containerRect.top - topOffset;
+                                const finalScrollTop = Math.max(0, targetPosition);
+                                
+                                container.scrollTop = finalScrollTop;
+                            }
+                        }
+                    }
+                }
+            }, 200); // Increased delay to ensure DOM is ready
+        };
+
+        attemptScroll();
+    }, [processedData, updateCurrentTimeIndicator]);
+
+    // Manual navigation function for the "Go to Now" button
+    const manualNavigateToCurrentTime = useCallback(() => {
+        // First, go to today's slide if not already there
+        const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+        const currentSlideDay = document.querySelector('.swiper-slide-active')?.dataset.day;
+        
+        if (currentSlideDay !== today && swiperRef.current) {
+            const todayIndex = CONFIG.DAYS_ORDER.indexOf(today);
+            if (todayIndex !== -1) {
+                swiperRef.current.slideTo(todayIndex);
+                // Wait for slide transition, then scroll (no need to pass viewMode, it will use the ref)
+                setTimeout(() => {
+                    performNavigation();
+                }, 300);
+                return;
+            }
+        }
+        
+        // Already on today's slide, just scroll (no need to pass viewMode, it will use the ref)
+        performNavigation();
+    }, [performNavigation]);
     const dutiesData = useMemo(() => {
         const dutiesData10 = {
             'AC 1': ['Music Program', 'Dance Prep (T)', 'Dance DJ (T)', 'Games Night', 'Dance Lead (F)', 'Wednesday Exercise Coordinator'],
@@ -83,7 +970,6 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
     // --- Initialization Effect ---
     useEffect(() => {
         if (roles.length > 0 && !filtersInitialized) {
-            console.log('⚙️ Initializing filters for roles:', roles.length);
             const initialFilters = {};
             const baseRoles = roles.reduce((acc, role) => {
                 acc[role.replace(/[^a-z0-9]/gi, '-').toLowerCase()] = true;
@@ -91,21 +977,22 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
             }, {});
 
             if (savedFilters) {
-                console.log('💾 Applying saved filters:', savedFilters.length);
                 savedFilters.forEach(filter => { initialFilters[filter.value] = filter.checked; });
                 Object.keys(baseRoles).forEach(roleKey => {
                     if (!(roleKey in initialFilters)) { initialFilters[roleKey] = true; }
                 });
             } else {
-                console.log('🆕 Using default filters');
                 Object.assign(initialFilters, baseRoles);
             }
             setActiveFilterRoles(initialFilters);
             setFiltersInitialized(true);
-        } else if (roles.length > 0 && filtersInitialized) {
-            console.log('⏭️ Filters already initialized, skipping');
         }
-    }, [roles, savedFilters, filtersInitialized]); // Removed activeFilterRoles dependency
+    }, [roles, savedFilters, filtersInitialized]);
+
+    // --- Filter Change Effect ---
+    useEffect(() => {
+        // Filters changed, view updated
+    }, [activeFilterRoles]);
 
     // --- UI Interaction Handlers ---
     const showRoleModal = useCallback((eventData) => {
@@ -116,31 +1003,22 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
     const handleViewToggle = useCallback(() => {
         const newViewMode = viewMode === 'card' ? 'table' : 'card';
         setViewMode(newViewMode);
-        localStorage.setItem(CONFIG.LOCAL_STORAGE_KEY, JSON.stringify({
-            filters: Object.entries(activeFilterRoles).map(([value, checked]) => ({ value, checked })),
-            isCardView: newViewMode === 'card'
-        }));
-    }, [viewMode, activeFilterRoles]);
+        savePreferences(activeFilterRoles, newViewMode, selectedSearchNameData);
+    }, [viewMode, activeFilterRoles, selectedSearchNameData]);
 
     const applyFilters = useCallback(() => {
         setActiveFilterRoles(tempFilterRoles);
         setIsFilterModalOpen(false);
-        localStorage.setItem(CONFIG.LOCAL_STORAGE_KEY, JSON.stringify({
-            filters: Object.entries(tempFilterRoles).map(([value, checked]) => ({ value, checked })),
-            isCardView: viewMode === 'card'
-        }));
-    }, [tempFilterRoles, viewMode]);
+        savePreferences(tempFilterRoles, viewMode, selectedSearchNameData);
+    }, [tempFilterRoles, viewMode, selectedSearchNameData]);
 
     const closeFilterModal = useCallback(() => {
         // Automatically apply filters when closing modal (like the backup)
         setActiveFilterRoles(tempFilterRoles);
         setIsFilterModalOpen(false);
         // Save preferences
-        localStorage.setItem(CONFIG.LOCAL_STORAGE_KEY, JSON.stringify({ 
-            filters: Object.entries(tempFilterRoles).map(([value, checked]) => ({ value, checked })), 
-            isCardView: viewMode === 'card' 
-        }));
-    }, [tempFilterRoles, viewMode]);
+        savePreferences(tempFilterRoles, viewMode, selectedSearchNameData);
+    }, [tempFilterRoles, viewMode, selectedSearchNameData]);
 
     const handleFilterModalOpen = useCallback(() => {
         setTempFilterRoles({ ...activeFilterRoles });
@@ -157,7 +1035,9 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
         newFilters[nameData.role.replace(/[^a-z0-9]/gi, '-').toLowerCase()] = true;
         newFilters['agenda'] = true;
         setActiveFilterRoles(newFilters);
-    }, [roles]);
+        // Save preferences immediately when name is selected
+        savePreferences(newFilters, viewMode, nameData);
+    }, [roles, viewMode]);
 
     const handleFilterChange = useCallback((roleClass, isChecked) => {
         setTempFilterRoles(prev => ({ ...prev, [roleClass]: isChecked }));
@@ -171,6 +1051,12 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
             }
         });
         setTempFilterRoles(newFilters);
+        
+        // If clearing all filters, also clear the selected name
+        if (action === 'select-none') {
+            setNameSearchInput('');
+            setSelectedSearchNameData(null);
+        }
     }, [tempFilterRoles]);
 
     const goToDay = useCallback((day) => {
@@ -229,317 +1115,14 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
         });
     }, []);
 
-    const updateCurrentTimeIndicator = useCallback(() => {
-        const now = new Date();
-        const today = now.toLocaleDateString('en-US', { weekday: 'long' });
-        const currentMinutes = now.getHours() * 60 + now.getMinutes();
-
-        // Remove existing indicators
-        document.querySelectorAll('.current-time-indicator').forEach(el => el.remove());
-
-        // Only show indicator if we're on today's slide
-        const activeSlide = document.querySelector('.swiper-slide-active');
-        if (activeSlide && activeSlide.dataset.day === today && viewMode === 'table') {
-            const targetMinutes = Math.floor(currentMinutes / 5) * 5;
-            const timeRow = activeSlide.querySelector(`tr[data-time-minutes="${targetMinutes}"]`);
-            if (timeRow) {
-                const indicator = document.createElement('div');
-                indicator.className = 'current-time-indicator absolute left-0 right-0 h-0.5 bg-red-500 z-10 shadow-md pointer-events-none';
-                
-                // Calculate precise position within the 5-minute slot
-                const minutesWithinSlot = currentMinutes % 5;
-                const slotProgress = minutesWithinSlot / 5;
-                indicator.style.top = `${slotProgress * timeRow.offsetHeight}px`;
-
-                const timeCell = timeRow.querySelector('.time-col');
-                if (timeCell) {
-                    timeCell.style.position = 'relative';
-                    timeCell.appendChild(indicator);
-                }
-            }
-        }
-    }, [viewMode]);
-
-    const navigateToCurrentTime = useCallback(() => {
-        console.log('⏰ navigateToCurrentTime called - hasScrolled:', hasScrolledRef.current);
-        if (hasScrolledRef.current) return;
-        
-        const attemptScroll = () => {
-            console.log('🔍 Attempting scroll...');
-            const activeSlide = document.querySelector('.swiper-slide-active');
-            console.log('📍 Active slide found:', !!activeSlide);
-            if (!activeSlide) {
-                console.log('⏳ No active slide, retrying in 100ms');
-                // Retry after a short delay if slide not ready
-                setTimeout(attemptScroll, 100);
-                return;
-            }
-
-            hasScrolledRef.current = true;
-            const now = new Date();
-            const currentMinutes = now.getHours() * 60 + now.getMinutes();
-            console.log('🕐 Current time:', `${now.getHours()}:${now.getMinutes().toString().padStart(2, '0')}`, 'Minutes:', currentMinutes);
-            console.log('👁️ Current view mode:', viewMode);
-
-            // Use a longer delay to ensure DOM is fully rendered
-            setTimeout(() => {
-                // Find the visible container based on current view mode
-                let container;
-                if (viewMode === 'card') {
-                    // Find the card view container - look for the h-full element that has 'flex' class and is not hidden
-                    const cardViewDiv = activeSlide.querySelector('.h-full:not(.hidden)');
-                    console.log('🔍 Card view debug:');
-                    console.log('- cardViewDiv found:', !!cardViewDiv);
-                    console.log('- cardViewDiv classes:', cardViewDiv?.className);
-                    
-                    // Check if this is actually the card view (should contain flex class)
-                    if (cardViewDiv && cardViewDiv.className.includes('flex')) {
-                        container = cardViewDiv.querySelector('.overflow-y-auto');
-                        console.log('- Found flex container, overflow-y-auto child found:', !!container);
-                    } else {
-                        console.log('- cardViewDiv is not flex container, trying direct search');
-                        // Try direct selection of overflow-y-auto in the slide
-                        const allOverflowContainers = activeSlide.querySelectorAll('.overflow-y-auto');
-                        console.log('- All overflow-y-auto containers found:', allOverflowContainers.length);
-                        
-                        // Look for the one that's not in a table (card view container)
-                        for (const overflowContainer of allOverflowContainers) {
-                            if (!overflowContainer.querySelector('table')) {
-                                container = overflowContainer;
-                                console.log('- Found non-table overflow container');
-                                break;
-                            }
-                        }
-                    }
-                    console.log('- Final container found:', !!container);
-                } else {
-                    // Find the table view container (the visible one) 
-                    const tableViewDiv = activeSlide.querySelector('.h-full.block:not(.hidden)');
-                    container = tableViewDiv?.querySelector('.overflow-y-auto');
-                }
-                
-                console.log('📦 Container found:', !!container, 'for view mode:', viewMode);
-                if (!container) {
-                    console.warn('❌ Scroll container not found for view mode:', viewMode);
-                    console.log('🔍 Available containers in slide:', activeSlide.querySelectorAll('*').length, 'elements');
-                    console.log('🔍 Available overflow-y-auto elements:', activeSlide.querySelectorAll('.overflow-y-auto').length);
-                    console.log('🔍 Available h-full elements:', activeSlide.querySelectorAll('.h-full').length);
-                    return;
-                }
-
-                if (viewMode === 'table') {
-                    console.log('📊 Table view scrolling...');
-                    // Find the closest time row (search for nearby times if exact match not found)
-                    const targetMinutes = Math.floor(currentMinutes / 5) * 5;
-                    let timeRow = container.querySelector(`tr[data-time-minutes="${targetMinutes}"]`);
-                    console.log('🎯 Looking for time row:', targetMinutes, 'Found:', !!timeRow);
-                    
-                    // If exact time not found, look for the nearest earlier time
-                    if (!timeRow) {
-                        console.log('🔍 Exact time not found, searching for nearby times...');
-                        for (let offset = 5; offset <= 60; offset += 5) {
-                            timeRow = container.querySelector(`tr[data-time-minutes="${targetMinutes - offset}"]`);
-                            if (timeRow) {
-                                console.log('✅ Found nearby time row at offset:', offset);
-                                break;
-                            }
-                        }
-                    }
-                    
-                    if (timeRow) {
-                        const headerHeight = container.querySelector('thead')?.offsetHeight || 50;
-                        
-                        // Calculate visible roles to determine scroll offset
-                        const visibleRoles = roles.filter(role => 
-                            role === 'Agenda' || activeFilterRoles[role.replace(/[^a-z0-9]/gi, '-').toLowerCase()] !== false
-                        );
-                        const densityFactor = Math.max(0.3, Math.min(1, visibleRoles.length / roles.length));
-                        const dynamicOffset = Math.floor(80 * densityFactor); // Dynamic offset based on content density
-                        
-                        const scrollTop = Math.max(0, timeRow.offsetTop - headerHeight - dynamicOffset);
-                        
-                        // Add smooth scrolling behavior
-                        container.style.scrollBehavior = 'smooth';
-                        container.scrollTop = scrollTop;
-                        
-                        // Update time indicator after scrolling
-                        setTimeout(() => {
-                            updateCurrentTimeIndicator();
-                        }, 300);
-                        
-                        console.log(`✅ Scrolled to time: ${Math.floor(targetMinutes/60)}:${(targetMinutes%60).toString().padStart(2,'0')} with ${visibleRoles.length} visible roles`);
-                    } else {
-                        console.warn('❌ No time row found for current time');
-                        const allTimeRows = container.querySelectorAll('tr[data-time-minutes]');
-                        console.log('📋 Available time rows:', Array.from(allTimeRows).map(row => row.getAttribute('data-time-minutes')));
-                    }
-                } else {
-                    console.log('🎴 Card view scrolling...');
-                    const dayEvents = processedData[activeSlide.dataset.day] || [];
-                    console.log('📅 Day events for', activeSlide.dataset.day, ':', dayEvents.length);
-                    
-                    // Debug: Show all event types for this day
-                    const eventTypes = [...new Set(dayEvents.map(e => e.eventType))];
-                    console.log('🏷️ Event types found:', eventTypes);
-                    
-                    // Debug: Show sample events
-                    console.log('📋 Sample events:', dayEvents.slice(0, 3).map(e => ({
-                        name: e.eventName,
-                        type: e.eventType,
-                        startMins: e.startMins,
-                        endMins: e.endMins,
-                        startTime: e.startTime,
-                        endTime: e.endTime
-                    })));
-                    
-                    // Debug: Show all agenda events for this day
-                    const agendaEvents = dayEvents.filter(e => e.eventType?.toLowerCase() === 'agenda');
-                    console.log('📋 Agenda events:', agendaEvents.map(e => ({
-                        name: e.eventName,
-                        startMins: e.startMins,
-                        endMins: e.endMins,
-                        startTime: e.startTime,
-                        endTime: e.endTime
-                    })));
-                    
-                    const currentEvent = dayEvents.find(e => {
-                        // Look for agenda events that contain the current time
-                        if (e.eventType?.toLowerCase() !== 'agenda') return false;
-                        return currentMinutes >= e.startMins && currentMinutes < e.endMins;
-                    });
-                    
-                    console.log('🎯 Current event:', currentEvent?.eventName, 'Current minutes:', currentMinutes);
-                    if (currentEvent) {
-                        const targetSelector = `[data-event-time="${currentEvent.startMins}-${currentEvent.endMins}"]`;
-                        console.log('🔍 Looking for element with selector:', targetSelector);
-                        const targetCard = container.querySelector(targetSelector);
-                        console.log('🎴 Target card found:', !!targetCard);
-                        
-                        // Debug: show all available data-event-time attributes
-                        const allEventCards = container.querySelectorAll('[data-event-time]');
-                        console.log('🎴 Available event cards:', Array.from(allEventCards).map(card => card.getAttribute('data-event-time')));
-                        
-                        // Debug: Let's also check what's actually in the container
-                        console.log('🔍 Container HTML structure:');
-                        console.log('- Container children count:', container.children.length);
-                        console.log('- Container innerHTML preview:', container.innerHTML.substring(0, 500));
-                        
-                        if (targetCard) {
-                            console.log(`🎯 Scrolling to event: ${currentEvent.eventName} - aligning to top of container`);
-                            
-                            // Use smooth scrolling
-                            container.style.scrollBehavior = 'smooth';
-                            
-                            // Calculate the target scroll position to align card top with container top
-                            const containerRect = container.getBoundingClientRect();
-                            const targetRect = targetCard.getBoundingClientRect();
-                            const containerScrollTop = container.scrollTop;
-                            
-                            // Position the top of the target card at the top of the container with small offset
-                            const topOffset = 10; // Small padding from the top
-                            const targetPosition = containerScrollTop + targetRect.top - containerRect.top - topOffset;
-                            const finalScrollTop = Math.max(0, targetPosition);
-                            
-                            console.log(`📏 Scroll calculation: containerScrollTop=${containerScrollTop}, targetRect.top=${targetRect.top}, containerRect.top=${containerRect.top}, finalScrollTop=${finalScrollTop}`);
-                            
-                            // Perform the scroll
-                            container.scrollTop = finalScrollTop;
-                            
-                            console.log(`✅ Scrolled to event: ${currentEvent.eventName} at position ${finalScrollTop}`);
-                        } else if (allEventCards.length === 0) {
-                            console.warn('❌ No event cards found at all! This indicates the DOM elements are not being rendered.');
-                            console.log('🔍 Let\'s debug why cards aren\'t rendering...');
-                            
-                            // Check if we're looking in the right view
-                            const cardView = activeSlide.querySelector('.h-full.flex');
-                            const tableView = activeSlide.querySelector('.h-full.block');
-                            console.log('📱 Card view element found:', !!cardView, 'visible:', cardView?.style.display !== 'none');
-                            console.log('📊 Table view element found:', !!tableView, 'visible:', tableView?.style.display !== 'none');
-                            
-                            // Check if generateCardViewForDay is actually being rendered
-                            console.log('🎴 Current view mode in state:', viewMode);
-                            console.log('🎴 Active slide data-day:', activeSlide.dataset.day);
-                        } else {
-                            console.warn('❌ Target card not found, but some event cards exist. Scrolling to first card as fallback.');
-                            const firstCard = allEventCards[0];
-                            if (firstCard) {
-                                firstCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
-                                console.log('✅ Scrolled to first available card');
-                            }
-                        }
-                    } else {
-                        // If no current event, scroll to the next upcoming event
-                        const upcomingEvent = dayEvents
-                            .filter(e => e.eventType?.toLowerCase() === 'agenda' && e.startMins > currentMinutes)
-                            .sort((a, b) => a.startMins - b.startMins)[0];
-                        
-                        console.log('⏭️ Upcoming event:', upcomingEvent?.eventName, 'at minutes:', upcomingEvent?.startMins);
-                        if (upcomingEvent) {
-                            const targetCard = container.querySelector(`[data-event-time="${upcomingEvent.startMins}-${upcomingEvent.endMins}"]`);
-                            if (targetCard) {
-                                console.log(`🎯 Scrolling to upcoming event: ${upcomingEvent.eventName} - aligning to top of container`);
-                                
-                                // Use smooth scrolling
-                                container.style.scrollBehavior = 'smooth';
-                                
-                                // Calculate the target scroll position to align card top with container top
-                                const containerRect = container.getBoundingClientRect();
-                                const targetRect = targetCard.getBoundingClientRect();
-                                const containerScrollTop = container.scrollTop;
-                                
-                                // Position the top of the target card at the top of the container with small offset
-                                const topOffset = 10; // Small padding from the top
-                                const targetPosition = containerScrollTop + targetRect.top - containerRect.top - topOffset;
-                                const finalScrollTop = Math.max(0, targetPosition);
-                                
-                                container.scrollTop = finalScrollTop;
-                                
-                                console.log(`✅ Scrolled to upcoming event: ${upcomingEvent.eventName} at position ${finalScrollTop}`);
-                            }
-                        } else {
-                            console.log('⚠️ No upcoming agenda events found - scrolling to first event card');
-                            // Fallback: scroll to the first event card
-                            const firstCard = container.querySelector('[data-event-time]');
-                            if (firstCard) {
-                                console.log('🎯 Scrolling to first event card as fallback - aligning to top');
-                                
-                                container.style.scrollBehavior = 'smooth';
-                                
-                                // Calculate scroll position to align first card with top of container
-                                const containerRect = container.getBoundingClientRect();
-                                const targetRect = firstCard.getBoundingClientRect();
-                                const containerScrollTop = container.scrollTop;
-                                
-                                // Position at top of container with small offset
-                                const topOffset = 10;
-                                const targetPosition = containerScrollTop + targetRect.top - containerRect.top - topOffset;
-                                const finalScrollTop = Math.max(0, targetPosition);
-                                
-                                container.scrollTop = finalScrollTop;
-                                
-                                console.log(`✅ Scrolled to first event card at position ${finalScrollTop}`);
-                            }
-                        }
-                    }
-                }
-            }, 200); // Increased delay to ensure DOM is ready
-        };
-
-        attemptScroll();
-    }, [viewMode, processedData, activeFilterRoles, roles, updateCurrentTimeIndicator]);
-    
     // --- Swiper Initialization Effect ---
     useEffect(() => {
-        console.log('🎢 Swiper useEffect triggered - processedData:', !!processedData, 'keys:', Object.keys(processedData || {}).length, 'hasSwiper:', !!swiperRef.current);
-        
         if (!processedData || Object.keys(processedData).length === 0) {
-            console.log('❌ Swiper init skipped - no processed data');
             return;
         }
 
         // Don't recreate if already exists and initialized
         if (swiperRef.current && swiperRef.current.initialized) {
-            console.log('⏭️ Swiper already initialized, skipping recreation');
             return;
         }
 
@@ -547,13 +1130,11 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
         
         const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
         const initialSlide = Math.max(0, CONFIG.DAYS_ORDER.indexOf(today));
-        console.log('📅 Today is:', today, 'Initial slide:', initialSlide);
 
         // Use a single timeout to prevent multiple initializations
         const timeoutId = setTimeout(() => {
             // Double-check we still need to create swiper
             if (swiperRef.current && swiperRef.current.initialized) {
-                console.log('🚫 Swiper already exists, cancelling creation');
                 return;
             }
 
@@ -566,19 +1147,14 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
                 initialSlide: initialSlide,
                 on: {
                     init: (swiper) => {
-                        console.log('🎢 Swiper init event fired');
                         const currentDay = swiper.slides[swiper.activeIndex]?.dataset.day;
-                        console.log('📍 Current day from slide:', currentDay, 'Today:', today);
                         updateActiveDayButton(currentDay);
-                        // Delay the scroll to current time to ensure content is rendered
-                        if (currentDay === today && !hasScrolledRef.current) {
-                            console.log('⏰ Scheduling scroll to current time in 300ms');
+                        // Only auto-navigate to current time on the very first page load
+                        if (currentDay === today && !hasInitiallyNavigatedRef.current) {
+                            hasInitiallyNavigatedRef.current = true; // Mark that initial navigation is done
                             setTimeout(() => {
-                                console.log('🚀 Attempting to navigate to current time');
-                                navigateToCurrentTime();
+                                performNavigation();
                             }, 300);
-                        } else {
-                            console.log('⏭️ Skipping scroll - currentDay:', currentDay, 'today:', today, 'hasScrolled:', hasScrolledRef.current);
                         }
                     },
                     slideChangeTransitionEnd: (swiper) => {
@@ -597,7 +1173,7 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
             clearTimeout(timeoutId);
             swiperRef.current?.destroy(); 
         };
-    }, [processedData, navigateToCurrentTime, updateActiveDayButton, updateCurrentTimeIndicator]);
+    }, [processedData, updateActiveDayButton, updateCurrentTimeIndicator, performNavigation]);
 
     // Update time indicator periodically
     useEffect(() => {
@@ -791,296 +1367,44 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
         return roleActivities;
     }, [roles, processedData, getEventPriority, shouldReplaceActivity, activeFilterRoles]);
 
-    const generateRoleAssignmentHTML = useCallback((role, activityData, agendaEvent) => {
-        const colors = getActivityColor(activityData);
-        let displayText, timeIndicator = '';
-        let assignmentTime = `${agendaEvent.startTime} - ${agendaEvent.endTime}`;
-
-        if (typeof activityData === 'string') {
-            displayText = activityData;
-        } else {
-            displayText = activityData.activity;
-            assignmentTime = `${activityData.startTime} - ${activityData.endTime}`;
-            if (!activityData.isOverlapping) {
-                if (activityData.startsWithin) {
-                    timeIndicator = ` (starts ${activityData.startTime})`;
-                } else {
-                    timeIndicator = ` (${activityData.startTime} - ${activityData.endTime})`;
-                }
-            }
-        }
-
-        const eventType = typeof activityData === 'object' ? activityData.eventType : (activityData === 'No Duty' ? 'Free' : 'Duty');
-        const roleNameWithAssignments = formatRoleNameForCard(role);
-        const activityDescription = typeof activityData === 'object' ?
-            processedData[agendaEvent.weekday]?.find(e => e.assignedRoles.includes(role) && e.startMins < agendaEvent.endMins && e.endMins > agendaEvent.startMins)?.eventDescription || '' : '';
-
-        // Create event key to find the complete merged event with all assigned roles
-        let eventKey = '';
-        if (typeof activityData === 'object' && activityData.activity) {
-            const eventName = activityData.activity.split(' - ')[1] || activityData.activity;
-            eventKey = `${agendaEvent.weekday}-${activityData.startTime}-${activityData.endTime}-${eventName}-${activityData.eventType}`;
-        } else {
-            eventKey = `${agendaEvent.weekday}-${agendaEvent.startTime}-${agendaEvent.endTime}-${agendaEvent.eventName}-${agendaEvent.eventType}`;
-        }
-
-        // Find the complete event from processedData to get all assigned roles
-        const completeEvent = typeof activityData === 'object' ? 
-            processedData[agendaEvent.weekday]?.find(e => 
-                e.startTime === activityData.startTime && 
-                e.endTime === activityData.endTime && 
-                e.assignedRoles.includes(role)
-            ) : agendaEvent;
-        
-        return (
-            <div
-                key={role}
-                className={`flex-1 p-2 rounded-md border-l-4 cursor-pointer transition-all duration-200 hover:translate-y-[-1px] hover:shadow-md ${colors.backgroundColor} ${colors.borderColor}`}
-                onClick={() => showRoleModal({
-                    eventKey,
-                    activity: displayText,
-                    description: activityDescription,
-                    eventTime: assignmentTime,
-                    eventName: agendaEvent.eventName,
-                    eventType: eventType,
-                    mergedEvent: completeEvent || agendaEvent // Pass the complete event with all roles
-                })}
-            >
-                <div 
-                    className="font-bold text-gray-800 hover:text-blue-600 transition-colors duration-200" 
-                    dangerouslySetInnerHTML={{ __html: roleNameWithAssignments }}
-                ></div>
-                <div className={`text-sm ${colors.textColor}`}>{displayText}{timeIndicator}</div>
-            </div>
-        );
-    }, [getActivityColor, formatRoleNameForCard, showRoleModal, processedData]);
-    
-    const generateCardViewForDay = useCallback((day) => {
-        const dayEvents = processedData[day];
-        if (!dayEvents?.length) {
-            return <div className="p-4 text-center text-gray-600">No events for {day}.</div>;
-        }
-
-        const allAgendaEvents = dayEvents
-            .filter(event => event.eventType?.toLowerCase() === 'agenda')
-            .sort((a, b) => a.startMins - b.startMins);
-
-        if (!allAgendaEvents.length) {
-            return <div className="p-4 text-center text-gray-600">No agenda events for {day}.</div>;
-        }
-        
-        return (
-            <div className="p-1 flex flex-col gap-2 h-full overflow-y-auto w-full">
-                {allAgendaEvents.map((agendaEvent, index) => {
-                    const lowerEventName = agendaEvent.eventName.toLowerCase();
-                    const isTravelEvent = lowerEventName.includes('travel') || lowerEventName.includes('transition') || lowerEventName.includes('move to') || lowerEventName.includes('roll call');
-
-                    if (isTravelEvent) {
-                        return (
-                            <div key={index} 
-                                 data-event-time={`${agendaEvent.startMins}-${agendaEvent.endMins}`}
-                                 className="flex items-center justify-center gap-2 bg-white border border-gray-300 rounded-lg p-2 shadow-sm transition-all duration-200 hover:translate-y-[-1px] hover:shadow-md text-sm">
-                                <span className="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-md text-xs font-semibold whitespace-nowrap">{agendaEvent.startTime}</span>
-                                <span className="text-gray-700 font-medium text-center flex-grow text-sm">{agendaEvent.eventName}</span>
-                            </div>
-                        );
-                    } else {
-                        const roleActivities = getRoleActivitiesForAgendaEvent(agendaEvent);
-                        const roleEntries = Object.entries(roleActivities);
-
-                        const acRoles = roleEntries.filter(([role]) => role.startsWith('AC ')).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }));
-                        const cnRoles = roleEntries.filter(([role]) => role.startsWith('CN ')).sort(([a], [b]) => a.localeCompare(b, undefined, { numeric: true }));
-                        const otherRoles = roleEntries.filter(([role]) => !role.startsWith('AC ') && !role.startsWith('CN '));
-
-                        const acRoleMap = new Map(acRoles.map(([role, activity]) => [parseInt(role.match(/^AC (\d+)$/)[1]), [role, activity]]));
-                        const cnRoleMap = new Map(cnRoles.map(([role, activity]) => {
-                            const letterNumber = role.match(/^CN ([A-Z])$/)[1].charCodeAt(0) - 'A'.charCodeAt(0) + 1;
-                            return [letterNumber, [role, activity]];
-                        }));
-
-                        const allAcNumbers = [...acRoleMap.keys(), ...cnRoleMap.keys()];
-                        const maxAcNumber = allAcNumbers.length > 0 ? Math.max(...allAcNumbers) : 0;
-
-                        let pairedRolesHTML = [];
-                        for (let acNumber = 1; acNumber <= maxAcNumber; acNumber++) {
-                            const acRole = acRoleMap.get(acNumber);
-                            const cnRole = cnRoleMap.get(acNumber);
-
-                            if (acRole || cnRole) {
-                                pairedRolesHTML.push(
-                                    <div key={`pair-${acNumber}`} className="grid grid-cols-2 gap-1.5">
-                                        {acRole ? generateRoleAssignmentHTML(acRole[0], acRole[1], agendaEvent) : <div className="invisible"></div>}
-                                        {cnRole ? generateRoleAssignmentHTML(cnRole[0], cnRole[1], agendaEvent) : <div className="invisible"></div>}
-                                    </div>
-                                );
-                                if (acNumber % 2 === 0 && acNumber < maxAcNumber) {
-                                    pairedRolesHTML.push(<div key={`divider-${acNumber}`} className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent my-0.5 relative before:content-[''] before:absolute before:left-1/2 before:top-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full"></div>);
-                                } else if (acNumber % 2 !== 0 && acNumber < maxAcNumber) {
-                                    const nextAcNum = acNumber + 1;
-                                    if (!acRoleMap.has(nextAcNum) && !cnRoleMap.has(nextAcNum)) {
-                                        pairedRolesHTML.push(<div key={`divider-${acNumber}-single`} className="h-px bg-gradient-to-r from-transparent via-gray-300 to-transparent my-0.5 relative before:content-[''] before:absolute before:left-1/2 before:top-1/2 before:-translate-x-1/2 before:-translate-y-1/2 before:w-1 before:h-1 before:bg-gray-300 before:rounded-full"></div>);
-                                    }
-                                }
-                            }
-                        }
-
-                        let otherRolesHTML = [];
-                        for (let i = 0; i < otherRoles.length; i += 2) {
-                            otherRolesHTML.push(
-                                <div key={`other-pair-${i}`} className="grid grid-cols-2 gap-1.5">
-                                    {generateRoleAssignmentHTML(otherRoles[i][0], otherRoles[i][1], agendaEvent)}
-                                    {otherRoles[i + 1] && generateRoleAssignmentHTML(otherRoles[i + 1][0], otherRoles[i + 1][1], agendaEvent)}
-                                </div>
-                            );
-                        }
-
-                        return (
-                            <div key={index} 
-                                 data-event-time={`${agendaEvent.startMins}-${agendaEvent.endMins}`}
-                                 className="bg-white border-2 border-blue-500 rounded-lg p-3 shadow-md">
-                                <div className="flex justify-between items-start mb-3 gap-3 flex-col md:flex-row">
-                                    <h3 className="text-lg font-bold text-gray-800 m-0">{agendaEvent.eventName}</h3>
-                                    <div className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-full whitespace-nowrap font-medium">{agendaEvent.startTime} - {agendaEvent.endTime}</div>
-                                </div>
-                                <div className="text-gray-700 mb-3 leading-relaxed text-sm">{agendaEvent.eventDescription}</div>
-                                <div className="flex flex-col gap-1.5">
-                                    {pairedRolesHTML}
-                                    {otherRolesHTML}
-                                </div>
-                            </div>
-                        );
-                    }
-                })}
-            </div>
-        );
-    }, [processedData, getRoleActivitiesForAgendaEvent, generateRoleAssignmentHTML]);
-
-    const renderCalendarForDay = useCallback((day) => {
-            const dayEvents = processedData[day];
-            if (!dayEvents || dayEvents.length === 0) {
-                return <div className="flex items-center justify-center h-full"><p className="text-gray-600 italic">No events for {day}.</p></div>;
-            }
-    
-            const allTimes = dayEvents.flatMap(e => [e.startMins, e.endMins]).filter(t => t !== null);
-            if (allTimes.length === 0) return <div className="flex items-center justify-center h-full"><p className="text-gray-600 italic">No valid events for {day}.</p></div>;
-    
-            const minTime = Math.min(...allTimes);
-            const maxTime = Math.max(...allTimes);
-            const eventGrid = {};
-            roles.forEach(role => { eventGrid[role] = {}; });
-    
-            dayEvents.forEach(event => {
-                event.assignedRoles.forEach(role => {
-                    if (!eventGrid[role] || event.endMins <= event.startMins) return;
-                    eventGrid[role][event.startMins] = {
-                        ...event,
-                        isStart: true,
-                        duration: event.endMins - event.startMins,
-                        Role: role
-                    };
-                    for (let t = event.startMins + 5; t < event.endMins; t += 5) {
-                        eventGrid[role][t] = { isSpanned: true };
-                    }
-                });
-            });
-    
-            const tableRows = [];
-            for (let t = minTime; t < maxTime; t += 5) {
-                const rowCells = [];
-                rowCells.push(<td key="time" className="time-col sticky left-0 bg-gray-100 p-1 font-bold w-[70px] text-xs text-center h-10 border-r border-gray-400">{minutesToTime(t)}</td>);
-                roles.forEach(role => {
-                    const eventAtTime = eventGrid[role]?.[t];
-                    const roleClass = role.replace(/[^a-z0-9]/gi, '-').toLowerCase();
-                    const isRoleVisible = role === 'Agenda' || activeFilterRoles[roleClass] !== false; // Always show Agenda
-    
-                    if (eventAtTime?.isStart) {
-                        const rowspan = Math.max(1, Math.floor(eventAtTime.duration / 5));
-                        const eventKey = `${eventAtTime.weekday}-${eventAtTime.startTime}-${eventAtTime.endTime}-${eventAtTime.eventName}-${eventAtTime.eventType}`;
-                        const colors = getActivityColor(eventAtTime);
-                        const visibleRoleCount = roles.filter(r => activeFilterRoles[r.replace(/[^a-z0-9]/gi, '-').toLowerCase()] !== false && r !== 'Agenda').length;
-                        rowCells.push(
-                            <td
-                                key={role}
-                                className={`role-col h-10 p-0 text-center align-top break-words border-r border-gray-300 ${isRoleVisible ? '' : 'hidden'}`}
-                                data-role={roleClass}
-                                rowSpan={rowspan}
-                            >
-                                <div
-                                    className={`relative w-full h-full rounded-md text-left flex items-start box-border p-1 md:p-2 text-sm cursor-pointer transition-all duration-200 hover:translate-y-[-1px] hover:shadow-md z-0 hover:z-10 ${colors.backgroundColor} ${colors.borderColor} border-l-4`}
-                                    onClick={() => showRoleModal({
-                                        eventKey,
-                                        activity: `${eventAtTime.eventAbbreviation} - ${eventAtTime.eventName}`,
-                                        description: eventAtTime.eventDescription,
-                                        eventTime: `${eventAtTime.startTime} - ${eventAtTime.endTime}`,
-                                        eventName: eventAtTime.eventName,
-                                        eventType: eventAtTime.eventType,
-                                        mergedEvent: mergedEvents.find(e => {
-                                            const key = `${e.weekday}-${e.startTime}-${e.endTime}-${e.eventName}-${e.eventType}`;
-                                            return key === eventKey;
-                                        })
-                                    })}
-                                >
-                                    <div className="sticky top-8 overflow-hidden text-ellipsis">
-                                        {/* On small screens, show full name if <= 4 visible roles, else abbreviation only */}
-                                        <span className={`event-full ${visibleRoleCount <= 4 ? 'block' : 'hidden'} md:block`}><strong>{eventAtTime.eventAbbreviation}</strong> - {eventAtTime.eventName}</span>
-                                        <span className={`event-abbr-only ${visibleRoleCount > 4 ? 'block' : 'hidden'} md:hidden text-xs`}><strong>{eventAtTime.eventAbbreviation}</strong></span>
-                                    </div>
-                                </div>
-                            </td>
-                        );
-                    } else if (!eventAtTime?.isSpanned) {
-                        rowCells.push(<td key={role} className={`role-col h-10 p-0 text-center align-top break-words border-r border-gray-300 ${isRoleVisible ? '' : 'hidden'}`} data-role={roleClass}></td>);
-                    }
-                });
-                tableRows.push(<tr key={t} data-time-minutes={t}>{rowCells}</tr>);
-            }
-    
-            const manyColumnsClass = roles.filter(role => role === 'Agenda' || (activeFilterRoles[role.replace(/[^a-z0-9]/gi, '-').toLowerCase()] !== false && role !== 'Agenda')).length > 7 ? 'many-columns' : '';
-    
-            return (
-                <div className="overflow-y-auto overflow-x-hidden h-full">
-                    <table className={`w-full border-collapse table-fixed ${manyColumnsClass}`}>
-                        <thead>
-                            <tr>
-                                <th className="time-col sticky left-0 top-0 bg-gray-200 p-1 font-bold border-b-2 border-gray-300 border-r border-gray-400 z-50 text-xs text-center" style={{width: '70px'}}>Time</th>
-                                {roles.map(r => {
-                                    const roleClass = r.replace(/[^a-z0-9]/gi, '-').toLowerCase();
-                                    const mobileAbbr = createMobileAbbreviation(r);
-                                    const isRoleVisible = r === 'Agenda' || activeFilterRoles[roleClass] !== false;
-                                    return (
-                                        <th key={r} className={`role-col sticky top-0 bg-gray-200 p-1 md:p-2 font-bold border-b-2 border-gray-300 border-r border-gray-300 shadow-sm z-30 text-xs ${isRoleVisible ? '' : 'hidden'}`} 
-                                            data-role={roleClass}>
-                                            <span className="full-text block md:hidden">{mobileAbbr}</span>
-                                            <span className="mobile-abbr hidden md:block">{r}</span>
-                                        </th>
-                                    );
-                                })}
-                            </tr>
-                        </thead>
-                        <tbody>{tableRows}</tbody>
-                    </table>
-                </div>
-            );
-        }, [processedData, roles, minutesToTime, createMobileAbbreviation, getActivityColor, showRoleModal, mergedEvents, activeFilterRoles]);
-
-
     const memoizedSlides = useMemo(() => {
-        console.log('🎬 Creating memoized slides - processedData:', !!processedData, 'roles:', roles.length, 'viewMode:', viewMode);
         if (!processedData || roles.length === 0) {
-            console.log('❌ Skipping slide creation - no data');
             return null;
         }
 
         const slides = CONFIG.DAYS_ORDER.map((day) => (
             <div key={day} className="swiper-slide" data-day={day}>
-                <div className={`h-full ${viewMode === 'table' ? 'block' : 'hidden'}`}>{renderCalendarForDay(day)}</div>
-                <div className={`h-full ${viewMode === 'card' ? 'flex' : 'hidden'}`}>{generateCardViewForDay(day)}</div>
+                <div className={`h-full ${viewMode === 'table' ? 'block' : 'hidden'}`}>
+                    <TableView 
+                        day={day}
+                        processedData={processedData}
+                        roles={roles}
+                        activeFilterRoles={activeFilterRoles}
+                        showRoleModal={showRoleModal}
+                        eventsMap={eventsMap}
+                        minutesToTime={minutesToTime}
+                        createMobileAbbreviation={createMobileAbbreviation}
+                        getActivityColor={getActivityColor}
+                    />
+                </div>
+                <div className={`h-full ${viewMode === 'card' ? 'flex' : 'hidden'}`}>
+                    <CardView 
+                        day={day}
+                        processedData={processedData}
+                        getRoleActivitiesForAgendaEvent={getRoleActivitiesForAgendaEvent}
+                        getActivityColor={getActivityColor}
+                        formatRoleNameForCard={formatRoleNameForCard}
+                        showRoleModal={showRoleModal}
+                        eventsMap={eventsMap}
+                        selectedRole={selectedSearchNameData?.role}
+                        minutesToTime={minutesToTime}
+                    />
+                </div>
             </div>
         ));
         
-        console.log('✅ Created', slides.length, 'slides for view mode:', viewMode);
         return slides;
-    }, [processedData, roles.length, viewMode, renderCalendarForDay, generateCardViewForDay]); // Include required dependencies
+    }, [processedData, roles, viewMode, activeFilterRoles, showRoleModal, eventsMap, minutesToTime, createMobileAbbreviation, getActivityColor, getRoleActivitiesForAgendaEvent, formatRoleNameForCard, selectedSearchNameData?.role]);
 
     return (
         <>
@@ -1090,10 +1414,13 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
                 viewMode={viewMode}
                 nameSearchInput={nameSearchInput}
                 setNameSearchInput={setNameSearchInput}
+                setSelectedSearchNameData={setSelectedSearchNameData}
+                setActiveFilterRoles={setActiveFilterRoles}
                 onFilterModalOpen={handleFilterModalOpen}
                 onViewToggle={handleViewToggle}
                 onDutiesSummaryClick={() => setIsDutiesSummaryModalOpen(true)}
                 onNameSelect={selectNameAndFilter}
+                onClearNameSearch={(newFilters) => savePreferences(newFilters, viewMode, null)}
                 goToDay={goToDay}
             />
             <main className="flex-grow min-h-0 relative">
@@ -1102,6 +1429,15 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
                 ) : (
                     <div className="swiper h-full"><div className="swiper-wrapper">{memoizedSlides}</div></div>
                 )}
+                
+                {/* Floating "Go to Now" button */}
+                <button
+                    onClick={manualNavigateToCurrentTime}
+                    className="fixed bottom-6 left-6 w-14 h-14 border border-gray-300 bg-white text-gray-800 rounded-full shadow-lg transition-all duration-200 flex items-center justify-center text-xs font-semibold z-50 hover:shadow-xl"
+                    title="Go to current time"
+                >
+                    NOW
+                </button>
             </main>
             <Modals
                 isRoleModalOpen={isRoleModalOpen}
