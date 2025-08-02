@@ -1,17 +1,19 @@
-import React, { useState, useEffect } from 'react';
-import { BrowserRouter as Router, Routes, Route } from 'react-router-dom';
+import React, { useState, useEffect, useRef, useCallback, useMemo } from 'react';
+import Swiper from 'swiper';
+import { Navigation } from 'swiper/modules';
+// Fixed Swiper CSS imports for Swiper v11
+import 'swiper/css';
+import 'swiper/css/navigation';
 
 import { initializeApp } from 'firebase/app';
 import { getAuth, signInAnonymously, signInWithCustomToken, onAuthStateChanged } from 'firebase/auth';
-import { getFirestore } from 'firebase/firestore';
+import { getFirestore, collection, onSnapshot } from 'firebase/firestore';
 
 // Import Firebase configuration
 import { firebaseConfig as defaultFirebaseConfig, appId as defaultAppId, initialAuthToken as defaultInitialAuthToken } from './firebase-config.js';
 
-// Import components
-import Navigation from './components/Navigation';
-import CalendarPage from './components/CalendarPage';
-import DashboardPage from './components/DashboardPage';
+// Import the Selection Dashboard component
+import SelectionDashboard from './components/SelectionDashboard.jsx';
 
 // Global variables provided by the Canvas environment (fallback to local config)
 const appId = typeof __app_id !== 'undefined' ? __app_id : defaultAppId;
@@ -27,7 +29,23 @@ const loadTailwind = () => {
 
 loadTailwind();
 
+const CONFIG = {
+    DAYS_ORDER: ['Sunday', 'Monday', 'Tuesday', 'Wednesday', 'Thursday', 'Friday', 'Saturday'],
+    LOCAL_STORAGE_KEY: 'duties-calendar-preferences',
+};
+
 const App = () => {
+    // Page navigation state
+    const [currentPage, setCurrentPage] = useState('calendar'); // 'calendar' or 'selection'
+    
+    // Existing state variables
+    const [schedules, setSchedules] = useState([]);
+    const [roleAssignments, setRoleAssignments] = useState({});
+    const [roleFullNames, setRoleFullNames] = useState({});
+    const [allNames, setAllNames] = useState([]);
+    const [roles, setRoles] = useState([]);
+    const [processedData, setProcessedData] = useState({});
+    const [mergedEvents, setMergedEvents] = useState([]);
     const [loading, setLoading] = useState(true);
     const [error, setError] = useState(null);
     const [isAuthReady, setIsAuthReady] = useState(false);
@@ -35,7 +53,23 @@ const App = () => {
     const [auth, setAuth] = useState(null);
     const [userId, setUserId] = useState(null);
 
-    // --- Firebase Initialization ---
+    const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
+    const [isRoleModalOpen, setIsRoleModalOpen] = useState(false);
+    const [tempFilterRoles, setTempFilterRoles] = useState({});
+    const [selectedEvent, setSelectedEvent] = useState(null);
+    const [isDutiesSummaryModalOpen, setIsDutiesSummaryModalOpen] = useState(false);
+
+    const [viewMode, setViewMode] = useState('card'); // 'card' or 'table'
+    const [activeFilterRoles, setActiveFilterRoles] = useState({}); // { 'ac-1': true, 'agenda': false }
+
+    const swiperRef = useRef(null);
+    const calendarContainerRef = useRef(null);
+
+    const [nameSearchInput, setNameSearchInput] = useState('');
+    const [nameSearchDropdownActive, setNameSearchDropdownActive] = useState(false);
+    const [selectedSearchNameData, setSelectedSearchNameData] = useState(null); // Changed to useState
+
+    // --- Firebase Initialization and Data Fetching ---
     useEffect(() => {
         // Check if Firebase config is valid
         if (!firebaseConfig || !firebaseConfig.apiKey || !firebaseConfig.projectId) {
@@ -67,18 +101,10 @@ const App = () => {
                     }
                 }
                 setIsAuthReady(true); // Auth state is now known
-                setLoading(false);
             });
 
             return () => {
                 unsubscribeAuth();
-            };
-        } catch (error) {
-            console.error('Firebase initialization error:', error);
-            setError("Failed to initialize Firebase. Please check your configuration.");
-            setLoading(false);
-        }
-    }, []);
             };
         } catch (e) {
             setError("Failed to initialize Firebase. Check your configuration and console for details.");
@@ -348,15 +374,32 @@ const App = () => {
                 return true;
             }
 
+            // Calculate overlap duration
             const overlap = Math.max(0, Math.min(currentEndMins, eventEndMins) - Math.max(currentStartMins, eventStartMins));
             const timeDiff = Math.abs(currentStartMins - eventStartMins);
 
+            // If there's any overlap, they're related
             if (overlap > 0) return true;
+            
+            // For Class events specifically, be more lenient with afternoon timing
+            // Class Coordinator (1:15 PM - 3:30 PM) should link to all Class Support in afternoon
+            if (currentStartMins >= 780 && eventStartMins >= 780) { // Both after 1 PM
+                // Allow linking if events are within the broader afternoon class period
+                const currentSpansAfternoon = currentStartMins < 930 && currentEndMins > 780; // Overlaps 1 PM - 3:30 PM
+                const eventSpansAfternoon = eventStartMins < 930 && eventEndMins > 780;
+                
+                if (currentSpansAfternoon && eventSpansAfternoon) {
+                    return true;
+                }
+            }
+            
+            // If events are within 60 minutes of each other, check if they're in the same time period
             if (timeDiff <= 60) {
                 const isCurrentMorning = currentStartMins < 780; // 1 PM = 780 minutes
                 const isEventMorning = eventStartMins < 780;
                 return isCurrentMorning === isEventMorning;
             }
+            
             return false;
         };
 
@@ -418,7 +461,7 @@ const App = () => {
             });
         }
 
-        // Specific event linking (within same event type and weekday)
+        // Specific event linking (within same event type and weekday) - BIDIRECTIONAL
         const specificLinkPatterns = [
             { name: 'Check-in', subpatterns: ['Coordinator', 'Setup', 'Set Up', 'Check-in 1', 'Check-in 2', 'Check-In 1', 'Check-In 2', 'Check In 1', 'Check In 2', 'Participant Check-in 1', 'Participant Check-in 2'] },
             { name: 'Dance', subpatterns: ['Coordinator', 'DJ', 'Accommodations', 'Support'] },
@@ -429,15 +472,24 @@ const App = () => {
 
         specificLinkPatterns.forEach(pattern => {
             if (currentEventName.includes(pattern.name)) {
-                filterAndAddEvents(pattern.subpatterns, currentEventType.toLowerCase(), (event, currentStartMins, currentEndMins) => {
+                // Find ALL events that contain the pattern name (bidirectional linking)
+                filterAndAddEvents([pattern.name], currentEventType.toLowerCase(), (event, currentStartMins, currentEndMins) => {
                     if (!event.eventName.includes(pattern.name)) return false;
+                    
+                    // Link if either event contains any of the subpatterns (bidirectional)
+                    const eventContainsSubpattern = pattern.subpatterns.some(sub => event.eventName.includes(sub));
+                    const currentContainsSubpattern = pattern.subpatterns.some(sub => currentEventName.includes(sub));
+                    
+                    // Either event must contain a subpattern to be related (OR logic for bidirectional)
+                    if (!eventContainsSubpattern && !currentContainsSubpattern) return false;
+                    
                     if (pattern.checkFn) return pattern.checkFn(event, currentStartMins, currentEndMins);
                     return true;
                 });
             }
         });
 
-        // General Coordinator/Support patterns
+        // General Coordinator/Support patterns - BIDIRECTIONAL
         const generalPatterns = [{ coordinator: 'Coordinator', support: 'Support' }, { coordinator: 'Lead', support: 'Support' }, { coordinator: 'Lead', support: 'Assist' }];
         for (const pattern of generalPatterns) {
             const isCoordinator = currentEventName.includes(pattern.coordinator);
@@ -447,7 +499,9 @@ const App = () => {
                 if (isSpecificPatternHandled) continue;
 
                 const baseEventName = currentEventName.replace(pattern.coordinator, '').replace(pattern.support, '').trim();
-                filterAndAddEvents([baseEventName], currentEventType.toLowerCase(), (event) => {
+                
+                // Bidirectional: find both coordinator and support events for this base activity
+                filterAndAddEvents([pattern.coordinator, pattern.support], currentEventType.toLowerCase(), (event) => {
                     const eventBaseName = event.eventName.replace(pattern.coordinator, '').replace(pattern.support, '').trim();
                     return eventBaseName === baseEventName && (event.eventName.includes(pattern.coordinator) || event.eventName.includes(pattern.support));
                 });
@@ -455,7 +509,13 @@ const App = () => {
         }
 
         const uniqueLinkedEvents = linkedEvents.filter((event, index, self) =>
-            index === self.findIndex(e => e.eventName === event.eventName && e.weekday === event.weekday)
+            index === self.findIndex(e => 
+                e.eventName === event.eventName && 
+                e.weekday === event.weekday &&
+                e.startTime === event.startTime &&
+                e.endTime === event.endTime &&
+                JSON.stringify(e.assignedRoles.sort()) === JSON.stringify(event.assignedRoles.sort())
+            )
         );
 
         return uniqueLinkedEvents;
@@ -517,56 +577,68 @@ const App = () => {
 
     // --- Swiper Initialization and Lifecycle ---
     useEffect(() => {
-        if (roles.length > 0 && Object.keys(processedData).length > 0) {
+        // Only initialize Swiper when on calendar page and data is ready
+        if (currentPage === 'calendar' && roles.length > 0 && Object.keys(processedData).length > 0) {
             if (swiperRef.current) {
                 swiperRef.current.destroy(true, true);
             }
 
-            const swiperInstance = new Swiper('.swiper', {
-                modules: [Navigation],
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                keyboard: {
-                    enabled: true,
-                },
-                on: {
-                    slideChange: function () {
-                        const currentDay = this.slides[this.activeIndex]?.dataset.day;
-                        if (currentDay) {
-                            updateActiveDayButton(currentDay);
-                        }
-                    },
-                    slideChangeTransitionEnd: function () {
-                        const currentDay = this.slides[this.activeIndex]?.dataset.day;
-                        if (currentDay) {
-                            updateActiveDayButton(currentDay);
-                            updateCurrentTimeIndicator(this);
-                        }
-                    },
-                    transitionStart: function () {
-                        const currentDay = this.slides[this.activeIndex]?.dataset.day;
-                        if (currentDay) {
-                            updateActiveDayButton(currentDay);
-                        }
-                    },
-                },
-            });
-            swiperRef.current = swiperInstance;
+            // Add a small delay to ensure DOM is ready
+            const timer = setTimeout(() => {
+                const swiperElement = document.querySelector('.swiper');
+                if (!swiperElement) return;
 
-            const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
-            const todayIndex = CONFIG.DAYS_ORDER.indexOf(today);
-            if (todayIndex !== -1) {
-                swiperInstance.slideTo(todayIndex, 0);
-            }
-            if (swiperInstance.slides.length > 0) {
-                swiperInstance.emit('slideChangeTransitionEnd');
-            }
+                const swiperInstance = new Swiper('.swiper', {
+                    modules: [Navigation],
+                    navigation: {
+                        nextEl: '.swiper-button-next',
+                        prevEl: '.swiper-button-prev',
+                    },
+                    keyboard: {
+                        enabled: true,
+                    },
+                    on: {
+                        slideChange: function () {
+                            const currentDay = this.slides[this.activeIndex]?.dataset.day;
+                            if (currentDay) {
+                                updateActiveDayButton(currentDay);
+                            }
+                        },
+                        slideChangeTransitionEnd: function () {
+                            const currentDay = this.slides[this.activeIndex]?.dataset.day;
+                            if (currentDay) {
+                                updateActiveDayButton(currentDay);
+                                updateCurrentTimeIndicator(this);
+                            }
+                        },
+                        transitionStart: function () {
+                            const currentDay = this.slides[this.activeIndex]?.dataset.day;
+                            if (currentDay) {
+                                updateActiveDayButton(currentDay);
+                            }
+                        },
+                    },
+                });
+                swiperRef.current = swiperInstance;
 
-            const intervalId = setInterval(() => updateCurrentTimeIndicator(swiperInstance), 60000);
+                const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+                const todayIndex = CONFIG.DAYS_ORDER.indexOf(today);
+                if (todayIndex !== -1) {
+                    swiperInstance.slideTo(todayIndex, 0);
+                }
+                if (swiperInstance.slides.length > 0) {
+                    swiperInstance.emit('slideChangeTransitionEnd');
+                }
+            }, 100);
+
+            const intervalId = setInterval(() => {
+                if (swiperRef.current) {
+                    updateCurrentTimeIndicator(swiperRef.current);
+                }
+            }, 60000);
 
             return () => {
+                clearTimeout(timer);
                 clearInterval(intervalId);
                 if (swiperRef.current) {
                     swiperRef.current.destroy(true, true);
@@ -574,7 +646,7 @@ const App = () => {
                 }
             };
         }
-    }, [roles, processedData]); // Re-initialize swiper when roles or processedData changes
+    }, [currentPage, roles, processedData]); // Include currentPage in dependencies
 
     // --- UI Update Functions ---
     const updateActiveDayButton = useCallback((currentDay) => {
@@ -1253,7 +1325,11 @@ const App = () => {
                         />
                         <label
                             htmlFor={`dd-role-${roleClass}`}
-                            className={`block p-2 rounded-md bg-gray-100 text-gray-800 cursor-pointer transition-all duration-200 border border-gray-300 select-none text-center text-sm w-full box-border ${tempFilterRoles[roleClass] !== false ? 'bg-green-600 text-white border-green-600' : ''}`}
+                            className={`block p-2 rounded-md cursor-pointer transition-all duration-200 select-none text-center text-sm w-full box-border ${
+                                tempFilterRoles[roleClass] !== false 
+                                    ? 'bg-green-600 text-white border-green-600' 
+                                    : 'bg-gray-100 text-gray-800 border border-gray-300'
+                            }`}
                         >
                             {displayName}
                         </label>
@@ -1278,7 +1354,11 @@ const App = () => {
                         />
                         <label
                             htmlFor={`dd-role-${roleClass}`}
-                            className={`block p-2 rounded-md bg-gray-100 text-gray-800 cursor-pointer transition-all duration-200 border border-gray-300 select-none text-center text-sm w-full box-border ${tempFilterRoles[roleClass] !== false ? 'bg-blue-600 text-white border-blue-600' : ''}`}
+                            className={`block p-2 rounded-md cursor-pointer transition-all duration-200 select-none text-center text-sm w-full box-border ${
+                                tempFilterRoles[roleClass] !== false 
+                                    ? 'bg-blue-600 text-white border-blue-600' 
+                                    : 'bg-gray-100 text-gray-800 border border-gray-300'
+                            }`}
                         >
                             {cnRole}
                         </label>
@@ -1315,7 +1395,11 @@ const App = () => {
                     />
                     <label
                         htmlFor={`dd-role-${roleClass}`}
-                        className={`block p-2 rounded-md bg-gray-100 text-gray-800 cursor-pointer transition-all duration-200 border border-gray-300 select-none text-center text-sm w-full box-border ${tempFilterRoles[roleClass] !== false ? 'bg-purple-600 text-white border-purple-600' : ''}`}
+                        className={
+                            tempFilterRoles[roleClass] !== false
+                                ? 'block p-2 rounded-md bg-purple-600 text-white cursor-pointer transition-all duration-200 border border-purple-600 select-none text-center text-sm w-full box-border'
+                                : 'block p-2 rounded-md bg-gray-100 text-gray-800 cursor-pointer transition-all duration-200 border border-gray-300 select-none text-center text-sm w-full box-border'
+                        }
                     >
                         {displayName}
                     </label>
@@ -1414,6 +1498,39 @@ const App = () => {
 
     return (
         <div id="calendar-container" className="fixed inset-0 w-screen h-screen box-border flex flex-col font-sans text-gray-800 bg-gray-100">
+            {/* Navigation Bar */}
+            <nav className="bg-white shadow-md border-b border-gray-300 px-4 py-1 transition-all duration-300 z-50">
+                <div className="flex justify-between items-center max-w-7xl mx-auto">
+                    <h1 className="text-lg font-bold text-gray-800">FSY Navigator</h1>
+                    <div className="flex space-x-2">
+                        <button
+                            onClick={() => setCurrentPage('calendar')}
+                            className={`px-3 py-1 rounded-lg font-medium transition-colors ${
+                                currentPage === 'calendar' 
+                                    ? 'bg-blue-100 text-blue-700 border border-blue-200' 
+                                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                            }`}
+                        >
+                            Calendar
+                        </button>
+                        <button
+                            onClick={() => setCurrentPage('selection')}
+                            className={`px-3 py-1 rounded-lg font-medium transition-colors ${
+                                currentPage === 'selection' 
+                                    ? 'bg-green-100 text-green-700 border border-green-200' 
+                                    : 'text-gray-600 hover:text-gray-900 hover:bg-gray-100'
+                            }`}
+                        >
+                            Spots
+                        </button>
+                    </div>
+                </div>
+            </nav>
+            
+            {/* Conditional Page Rendering */}
+            {currentPage === 'calendar' ? (
+                /* Your existing calendar UI */
+                <>
             <header className="sticky top-0 z-50 bg-gray-100 border-b border-gray-300 px-3 pt-2 pb-1 shadow-sm">
                 <section className="mb-2">
                     <div className="relative w-full max-w-xl mx-auto">
@@ -1498,22 +1615,38 @@ const App = () => {
 
             {/* Filter Modal */}
             {isFilterModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 z-[2000] flex justify-center items-center p-2 box-border" onClick={handleFilterModalCancel}>
-                    <div className="bg-white rounded-lg p-4 max-w-5xl w-full max-h-[95vh] overflow-y-auto shadow-xl relative" onClick={(e) => e.stopPropagation()}>
-                        <button onClick={handleFilterModalCancel} className="absolute top-2 right-2 bg-transparent border-none text-gray-600 text-xl cursor-pointer w-6 h-6 flex items-center justify-center rounded-full transition-colors duration-200 hover:bg-gray-100">&times;</button>
-                        <div className="mb-3 pr-6">
-                            <h2 className="text-xl font-bold text-gray-800 m-0">Filter Roles</h2>
-                        </div>
-                        <div className="mb-4">
-                            {populateFilters()}
-                        </div>
-                        <div className="flex gap-2 justify-end pt-3 border-t border-gray-200">
-                            <button onClick={handleFilterModalCancel} className="px-4 py-2 border border-gray-300 bg-white rounded-md cursor-pointer transition-all duration-200 text-sm hover:bg-gray-100 hover:text-gray-800 hover:border-gray-400">
-                                Cancel
+                <div 
+                    className="fixed inset-0 bg-black bg-opacity-50 z-[2000] flex items-start justify-center p-2 sm:p-4 overflow-y-auto" 
+                    onClick={(e) => e.target === e.currentTarget && handleFilterModalCancel()}
+                >
+                    <div className="bg-white rounded-lg shadow-2xl max-w-5xl w-full my-4 sm:my-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] overflow-hidden">
+                        <div className="flex justify-between items-center p-4 sm:p-6 border-b bg-gray-50">
+                            <h2 className="text-lg sm:text-xl font-bold text-gray-800 m-0">Filter Roles</h2>
+                            <button 
+                                onClick={handleFilterModalCancel} 
+                                className="text-gray-500 hover:text-gray-700 text-2xl font-bold p-1 hover:bg-gray-200 rounded"
+                            >
+                                ×
                             </button>
-                            <button onClick={handleFilterModalClose} className="px-4 py-2 border border-blue-600 bg-blue-600 text-white rounded-md cursor-pointer transition-all duration-200 text-sm hover:bg-blue-700 hover:border-blue-700">
-                                Apply Filters
-                            </button>
+                        </div>
+                        <div className="p-4 sm:p-6 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 12rem)' }}>
+                            <div className="mb-4">
+                                {populateFilters()}
+                            </div>
+                            <div className="flex gap-2 justify-end pt-3 border-t border-gray-200">
+                                <button 
+                                    onClick={handleFilterModalCancel} 
+                                    className="px-4 py-2 border border-gray-300 bg-white rounded-md cursor-pointer transition-all duration-200 text-sm hover:bg-gray-100 hover:text-gray-800 hover:border-gray-400"
+                                >
+                                    Cancel
+                                </button>
+                                <button 
+                                    onClick={handleFilterModalClose} 
+                                    className="px-4 py-2 border border-blue-600 bg-blue-600 text-white rounded-md cursor-pointer transition-all duration-200 text-sm hover:bg-blue-700 hover:border-blue-700"
+                                >
+                                    Apply Filters
+                                </button>
+                            </div>
                         </div>
                     </div>
                 </div>
@@ -1521,17 +1654,27 @@ const App = () => {
 
             {/* Role Details Modal */}
             {isRoleModalOpen && selectedEvent && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 z-[2000] flex justify-center items-center p-2 box-border" onClick={() => setIsRoleModalOpen(false)}>
-                    <div className="bg-white rounded-lg p-4 max-w-5xl w-full max-h-[95vh] overflow-y-auto shadow-xl relative" onClick={(e) => e.stopPropagation()}>
-                        <button onClick={() => setIsRoleModalOpen(false)} className="absolute top-2 right-2 bg-transparent border-none text-gray-600 text-xl cursor-pointer w-6 h-6 flex items-center justify-center rounded-full transition-colors duration-200 hover:bg-gray-100">&times;</button>
-                        <div className="mb-3 pr-6">
-                            <h2 className="text-xl font-bold text-gray-800 m-0 mb-2">{selectedEvent.activity}</h2>
-                            <div className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full inline-block">{selectedEvent.eventTime}</div>
+                <div 
+                    className="fixed inset-0 bg-black bg-opacity-50 z-[2000] flex items-start justify-center p-2 sm:p-4 overflow-y-auto" 
+                    onClick={(e) => e.target === e.currentTarget && setIsRoleModalOpen(false)}
+                >
+                    <div className="bg-white rounded-lg shadow-2xl max-w-5xl w-full my-4 sm:my-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] overflow-hidden">
+                        <div className="flex justify-between items-center p-4 sm:p-6 border-b bg-gray-50">
+                            <div>
+                                <h2 className="text-lg sm:text-xl font-bold text-gray-800 m-0 mb-2">{selectedEvent.activity}</h2>
+                                <div className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full inline-block">{selectedEvent.eventTime}</div>
+                            </div>
+                            <button 
+                                onClick={() => setIsRoleModalOpen(false)} 
+                                className="text-gray-500 hover:text-gray-700 text-2xl font-bold p-1 hover:bg-gray-200 rounded ml-4"
+                            >
+                                ×
+                            </button>
                         </div>
-
-                        <div className="mb-4">
-                            <h3 className="text-base font-bold text-gray-800 mb-2 border-b-2 border-blue-600 pb-1">Assigned Staff</h3>
-                            <div className="flex flex-col gap-2">
+                        <div className="p-4 sm:p-6 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 8rem)' }}>
+                            <div className="mb-4">
+                                <h3 className="text-base font-bold text-gray-800 mb-2 border-b-2 border-blue-600 pb-1">Assigned Staff</h3>
+                                <div className="flex flex-col gap-2">
                                 {(() => {
                                     if (selectedEvent.mergedEvent && selectedEvent.mergedEvent.assignedRoles.length > 0) {
                                         const roleElements = [];
@@ -1572,70 +1715,79 @@ const App = () => {
                                         );
                                     }
                                 })()}
-                            </div>
-                        </div>
-
-                        {selectedEvent.description && selectedEvent.description.trim() && (
-                            <div className="mb-4">
-                                <h3 className="text-base font-bold text-gray-800 mb-2 border-b-2 border-blue-600 pb-1">Activity Description</h3>
-                                <div className="text-gray-700 leading-relaxed text-sm">{selectedEvent.description}</div>
-                            </div>
-                        )}
-
-                        {selectedEvent.mergedEvent && findLinkedEvents(selectedEvent.mergedEvent).length > 0 && (
-                            <div className="mt-4 pt-3 border-t border-gray-200">
-                                <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2 before:content-['🔗'] before:text-sm">Related Events</h3>
-                                <div className="flex flex-col gap-2">
-                                    {findLinkedEvents(selectedEvent.mergedEvent).map((linkedEvent, idx) => (
-                                        <div
-                                            key={idx}
-                                            className="bg-gray-50 border border-gray-300 rounded-md p-2 cursor-pointer transition-colors duration-200 hover:bg-gray-100"
-                                            onClick={() => showRoleModal({
-                                                eventKey: `${linkedEvent.weekday}-${linkedEvent.startTime}-${linkedEvent.endTime}-${linkedEvent.eventName}-${linkedEvent.eventType}`,
-                                                activity: `${linkedEvent.eventAbbreviation} - ${linkedEvent.eventName}`,
-                                                description: linkedEvent.eventDescription,
-                                                eventTime: `${linkedEvent.startTime} - ${linkedEvent.endTime}`,
-                                                eventName: linkedEvent.eventName,
-                                                eventType: linkedEvent.eventType,
-                                                mergedEvent: linkedEvent
-                                            })}
-                                        >
-                                            <div className="font-semibold text-gray-700 mb-1 text-sm">{linkedEvent.eventName}</div>
-                                            <div className="text-xs text-gray-600 mb-1">{linkedEvent.startTime} - {linkedEvent.endTime}</div>
-                                            <div className="flex flex-wrap gap-1">
-                                                {linkedEvent.assignedRoles.map(role => {
-                                                    const staff = roleFullNames[role] || [];
-                                                    if (staff.length > 0) {
-                                                        const isAcRole = role.startsWith('AC ');
-                                                        // Show all staff members for each role
-                                                        return staff.map(staffName => (
-                                                            <span key={`${role}-${staffName}`} className={`px-1.5 py-0.5 rounded-full text-xs font-medium ${isAcRole ? 'bg-green-600' : 'bg-blue-600'} text-white`}>
-                                                                {staffName}
-                                                            </span>
-                                                        ));
-                                                    }
-                                                    return null;
-                                                }).flat()}
-                                            </div>
-                                        </div>
-                                    ))}
                                 </div>
                             </div>
-                        )}
+
+                            {selectedEvent.description && selectedEvent.description.trim() && (
+                                <div className="mb-4">
+                                    <h3 className="text-base font-bold text-gray-800 mb-2 border-b-2 border-blue-600 pb-1">Activity Description</h3>
+                                    <div className="text-gray-700 leading-relaxed text-sm">{selectedEvent.description}</div>
+                                </div>
+                            )}
+
+                            {selectedEvent.mergedEvent && findLinkedEvents(selectedEvent.mergedEvent).length > 0 && (
+                                <div className="mt-4 pt-3 border-t border-gray-200">
+                                    <h3 className="text-sm font-semibold text-gray-700 mb-2 flex items-center gap-2 before:content-[''] before:text-sm">Related Events</h3>
+                                    <div className="flex flex-col gap-2">
+                                        {findLinkedEvents(selectedEvent.mergedEvent).map((linkedEvent, idx) => (
+                                            <div
+                                                key={idx}
+                                                className="bg-gray-50 border border-gray-300 rounded-md p-2 cursor-pointer transition-colors duration-200 hover:bg-gray-100"
+                                                onClick={() => showRoleModal({
+                                                    eventKey: `${linkedEvent.weekday}-${linkedEvent.startTime}-${linkedEvent.endTime}-${linkedEvent.eventName}-${linkedEvent.eventType}`,
+                                                    activity: `${linkedEvent.eventAbbreviation} - ${linkedEvent.eventName}`,
+                                                    description: linkedEvent.eventDescription,
+                                                    eventTime: `${linkedEvent.startTime} - ${linkedEvent.endTime}`,
+                                                    eventName: linkedEvent.eventName,
+                                                    eventType: linkedEvent.eventType,
+                                                    mergedEvent: linkedEvent
+                                                })}
+                                            >
+                                                <div className="font-semibold text-gray-700 mb-1 text-sm">{linkedEvent.eventName}</div>
+                                                <div className="text-xs text-gray-600 mb-1">{linkedEvent.startTime} - {linkedEvent.endTime}</div>
+                                                <div className="flex flex-wrap gap-1">
+                                                    {linkedEvent.assignedRoles.map(role => {
+                                                        const staff = roleFullNames[role] || [];
+                                                        if (staff.length > 0) {
+                                                            const isAcRole = role.startsWith('AC ');
+                                                            // Show all staff members for each role
+                                                            return staff.map(staffName => (
+                                                                <span key={`${role}-${staffName}`} className={`px-1.5 py-0.5 rounded-full text-xs font-medium ${isAcRole ? 'bg-green-600' : 'bg-blue-600'} text-white`}>
+                                                                    {staffName}
+                                                                </span>
+                                                            ));
+                                                        }
+                                                        return null;
+                                                    }).flat()}
+                                                </div>
+                                            </div>
+                                        ))}
+                                    </div>
+                                </div>
+                            )}
+                        </div>
                     </div>
                 </div>
             )}
 
             {/* Duties Summary Modal */}
-
             {isDutiesSummaryModalOpen && (
-                <div className="fixed inset-0 bg-black bg-opacity-50 z-[2000] flex justify-center items-center p-2 box-border" onClick={() => setIsDutiesSummaryModalOpen(false)}>
-                    <div className="bg-white rounded-lg p-4 max-w-5xl w-full max-h-[95vh] overflow-y-auto shadow-xl relative" onClick={(e) => e.stopPropagation()}>
-                        <button onClick={() => setIsDutiesSummaryModalOpen(false)} className="absolute top-2 right-2 bg-transparent border-none text-gray-600 text-xl cursor-pointer w-6 h-6 flex items-center justify-center rounded-full transition-colors duration-200 hover:bg-gray-100">&times;</button>
-                        <div className="mb-3 pr-6">
-                            <h2 className="text-xl font-bold text-gray-800 m-0">AC Role Duties Summary</h2>
+                <div 
+                    className="fixed inset-0 bg-black bg-opacity-50 z-[2000] flex items-start justify-center p-2 sm:p-4 overflow-y-auto" 
+                    onClick={(e) => e.target === e.currentTarget && setIsDutiesSummaryModalOpen(false)}
+                >
+                    <div className="bg-white rounded-lg shadow-2xl max-w-5xl w-full my-4 sm:my-8 max-h-[calc(100vh-2rem)] sm:max-h-[calc(100vh-4rem)] overflow-hidden">
+                        <div className="flex justify-between items-center p-4 sm:p-6 border-b bg-gray-50">
+                            <h2 className="text-lg sm:text-xl font-bold text-gray-800 m-0">AC Role Duties Summary</h2>
+                            <button 
+                                onClick={() => setIsDutiesSummaryModalOpen(false)} 
+                                className="text-gray-500 hover:text-gray-700 text-2xl font-bold p-1 hover:bg-gray-200 rounded"
+                            >
+                                ×
+                            </button>
                         </div>
-                        <div className="flex flex-col gap-2 mt-2">
+                        <div className="p-4 sm:p-6 overflow-y-auto" style={{ maxHeight: 'calc(100vh - 8rem)' }}>
+                            <div className="flex flex-col gap-2 mt-2">
                             {/* Flexible AC role pairing layout */}
                             {(() => {
                                 // Get all AC role keys and sort numerically
@@ -1699,9 +1851,15 @@ const App = () => {
                                 }
                                 return pairs;
                             })()}
+                            </div>
                         </div>
                     </div>
                 </div>
+            )}
+            </>
+            ) : (
+                /* Selection Dashboard Page */
+                <SelectionDashboard db={db} />
             )}
         </div>
     );
