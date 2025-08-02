@@ -1,4 +1,4 @@
-import React, { useMemo, useState, useCallback, memo } from 'react';
+import React, { useMemo, useState, memo } from 'react';
 
 const Header = ({
     roles,
@@ -13,60 +13,10 @@ const Header = ({
     onDutiesSummaryClick,
     onNameSelect,
     onClearNameSearch,
-    goToDay
+    goToDay,
+    updateActiveDayButton
 }) => {
     const [nameSearchDropdownActive, setNameSearchDropdownActive] = useState(false);
-
-    // Create the updateActiveDayButton function using DOM manipulation like the original
-    const updateActiveDayButton = useCallback((currentDay) => {
-        // Reset all buttons to default state with aggressive visual refresh
-        document.querySelectorAll('.quick-nav-btn').forEach(btn => {
-            // Remove all possible states
-            btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
-            btn.classList.add('bg-white', 'text-gray-800', 'border-gray-300');
-            
-            // Clear any lingering focus/hover states
-            btn.blur();
-            
-            // Force complete style reset with direct CSS property manipulation
-            btn.style.cssText = 'background-color: white !important; color: #374151 !important; border-color: #d1d5db !important;';
-            
-            // Force immediate visual refresh by hiding and showing the element
-            const originalDisplay = btn.style.display;
-            btn.style.display = 'none';
-            btn.offsetHeight; // Force reflow
-            btn.style.display = originalDisplay || '';
-            
-            // Additional forced reflow
-            btn.offsetHeight;
-        });
-
-        // Use requestAnimationFrame to ensure DOM updates are complete
-        requestAnimationFrame(() => {
-            const currentDayButton = document.querySelector(`.quick-nav-btn[data-day="${currentDay}"]`);
-            if (currentDayButton) {
-                // Ensure this button also loses focus first
-                currentDayButton.blur();
-                
-                // Remove default classes and add active classes
-                currentDayButton.classList.remove('bg-white', 'text-gray-800', 'border-gray-300');
-                currentDayButton.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
-                
-                // Force the active styles with direct CSS manipulation
-                currentDayButton.style.cssText = 'background-color: #2563eb !important; color: white !important; border-color: #2563eb !important;';
-                
-                // Force visual refresh for the active button too
-                const originalDisplay = currentDayButton.style.display;
-                currentDayButton.style.display = 'none';
-                currentDayButton.offsetHeight; // Force reflow
-                currentDayButton.style.display = originalDisplay || '';
-                
-                // Final forced reflow
-                currentDayButton.offsetHeight;
-            }
-        });
-    }, []);
-
     // Memoize filtered search results to avoid recalculating on every render
     const filteredSearchNames = useMemo(() => {
         if (nameSearchInput.length === 0) return [];

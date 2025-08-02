@@ -8,8 +8,6 @@ import Header from './Header';
 import Modals from './Modals';
 import useCalendarData from '../hooks/useCalendarData';
 
-// ===== CHILD COMPONENTS FOR TABLE VIEW =====
-
 const CalendarHeader = memo(({ roles, activeFilterRoles, createMobileAbbreviation }) => (
     <thead>
         <tr>
@@ -52,7 +50,7 @@ const EventCell = memo(({ event, role, roleClass, isRoleVisible, activeFilterRol
                     eventTime: `${event.startTime} - ${event.endTime}`,
                     eventName: event.eventName,
                     eventType: event.eventType,
-                    mergedEvent: eventsMap.get(eventKey) // O(1) lookup instead of O(n) find
+                    mergedEvent: eventsMap.get(eventKey)
                 })}
             >
                 <div className="sticky top-8 overflow-hidden text-ellipsis">
@@ -160,8 +158,6 @@ const TableView = memo(({ day, processedData, roles, activeFilterRoles, showRole
     );
 });
 
-// ===== CHILD COMPONENTS FOR CARD VIEW =====
-
 const TravelEventCard = memo(({ agendaEvent, index }) => (
     <div key={index} 
          data-event-time={`${agendaEvent.startMins}-${agendaEvent.endMins}`}
@@ -195,7 +191,6 @@ const RoleAssignment = memo(({ role, activityData, agendaEvent, getActivityColor
     const activityDescription = typeof activityData === 'object' ?
         processedData[agendaEvent.weekday]?.find(e => e.assignedRoles.includes(role) && e.startMins < agendaEvent.endMins && e.endMins > agendaEvent.startMins)?.eventDescription || '' : '';
 
-    // Create event key to find the complete merged event with all assigned roles
     let eventKey = '';
     if (typeof activityData === 'object' && activityData.activity) {
         const eventName = activityData.activity.split(' - ')[1] || activityData.activity;
@@ -204,7 +199,6 @@ const RoleAssignment = memo(({ role, activityData, agendaEvent, getActivityColor
         eventKey = `${agendaEvent.weekday}-${agendaEvent.startTime}-${agendaEvent.endTime}-${agendaEvent.eventName}-${agendaEvent.eventType}`;
     }
 
-    // Find the complete event from eventsMap to get all assigned roles (O(1) lookup)
     const completeEvent = typeof activityData === 'object' ? 
         eventsMap.get(`${agendaEvent.weekday}-${activityData.startTime}-${activityData.endTime}-${activityData.activity.split(' - ')[1] || activityData.activity}-${activityData.eventType}`) || agendaEvent
         : agendaEvent;
@@ -220,7 +214,7 @@ const RoleAssignment = memo(({ role, activityData, agendaEvent, getActivityColor
                 eventTime: assignmentTime,
                 eventName: agendaEvent.eventName,
                 eventType: eventType,
-                mergedEvent: completeEvent || agendaEvent // Pass the complete event with all roles
+                mergedEvent: completeEvent || agendaEvent
             })}
         >
             <div 
@@ -364,11 +358,9 @@ const CardView = memo(({ day, processedData, getRoleActivitiesForAgendaEvent, ge
                         const lowerEventName = agendaEvent.eventName.toLowerCase();
                         const isTravelEvent = lowerEventName.includes('travel') || lowerEventName.includes('transition') || lowerEventName.includes('move to') || lowerEventName.includes('roll call');
 
-                        // Build timeline segments for this agenda event if role is selected
                         let timelineContent = null;
                         if (selectedRole) {
                             if (isTravelEvent) {
-                                // Simple single segment for travel events - but determine proper color
                                 const dayEvents = processedData[day] || [];
                                 const overlappingEvents = dayEvents.filter(event => 
                                     event.eventType && event.eventType.toLowerCase() !== 'agenda' &&
@@ -378,13 +370,12 @@ const CardView = memo(({ day, processedData, getRoleActivitiesForAgendaEvent, ge
                                     event.endMins > agendaEvent.startMins
                                 );
 
-                                let bgColor = '#d1d5db'; // default gray for "No Duty"
+                                let bgColor = '#d1d5db';
                                 let title = `${agendaEvent.eventName}: Travel/No Duty`;
-                                let borderColor = 'border-gray-400'; // default border color
-                                
+                                let borderColor = 'border-gray-400';
+
                                 if (overlappingEvents.length > 0) {
-                                    // There are duties during this travel period
-                                    const activeEvent = overlappingEvents[0]; // Use first overlapping event
+                                    const activeEvent = overlappingEvents[0];
                                     const segmentActivity = {
                                         activity: `${activeEvent.eventAbbreviation} - ${activeEvent.eventName}`,
                                         eventType: activeEvent.eventType,
@@ -442,7 +433,6 @@ const CardView = memo(({ day, processedData, getRoleActivitiesForAgendaEvent, ge
                                     />
                                 );
                             } else {
-                                // Generate timeline segments for regular agenda events
                                 const dayEvents = processedData[day] || [];
                                 const overlappingEvents = dayEvents.filter(event => 
                                     event.eventType && event.eventType.toLowerCase() !== 'agenda' &&
@@ -536,13 +526,13 @@ const CardView = memo(({ day, processedData, getRoleActivitiesForAgendaEvent, ge
 
                                 timelineContent = (
                                     <div 
-                                        className={`w-4 flex-shrink-0 border-l-2 ${timelineSegments.length > 0 ? timelineSegments[0].borderColor : 'border-gray-400'} flex flex-col`}
+                                        className="w-4 flex-shrink-0 flex flex-col"
                                         style={{ height: '100%', minHeight: '100%' }}
                                     >
                                         {timelineSegments.map((segment) => (
                                             <div
                                                 key={`segment-${segment.startTime}-${segment.endTime}`}
-                                                className="cursor-pointer"
+                                                className={`cursor-pointer border-l-2 ${segment.borderColor}`}
                                                 style={{
                                                     flex: `${segment.flexGrow} 1 0%`,
                                                     backgroundColor: segment.bgColor,
@@ -551,12 +541,10 @@ const CardView = memo(({ day, processedData, getRoleActivitiesForAgendaEvent, ge
                                                 }}
                                                 title={segment.title}
                                                 onClick={() => {
-                                                    // For segments with actual duties, show the duty details
                                                     if (typeof segment.activity === 'object') {
                                                         const eventName = segment.activity.activity.split(' - ')[1] || segment.activity.activity;
                                                         const eventKey = `${agendaEvent.weekday}-${segment.activity.startTime}-${segment.activity.endTime}-${eventName}-${segment.activity.eventType}`;
                                                         
-                                                        // Look up the complete event from eventsMap to get all assigned roles
                                                         const completeEvent = eventsMap.get(eventKey);
                                                         const fullEvent = completeEvent || {
                                                             ...segment.activity,
@@ -575,7 +563,6 @@ const CardView = memo(({ day, processedData, getRoleActivitiesForAgendaEvent, ge
                                                             mergedEvent: fullEvent
                                                         });
                                                     } else {
-                                                        // For free time or no duty segments, show the agenda event
                                                         const fullEvent = {
                                                             ...agendaEvent,
                                                             eventName: agendaEvent.eventName || 'Agenda Event',
@@ -626,10 +613,9 @@ const CardView = memo(({ day, processedData, getRoleActivitiesForAgendaEvent, ge
                                     <div 
                                         className="absolute right-0 top-0 bottom-0"
                                         style={{
-                                            // Extend timeline 4px up and down to bridge gaps
                                             top: index === 0 ? '0' : '-4px',
                                             bottom: index === agendaEvents.length - 1 ? '0' : '-4px',
-                                            width: '16px', // w-4 equivalent
+                                            width: '16px',
                                             zIndex: 1
                                         }}
                                     >
@@ -679,38 +665,36 @@ const savePreferences = (filters, viewMode, selectedNameData = null) => {
 };
 
 const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNames }) => {
-    // --- State Management ---
     const { viewMode: initialViewMode, savedFilters, savedSelectedName } = useMemo(() => {
-        return loadSavedPreferences();
+        const prefs = loadSavedPreferences();
+        return prefs;
     }, []);
 
     const [viewMode, setViewMode] = useState(initialViewMode);
-    const [activeFilterRoles, setActiveFilterRoles] = useState({});
-    const [tempFilterRoles, setTempFilterRoles] = useState({});
-    const [selectedEvent, setSelectedEvent] = useState(null);
     const [nameSearchInput, setNameSearchInput] = useState(savedSelectedName?.displayText || '');
     const [selectedSearchNameData, setSelectedSearchNameData] = useState(savedSelectedName);
-    const [filtersInitialized, setFiltersInitialized] = useState(false);
+    
+    const [activeFilterRoles, setActiveFilterRoles] = useState(() => {
+        return {};
+    });
 
-    // Modal State
+    const [tempFilterRoles, setTempFilterRoles] = useState({});
+    const [selectedEvent, setSelectedEvent] = useState(null);
+
     const [isRoleModalOpen, setIsRoleModalOpen] = useState(false);
     const [isFilterModalOpen, setIsFilterModalOpen] = useState(false);
     const [isDutiesSummaryModalOpen, setIsDutiesSummaryModalOpen] = useState(false);
 
-    // --- Refs and Custom Hooks ---
     const swiperRef = useRef(null);
-    const hasInitiallyNavigatedRef = useRef(false); // Track if we've done the initial navigation (never resets)
-    const currentViewModeRef = useRef(viewMode); // Store current view mode without causing re-renders
+    const hasInitiallyNavigatedRef = useRef(false);
+    const currentViewModeRef = useRef(viewMode);
     
-    // Update the view mode ref whenever viewMode changes (without recreating functions)
     useEffect(() => {
         currentViewModeRef.current = viewMode;
     }, [viewMode]);
     
-    // Use calendar data hook directly
     const { processedData, mergedEvents, findLinkedEvents, timeToMinutes, minutesToTime } = useCalendarData(schedules);
     
-    // Performance Optimization: Create eventsMap for O(1) lookups
     const eventsMap = useMemo(() => {
         if (!mergedEvents) return new Map();
         
@@ -722,17 +706,13 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
         return map;
     }, [mergedEvents]);
 
-    // --- Core Navigation Callbacks (defined early to avoid hoisting issues) ---
-    // Define updateCurrentTimeIndicator as a regular function first to avoid hoisting issues
     const updateCurrentTimeIndicatorFn = () => {
         const now = new Date();
         const today = now.toLocaleDateString('en-US', { weekday: 'long' });
         const currentMinutes = now.getHours() * 60 + now.getMinutes();
 
-        // Remove existing indicators
         document.querySelectorAll('.current-time-indicator').forEach(el => el.remove());
 
-        // Only show indicator if we're on today's slide
         const activeSlide = document.querySelector('.swiper-slide-active');
         if (activeSlide && activeSlide.dataset.day === today && viewMode === 'table') {
             const targetMinutes = Math.floor(currentMinutes / 5) * 5;
@@ -741,7 +721,6 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
                 const indicator = document.createElement('div');
                 indicator.className = 'current-time-indicator absolute left-0 right-0 h-0.5 bg-red-500 z-10 shadow-md pointer-events-none';
                 
-                // Calculate precise position within the 5-minute slot
                 const minutesWithinSlot = currentMinutes % 5;
                 const slotProgress = minutesWithinSlot / 5;
                 indicator.style.top = `${slotProgress * timeRow.offsetHeight}px`;
@@ -757,7 +736,6 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
     
     const updateCurrentTimeIndicator = useCallback(updateCurrentTimeIndicatorFn, [viewMode]);
     
-    // Create a stable navigation function that doesn't depend on viewMode
     const performNavigation = useCallback((targetViewMode = null) => {
         const attemptScroll = () => {
             const activeSlide = document.querySelector('.swiper-slide-active');
@@ -766,35 +744,27 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
                 return;
             }
 
-            // Use current time for navigation
             const now = new Date();
             const currentMinutes = now.getHours() * 60 + now.getMinutes();
             
-            // Use the passed targetViewMode, or fall back to the ref value, or detect from DOM
             const currentViewMode = targetViewMode || currentViewModeRef.current || 
                 (activeSlide.querySelector('.h-full.hidden') ? 
                     (activeSlide.querySelector('.h-full.hidden').classList.contains('flex') ? 'table' : 'card') :
                     (activeSlide.querySelector('.h-full.block') ? 'table' : 'card'));
 
-            // Use a longer delay to ensure DOM is fully rendered
             setTimeout(() => {
-                // Find the visible container based on current view mode
                 let container;
                 if (currentViewMode === 'card') {
-                    // For card view, find the card view container specifically
                     const cardViewDiv = activeSlide.querySelector('.h-full.flex:not(.hidden)');
                     
                     if (cardViewDiv) {
-                        // Look for the overflow-y-auto container within the card view
                         container = cardViewDiv.querySelector('.overflow-y-auto');
                     }
                     
-                    // Fallback: look for overflow-y-auto that's NOT inside a table
                     if (!container) {
                         const allOverflowContainers = activeSlide.querySelectorAll('.overflow-y-auto');
                         
                         for (const overflowContainer of allOverflowContainers) {
-                            // Check if this container is NOT inside a table
                             if (!overflowContainer.querySelector('table') && !overflowContainer.closest('table')) {
                                 container = overflowContainer;
                                 break;
@@ -802,7 +772,6 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
                         }
                     }
                 } else {
-                    // Find the table view container (the visible one) 
                     const tableViewDiv = activeSlide.querySelector('.h-full.block:not(.hidden)');
                     container = tableViewDiv?.querySelector('.overflow-y-auto');
                 }
@@ -812,11 +781,9 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
                 }
 
                 if (currentViewMode === 'table') {
-                    // Find the closest time row (search for nearby times if exact match not found)
                     const targetMinutes = Math.floor(currentMinutes / 5) * 5;
                     let timeRow = container.querySelector(`tr[data-time-minutes="${targetMinutes}"]`);
                     
-                    // If exact time not found, look for the nearest earlier time
                     if (!timeRow) {
                         for (let offset = 5; offset <= 60; offset += 5) {
                             timeRow = container.querySelector(`tr[data-time-minutes="${targetMinutes - offset}"]`);
@@ -837,7 +804,6 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
                     const dayEvents = processedData[activeSlide.dataset.day] || [];
                     
                     const currentEvent = dayEvents.find(e => {
-                        // Look for agenda events that contain the current time
                         if (e.eventType?.toLowerCase() !== 'agenda') return false;
                         return currentMinutes >= e.startMins && currentMinutes < e.endMins;
                     });
@@ -846,30 +812,24 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
                         const targetCard = container.querySelector(`[data-event-time="${currentEvent.startMins}-${currentEvent.endMins}"]`);
                         
                         if (targetCard) {
-                            // Use smooth scrolling
                             container.style.scrollBehavior = 'smooth';
                             
-                            // Calculate the target scroll position to align card top with container top
                             const containerRect = container.getBoundingClientRect();
                             const targetRect = targetCard.getBoundingClientRect();
                             const containerScrollTop = container.scrollTop;
                             
-                            // Position the top of the target card at the top of the container with small offset
-                            const topOffset = 10; // Small padding from the top
+                            const topOffset = 10;
                             const targetPosition = containerScrollTop + targetRect.top - containerRect.top - topOffset;
                             const finalScrollTop = Math.max(0, targetPosition);
                             
-                            // Perform the scroll
                             container.scrollTop = finalScrollTop;
                         } else {
-                            // Fallback: scroll to first card if target not found
                             const firstCard = container.querySelector('[data-event-time]');
                             if (firstCard) {
                                 firstCard.scrollIntoView({ behavior: 'smooth', block: 'center' });
                             }
                         }
                     } else {
-                        // If no current event, scroll to the next upcoming event
                         const upcomingEvent = dayEvents
                             .filter(e => e.eventType?.toLowerCase() === 'agenda' && e.startMins > currentMinutes)
                             .sort((a, b) => a.startMins - b.startMins)[0];
@@ -877,33 +837,27 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
                         if (upcomingEvent) {
                             const targetCard = container.querySelector(`[data-event-time="${upcomingEvent.startMins}-${upcomingEvent.endMins}"]`);
                             if (targetCard) {
-                                // Use smooth scrolling
                                 container.style.scrollBehavior = 'smooth';
                                 
-                                // Calculate the target scroll position to align card top with container top
                                 const containerRect = container.getBoundingClientRect();
                                 const targetRect = targetCard.getBoundingClientRect();
                                 const containerScrollTop = container.scrollTop;
                                 
-                                // Position the top of the target card at the top of the container with small offset
-                                const topOffset = 10; // Small padding from the top
+                                const topOffset = 10;
                                 const targetPosition = containerScrollTop + targetRect.top - containerRect.top - topOffset;
                                 const finalScrollTop = Math.max(0, targetPosition);
                                 
                                 container.scrollTop = finalScrollTop;
                             }
                         } else {
-                            // Fallback: scroll to the first event card
                             const firstCard = container.querySelector('[data-event-time]');
                             if (firstCard) {
                                 container.style.scrollBehavior = 'smooth';
                                 
-                                // Calculate scroll position to align first card with top of container
                                 const containerRect = container.getBoundingClientRect();
                                 const targetRect = firstCard.getBoundingClientRect();
                                 const containerScrollTop = container.scrollTop;
                                 
-                                // Position at top of container with small offset
                                 const topOffset = 10;
                                 const targetPosition = containerScrollTop + targetRect.top - containerRect.top - topOffset;
                                 const finalScrollTop = Math.max(0, targetPosition);
@@ -913,15 +867,13 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
                         }
                     }
                 }
-            }, 200); // Increased delay to ensure DOM is ready
+            }, 200);
         };
 
         attemptScroll();
     }, [processedData, updateCurrentTimeIndicator]);
 
-    // Manual navigation function for the "Go to Now" button
     const manualNavigateToCurrentTime = useCallback(() => {
-        // First, go to today's slide if not already there
         const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
         const currentSlideDay = document.querySelector('.swiper-slide-active')?.dataset.day;
         
@@ -929,7 +881,6 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
             const todayIndex = CONFIG.DAYS_ORDER.indexOf(today);
             if (todayIndex !== -1) {
                 swiperRef.current.slideTo(todayIndex);
-                // Wait for slide transition, then scroll (no need to pass viewMode, it will use the ref)
                 setTimeout(() => {
                     performNavigation();
                 }, 300);
@@ -937,7 +888,6 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
             }
         }
         
-        // Already on today's slide, just scroll (no need to pass viewMode, it will use the ref)
         performNavigation();
     }, [performNavigation]);
     const dutiesData = useMemo(() => {
@@ -967,9 +917,8 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
         return acRolesCount === 10 ? dutiesData10 : (acRolesCount === 8 ? dutiesData8 : {});
     }, [roles]);
 
-    // --- Initialization Effect ---
     useEffect(() => {
-        if (roles.length > 0 && !filtersInitialized) {
+        if (roles.length > 0 && Object.keys(activeFilterRoles).length === 0) {
             const initialFilters = {};
             const baseRoles = roles.reduce((acc, role) => {
                 acc[role.replace(/[^a-z0-9]/gi, '-').toLowerCase()] = true;
@@ -984,17 +933,14 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
             } else {
                 Object.assign(initialFilters, baseRoles);
             }
+            
             setActiveFilterRoles(initialFilters);
-            setFiltersInitialized(true);
         }
-    }, [roles, savedFilters, filtersInitialized]);
+    }, [roles, savedFilters, activeFilterRoles]);
 
-    // --- Filter Change Effect ---
     useEffect(() => {
-        // Filters changed, view updated
     }, [activeFilterRoles]);
 
-    // --- UI Interaction Handlers ---
     const showRoleModal = useCallback((eventData) => {
         setSelectedEvent(eventData);
         setIsRoleModalOpen(true);
@@ -1013,10 +959,8 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
     }, [tempFilterRoles, viewMode, selectedSearchNameData]);
 
     const closeFilterModal = useCallback(() => {
-        // Automatically apply filters when closing modal (like the backup)
         setActiveFilterRoles(tempFilterRoles);
         setIsFilterModalOpen(false);
-        // Save preferences
         savePreferences(tempFilterRoles, viewMode, selectedSearchNameData);
     }, [tempFilterRoles, viewMode, selectedSearchNameData]);
 
@@ -1035,7 +979,6 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
         newFilters[nameData.role.replace(/[^a-z0-9]/gi, '-').toLowerCase()] = true;
         newFilters['agenda'] = true;
         setActiveFilterRoles(newFilters);
-        // Save preferences immediately when name is selected
         savePreferences(newFilters, viewMode, nameData);
     }, [roles, viewMode]);
 
@@ -1052,7 +995,6 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
         });
         setTempFilterRoles(newFilters);
         
-        // If clearing all filters, also clear the selected name
         if (action === 'select-none') {
             setNameSearchInput('');
             setSelectedSearchNameData(null);
@@ -1066,125 +1008,38 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
         }
     }, []);
 
-    // --- Core Navigation Callbacks ---
     const updateActiveDayButton = useCallback((currentDay) => {
         if (!currentDay) return;
         
-        // Reset all buttons to default state with aggressive visual refresh
         document.querySelectorAll('.quick-nav-btn').forEach(btn => {
-            // Remove all possible states
             btn.classList.remove('bg-blue-600', 'text-white', 'border-blue-600');
             btn.classList.add('bg-white', 'text-gray-800', 'border-gray-300');
-            
-            // Clear any lingering focus/hover states
             btn.blur();
-            
-            // Force complete style reset with direct CSS property manipulation
             btn.style.cssText = 'background-color: white !important; color: #374151 !important; border-color: #d1d5db !important;';
             
-            // Force immediate visual refresh by hiding and showing the element
             const originalDisplay = btn.style.display;
             btn.style.display = 'none';
-            btn.offsetHeight; // Force reflow
+            btn.offsetHeight;
             btn.style.display = originalDisplay || '';
-            
-            // Additional forced reflow
             btn.offsetHeight;
         });
 
-        // Use requestAnimationFrame to ensure DOM updates are complete
         requestAnimationFrame(() => {
             const currentDayButton = document.querySelector(`.quick-nav-btn[data-day="${currentDay}"]`);
             if (currentDayButton) {
-                // Apply active styles with forced override
                 currentDayButton.classList.remove('bg-white', 'text-gray-800', 'border-gray-300');
                 currentDayButton.classList.add('bg-blue-600', 'text-white', 'border-blue-600');
-                
-                // Force style application with direct CSS
                 currentDayButton.style.cssText = 'background-color: #2563eb !important; color: white !important; border-color: #2563eb !important;';
                 
-                // Force immediate visual refresh
                 const originalDisplay = currentDayButton.style.display;
                 currentDayButton.style.display = 'none';
-                currentDayButton.offsetHeight; // Force reflow
+                currentDayButton.offsetHeight;
                 currentDayButton.style.display = originalDisplay || '';
-                
-                // Additional forced reflow
                 currentDayButton.offsetHeight;
             }
         });
     }, []);
 
-    // --- Swiper Initialization Effect ---
-    useEffect(() => {
-        if (!processedData || Object.keys(processedData).length === 0) {
-            return;
-        }
-
-        // Don't recreate if already exists and initialized
-        if (swiperRef.current && swiperRef.current.initialized) {
-            return;
-        }
-
-        swiperRef.current?.destroy();
-        
-        const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
-        const initialSlide = Math.max(0, CONFIG.DAYS_ORDER.indexOf(today));
-
-        // Use a single timeout to prevent multiple initializations
-        const timeoutId = setTimeout(() => {
-            // Double-check we still need to create swiper
-            if (swiperRef.current && swiperRef.current.initialized) {
-                return;
-            }
-
-            swiperRef.current = new Swiper('.swiper', {
-                modules: [Navigation],
-                navigation: {
-                    nextEl: '.swiper-button-next',
-                    prevEl: '.swiper-button-prev',
-                },
-                initialSlide: initialSlide,
-                on: {
-                    init: (swiper) => {
-                        const currentDay = swiper.slides[swiper.activeIndex]?.dataset.day;
-                        updateActiveDayButton(currentDay);
-                        // Only auto-navigate to current time on the very first page load
-                        if (currentDay === today && !hasInitiallyNavigatedRef.current) {
-                            hasInitiallyNavigatedRef.current = true; // Mark that initial navigation is done
-                            setTimeout(() => {
-                                performNavigation();
-                            }, 300);
-                        }
-                    },
-                    slideChangeTransitionEnd: (swiper) => {
-                        const currentDay = swiper.slides[swiper.activeIndex]?.dataset.day;
-                        updateActiveDayButton(currentDay);
-                        // Update time indicator when changing slides
-                        setTimeout(() => {
-                            updateCurrentTimeIndicator();
-                        }, 100);
-                    },
-                },
-            });
-        }, 50);
-
-        return () => { 
-            clearTimeout(timeoutId);
-            swiperRef.current?.destroy(); 
-        };
-    }, [processedData, updateActiveDayButton, updateCurrentTimeIndicator, performNavigation]);
-
-    // Update time indicator periodically
-    useEffect(() => {
-        const interval = setInterval(() => {
-            updateCurrentTimeIndicator();
-        }, 60000); // Update every minute
-
-        return () => clearInterval(interval);
-    }, [updateCurrentTimeIndicator]);
-
-    // --- Rendering Logic & Helpers ---
     const getActivityColor = useCallback((activityData) => {
         if (typeof activityData === 'string') {
             if (activityData === 'Free' || activityData === 'No Duty') {
@@ -1301,7 +1156,6 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
             }
         });
 
-        // Add pairing logic from backup - show paired AC/CN roles even if they don't have assignments
         const visibleRoles = Object.keys(roleActivities);
         visibleRoles.forEach(role => {
             const acMatch = role.match(/^AC (\d+)$/);
@@ -1368,8 +1222,14 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
     }, [roles, processedData, getEventPriority, shouldReplaceActivity, activeFilterRoles]);
 
     const memoizedSlides = useMemo(() => {
-        if (!processedData || roles.length === 0) {
-            return null;
+        if (!processedData || roles.length === 0 || Object.keys(activeFilterRoles).length === 0) {
+            return CONFIG.DAYS_ORDER.map((day) => (
+                <div key={day} className="swiper-slide" data-day={day}>
+                    <div className="flex items-center justify-center h-full">
+                        <p className="text-gray-600 italic">Loading {day}...</p>
+                    </div>
+                </div>
+            ));
         }
 
         const slides = CONFIG.DAYS_ORDER.map((day) => (
@@ -1406,61 +1266,141 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
         return slides;
     }, [processedData, roles, viewMode, activeFilterRoles, showRoleModal, eventsMap, minutesToTime, createMobileAbbreviation, getActivityColor, getRoleActivitiesForAgendaEvent, formatRoleNameForCard, selectedSearchNameData?.role]);
 
+    useEffect(() => {
+        if (!processedData || Object.keys(processedData).length === 0) {
+            return;
+        }
+
+        if (swiperRef.current && swiperRef.current.initialized) {
+            return;
+        }
+
+        swiperRef.current?.destroy();
+        
+        const today = new Date().toLocaleDateString('en-US', { weekday: 'long' });
+        const initialSlide = Math.max(0, CONFIG.DAYS_ORDER.indexOf(today));
+
+        const timeoutId = setTimeout(() => {
+            if (swiperRef.current && swiperRef.current.initialized) {
+                return;
+            }
+
+            const swiperContainer = document.querySelector('.swiper');
+            if (!swiperContainer) {
+                return;
+            }
+
+            swiperRef.current = new Swiper('.swiper', {
+                modules: [Navigation],
+                navigation: {
+                    nextEl: '.swiper-button-next',
+                    prevEl: '.swiper-button-prev',
+                },
+                initialSlide: initialSlide,
+                on: {
+                    init: (swiper) => {
+                        const currentDay = swiper.slides[swiper.activeIndex]?.dataset.day;
+                        updateActiveDayButton(currentDay);
+                        
+                        if (currentDay === today && !hasInitiallyNavigatedRef.current) {
+                            hasInitiallyNavigatedRef.current = true;
+                            setTimeout(() => {
+                                performNavigation();
+                            }, 300);
+                        }
+                    },
+                    slideChangeTransitionEnd: (swiper) => {
+                        const currentDay = swiper.slides[swiper.activeIndex]?.dataset.day;
+                        updateActiveDayButton(currentDay);
+                        setTimeout(() => {
+                            updateCurrentTimeIndicator();
+                        }, 100);
+                    },
+                },
+            });
+        }, 100);
+
+        return () => { 
+            clearTimeout(timeoutId);
+            swiperRef.current?.destroy(); 
+        };
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [processedData]); // Only depend on processedData, not on memoizedSlides to prevent recreation on filter changes
+
+    useEffect(() => {
+        const interval = setInterval(() => {
+            updateCurrentTimeIndicator();
+        }, 60000);
+
+        return () => clearInterval(interval);
+    }, [updateCurrentTimeIndicator]);
+
     return (
         <>
-            <Header
-                roles={roles}
-                allNames={allNames}
-                viewMode={viewMode}
-                nameSearchInput={nameSearchInput}
-                setNameSearchInput={setNameSearchInput}
-                setSelectedSearchNameData={setSelectedSearchNameData}
-                setActiveFilterRoles={setActiveFilterRoles}
-                onFilterModalOpen={handleFilterModalOpen}
-                onViewToggle={handleViewToggle}
-                onDutiesSummaryClick={() => setIsDutiesSummaryModalOpen(true)}
-                onNameSelect={selectNameAndFilter}
-                onClearNameSearch={(newFilters) => savePreferences(newFilters, viewMode, null)}
-                goToDay={goToDay}
-            />
-            <main className="flex-grow min-h-0 relative">
-                {!memoizedSlides ? (
-                    <div className="flex items-center justify-center h-full"><p className="text-gray-600 italic">Loading calendar...</p></div>
-                ) : (
-                    <div className="swiper h-full"><div className="swiper-wrapper">{memoizedSlides}</div></div>
-                )}
-                
-                {/* Floating "Go to Now" button */}
-                <button
-                    onClick={manualNavigateToCurrentTime}
-                    className="fixed bottom-6 left-6 w-14 h-14 border border-gray-300 bg-white text-gray-800 rounded-full shadow-lg transition-all duration-200 flex items-center justify-center text-xs font-semibold z-50 hover:shadow-xl"
-                    title="Go to current time"
-                >
-                    NOW
-                </button>
-            </main>
-            <Modals
-                isRoleModalOpen={isRoleModalOpen}
-                closeRoleModal={() => setIsRoleModalOpen(false)}
-                selectedEvent={selectedEvent}
-                findLinkedEvents={findLinkedEvents}
-                roleFullNames={roleFullNames}
-                isFilterModalOpen={isFilterModalOpen}
-                closeFilterModal={closeFilterModal}
-                tempFilterRoles={tempFilterRoles}
-                setTempFilterRoles={setTempFilterRoles}
-                applyFilters={applyFilters}
-                roles={roles}
-                roleAssignments={roleAssignments}
-                isDutiesSummaryModalOpen={isDutiesSummaryModalOpen}
-                closeDutiesSummaryModal={() => setIsDutiesSummaryModalOpen(false)}
-                handleFilterChange={handleFilterChange}
-                handleFilterControl={handleFilterControl}
-                showRoleModal={showRoleModal}
-                dutiesData={dutiesData}
-                allNames={allNames}
-                selectNameAndFilter={selectNameAndFilter}
-            />
+            {Object.keys(activeFilterRoles).length === 0 || !processedData || Object.keys(processedData).length === 0 ? (
+                <div className="fixed inset-0 w-screen h-screen box-border flex flex-col font-sans text-gray-800 bg-gray-100">
+                    <div className="flex items-center justify-center h-full">
+                        <p className="text-gray-600 italic">Loading calendar...</p>
+                    </div>
+                </div>
+            ) : (
+                <>
+                    <Header
+                        roles={roles}
+                        allNames={allNames}
+                        viewMode={viewMode}
+                        nameSearchInput={nameSearchInput}
+                        setNameSearchInput={setNameSearchInput}
+                        setSelectedSearchNameData={setSelectedSearchNameData}
+                        setActiveFilterRoles={setActiveFilterRoles}
+                        onFilterModalOpen={handleFilterModalOpen}
+                        onViewToggle={handleViewToggle}
+                        onDutiesSummaryClick={() => setIsDutiesSummaryModalOpen(true)}
+                        onNameSelect={selectNameAndFilter}
+                        onClearNameSearch={(newFilters) => savePreferences(newFilters, viewMode, null)}
+                        goToDay={goToDay}
+                        updateActiveDayButton={updateActiveDayButton}
+                    />
+                    <main className="flex-grow min-h-0 relative">
+                        <div className="swiper h-full">
+                            <div className="swiper-wrapper">
+                                {memoizedSlides}
+                            </div>
+                        </div>
+                        
+                        {/* Floating "Go to Now" button */}
+                        <button
+                            onClick={manualNavigateToCurrentTime}
+                            className="fixed bottom-6 left-6 w-14 h-14 border border-gray-300 bg-white text-gray-800 rounded-full shadow-lg transition-all duration-200 flex items-center justify-center text-xs font-semibold z-50 hover:shadow-xl"
+                            title="Go to current time"
+                        >
+                            NOW
+                        </button>
+                    </main>
+                    <Modals
+                        isRoleModalOpen={isRoleModalOpen}
+                        closeRoleModal={() => setIsRoleModalOpen(false)}
+                        selectedEvent={selectedEvent}
+                        findLinkedEvents={findLinkedEvents}
+                        roleFullNames={roleFullNames}
+                        isFilterModalOpen={isFilterModalOpen}
+                        closeFilterModal={closeFilterModal}
+                        tempFilterRoles={tempFilterRoles}
+                        setTempFilterRoles={setTempFilterRoles}
+                        applyFilters={applyFilters}
+                        roles={roles}
+                        roleAssignments={roleAssignments}
+                        isDutiesSummaryModalOpen={isDutiesSummaryModalOpen}
+                        closeDutiesSummaryModal={() => setIsDutiesSummaryModalOpen(false)}
+                        handleFilterChange={handleFilterChange}
+                        handleFilterControl={handleFilterControl}
+                        showRoleModal={showRoleModal}
+                        dutiesData={dutiesData}
+                        allNames={allNames}
+                        selectNameAndFilter={selectNameAndFilter}
+                    />
+                </>
+            )}
         </>
     );
 };
