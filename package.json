@@ -23,6 +23,7 @@
   "dependencies": {
     "firebase": "^10.0.0",
     "leaflet": "^1.9.4",
+    "linkify-react": "^4.3.2",
     "react": "^18.2.0",
     "react-dom": "^18.2.0",
     "swiper": "^11.0.0"

@@ -1,0 +1,70 @@
+/* Mobile viewport fixes for browser navigation bars */
+/* Only apply these fixes on mobile devices */
+
+/* Support for mobile browsers with dynamic viewport */
+:root {
+  /* Fallback for browsers that don't support dvh */
+  --vh: 1vh;
+}
+
+/* Apply mobile-specific fixes only on mobile devices */
+@media (max-width: 768px) and (hover: none) and (pointer: coarse) {
+  /* Use dynamic viewport height when available */
+  html, body {
+    height: 100vh;
+    height: 100dvh; /* Dynamic viewport height - excludes browser UI */
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
+  }
+
+  #root {
+    height: 100vh;
+    height: 100dvh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  /* Ensure main content areas use safe areas on mobile */
+  .calendar-main {
+    height: calc(100vh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    height: calc(100dvh - env(safe-area-inset-top) - env(safe-area-inset-bottom));
+    padding-bottom: env(safe-area-inset-bottom, 0px);
+  }
+
+  /* Fix for iOS Safari address bar bounce */
+  @supports (-webkit-touch-callout: none) {
+    .calendar-main {
+      min-height: -webkit-fill-available;
+    }
+  }
+}
+
+/* Additional mobile-specific fixes for very small screens */
+@media (max-width: 768px) and (max-height: 700px) and (hover: none) and (pointer: coarse) {
+  /* For smaller mobile screens, ensure content is not cut off */
+  .overflow-y-auto {
+    padding-bottom: max(env(safe-area-inset-bottom, 0px), 20px) !important;
+  }
+}
+
+/* Desktop-specific overrides to ensure normal behavior */
+@media (min-width: 769px), (hover: hover) and (pointer: fine) {
+  html, body {
+    height: 100vh;
+    margin: 0;
+    padding: 0;
+  }
+
+  #root {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+  }
+
+  .calendar-main {
+    /* Normal desktop behavior - no special mobile handling */
+    height: auto;
+    padding-bottom: 0;
+  }
+}

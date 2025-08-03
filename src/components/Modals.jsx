@@ -1,4 +1,5 @@
 import React, { useCallback, memo } from 'react';
+import Linkify from 'linkify-react';
 
 const Modals = ({
     isRoleModalOpen,
@@ -324,7 +325,17 @@ const Modals = ({
                             {selectedEvent.description && (
                                 <div className="mb-4">
                                     <h3 className="text-base font-bold text-gray-800 mb-2 border-b-2 border-blue-600 pb-1">Description</h3>
-                                    <p>{selectedEvent.description}</p>
+                                    <p className="break-words">
+                                        <Linkify
+                                            options={{
+                                                target: '_blank',
+                                                rel: 'noopener noreferrer',
+                                                className: 'text-blue-600 hover:underline break-all'
+                                            }}
+                                        >
+                                            {selectedEvent.description}
+                                        </Linkify>
+                                    </p>
                                 </div>
                             )}
 

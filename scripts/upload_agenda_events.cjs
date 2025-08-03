@@ -3,14 +3,31 @@ const path = require('path');
 const fs = require('fs');
 // Simple CSV parser (no external dependency)
 const { initializeApp } = require('firebase/app');
-const { getFirestore, collection, addDoc } = require('firebase/firestore');
+const { getFirestore, collection, addDoc, getDocs, deleteDoc, doc } = require('firebase/firestore');
 
-const firebaseConfigModule = require('./src/firebase-config');
+const firebaseConfigModule = require('../src/firebase-config');
 const firebaseConfig = firebaseConfigModule.firebaseConfig || firebaseConfigModule;
 const appId = firebaseConfigModule.appId || '';
 
 const agendaCsvPath = path.resolve(__dirname, '../data/agenda.csv');
 const agendaEventsCollectionPath = `artifacts/${appId}/public/data/agendaEvents`;
+
+async function clearExistingAgendaEvents(db, colRef) {
+  console.log('Clearing existing agenda events...');
+  const snapshot = await getDocs(colRef);
+  let deleteCount = 0;
+  
+  for (const docSnapshot of snapshot.docs) {
+    try {
+      await deleteDoc(doc(db, agendaEventsCollectionPath, docSnapshot.id));
+      deleteCount++;
+    } catch (err) {
+      console.error('Failed to delete document:', docSnapshot.id, err);
+    }
+  }
+  
+  console.log(`Cleared ${deleteCount} existing agenda events.`);
+}
 
 async function uploadAgendaEvents() {
 
@@ -47,6 +64,9 @@ async function uploadAgendaEvents() {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const colRef = collection(db, agendaEventsCollectionPath);
+
+  // Clear existing agenda events before uploading new ones
+  await clearExistingAgendaEvents(db, colRef);
 
   let successCount = 0;
   let failCount = 0;

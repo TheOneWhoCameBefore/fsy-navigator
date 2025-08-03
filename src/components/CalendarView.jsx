@@ -1,4 +1,5 @@
 import React, { useState, useEffect, useRef, useCallback, useMemo, memo } from 'react';
+import Linkify from 'linkify-react';
 import Swiper from 'swiper';
 import { Navigation } from 'swiper/modules';
 import 'swiper/css';
@@ -145,7 +146,9 @@ const TableView = memo(({ day, processedData, roles, activeFilterRoles, showRole
     const manyColumnsClass = roles.filter(role => role === 'Agenda' || (activeFilterRoles[role.replace(/[^a-z0-9]/gi, '-').toLowerCase()] !== false && role !== 'Agenda')).length > 7 ? 'many-columns' : '';
 
     return (
-        <div className="overflow-y-auto overflow-x-hidden h-full">
+        <div className="overflow-y-auto overflow-x-hidden h-full" style={{ 
+            paddingBottom: 'env(safe-area-inset-bottom, 0px)'
+        }}>
             <table className={`w-full border-collapse table-fixed ${manyColumnsClass}`}>
                 <CalendarHeader 
                     roles={roles} 
@@ -283,7 +286,17 @@ const AgendaEventCard = memo(({ agendaEvent, index, roleActivities, getActivityC
                 <h3 className="text-lg font-bold text-gray-800 m-0">{agendaEvent.eventName}</h3>
                 <div className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-full whitespace-nowrap font-medium">{agendaEvent.startTime} - {agendaEvent.endTime}</div>
             </div>
-            <div className="text-gray-700 mb-3 leading-relaxed text-sm">{agendaEvent.eventDescription}</div>
+            <div className="text-gray-700 mb-3 leading-relaxed text-sm break-words">
+                <Linkify
+                    options={{
+                        target: '_blank',
+                        rel: 'noopener noreferrer',
+                        className: 'text-blue-600 hover:underline break-all'
+                    }}
+                >
+                    {agendaEvent.eventDescription}
+                </Linkify>
+            </div>
             <div className="flex flex-col gap-1.5">
                 {pairedRolesHTML}
                 {otherRolesHTML}
@@ -352,7 +365,9 @@ const CardView = memo(({ day, processedData, getRoleActivitiesForAgendaEvent, ge
     return (
         <div className="flex h-full w-full relative pt-2">
             {/* Single container with cards and inline timelines */}
-            <div className="flex-1 h-full overflow-y-auto">
+            <div className="flex-1 h-full overflow-y-auto" style={{ 
+                paddingBottom: 'env(safe-area-inset-bottom, 0px)'
+            }}>
                 <div className="p-1 flex flex-col gap-2">
                     {agendaEvents.map((agendaEvent, index) => {
                         const lowerEventName = agendaEvent.eventName.toLowerCase();
@@ -1331,6 +1346,26 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
         const interval = setInterval(() => {
             updateCurrentTimeIndicator();
         }, 60000);
+        
+        // Mobile viewport height fix for older browsers (only on mobile)
+        const isMobile = window.innerWidth <= 768 && 'ontouchstart' in window;
+        
+        if (isMobile) {
+            const setVH = () => {
+                const vh = window.innerHeight * 0.01;
+                document.documentElement.style.setProperty('--vh', `${vh}px`);
+            };
+            
+            setVH();
+            window.addEventListener('resize', setVH);
+            window.addEventListener('orientationchange', setVH);
+
+            return () => {
+                clearInterval(interval);
+                window.removeEventListener('resize', setVH);
+                window.removeEventListener('orientationchange', setVH);
+            };
+        }
 
         return () => clearInterval(interval);
     }, [updateCurrentTimeIndicator]);
@@ -1361,7 +1396,7 @@ const CalendarView = ({ schedules, roles, roleAssignments, roleFullNames, allNam
                         goToDay={goToDay}
                         updateActiveDayButton={updateActiveDayButton}
                     />
-                    <main className="flex-grow min-h-0 relative">
+                    <main className="flex-grow min-h-0 relative calendar-main">
                         <div className="swiper h-full">
                             <div className="swiper-wrapper">
                                 {memoizedSlides}
