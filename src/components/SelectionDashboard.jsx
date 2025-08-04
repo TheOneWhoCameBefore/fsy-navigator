@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from 'react';
+import React, { useState, useEffect, useRef, useCallback } from 'react';
 import { onSnapshot, collection, runTransaction, doc } from 'firebase/firestore';
 
 // Import appId for role assignments collection path
@@ -89,13 +89,7 @@ const SelectionDashboard = ({ db }) => {
         });
         
         setOutdoorLocations(locations);
-        if (L && mapInstanceRef.current) {
-          // Add a small delay to prevent rapid successive updates
-          setTimeout(() => {
-            console.log('Updating markers from data change');
-            updateMapMarkers(locations);
-          }, 200);
-        }
+        // Map markers will be updated by the map initialization useEffect
       },
       (error) => {
         console.error('Error fetching outdoor locations:', error);
@@ -226,10 +220,135 @@ const SelectionDashboard = ({ db }) => {
     };
 
     loadClaimedSpots();
-  }, [showManagement, outdoorLocations, indoorLocations, companyNames]);
+  }, [showManagement, outdoorLocations, indoorLocations, companyNames, db]);
+
+  // Handle outdoor location selection
+  const handleOutdoorSelection = useCallback((location) => {
+    if (location.status !== 'available') return;
+    
+    setSelection(prev => ({ ...prev, outdoor: location }));
+    closeModal('outdoor');
+    
+    // Pan map to selected location and open popup without changing zoom
+    if (mapInstanceRef.current && location.lat && location.lon) {
+      mapInstanceRef.current.panTo([location.lat, location.lon]);
+      const marker = markersRef.current.get(location.id);
+      if (marker) {
+        marker.openPopup();
+      }
+    }
+  }, []);
 
   // Initialize map when Leaflet is loaded
   useEffect(() => {
+    // Create custom icons (only when L is available)
+    const createIcons = () => {
+      if (!L) return { availableIcon: null, claimedIcon: null };
+      
+      // Larger icons for better mobile touch targets
+      const iconSize = [30, 45]; // Slightly larger than default
+      const iconAnchor = [15, 45];
+      const popupAnchor = [1, -34];
+      
+      const availableIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+        iconSize: iconSize,
+        iconAnchor: iconAnchor,
+        popupAnchor: popupAnchor,
+        shadowSize: [41, 41]
+      });
+
+      const claimedIcon = new L.Icon({
+        iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png',
+        shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
+        iconSize: iconSize,
+        iconAnchor: iconAnchor,
+        popupAnchor: popupAnchor,
+        shadowSize: [41, 41]
+      });
+
+      return { availableIcon, claimedIcon };
+    };
+
+    // Update map markers when outdoor locations change
+    const updateMapMarkers = (locations) => {
+      if (!L || !mapInstanceRef.current) {
+        console.log('Map not ready for markers:', { L: !!L, map: !!mapInstanceRef.current });
+        return;
+      }
+
+      const { availableIcon, claimedIcon } = createIcons();
+      if (!availableIcon || !claimedIcon) {
+        console.log('Icons not ready');
+        return;
+      }
+
+      console.log('Updating map markers with', locations.length, 'locations');
+
+      // Clear existing markers
+      markersRef.current.forEach(marker => {
+        mapInstanceRef.current.removeLayer(marker);
+      });
+      markersRef.current.clear();
+
+      // Add new markers
+      const validLocations = locations.filter(location => location.lat && location.lon);
+      
+      validLocations.forEach(location => {
+        const icon = location.status === 'available' ? availableIcon : claimedIcon;
+        const marker = L.marker([location.lat, location.lon], { icon })
+          .addTo(mapInstanceRef.current);
+
+        // Create popup content
+        const popupContent = `
+          <div>
+            <h3>${location.name}</h3>
+            <p>${location.description || 'No description available'}</p>
+            <p><strong>Status:</strong> ${location.status}</p>
+            ${location.claimedBy ? `
+              <p><strong>Claimed by:</strong> ${location.claimedBy}</p>
+              ${location.cnCounselors && location.cnCounselors.length > 0 ? 
+                `<p><strong>CN Counselors:</strong> ${location.cnCounselors.map(cn => cn.name).join(', ')}</p>` : ''
+              }
+            ` : ''}
+          </div>
+        `;
+        marker.bindPopup(popupContent);
+
+        // Handle marker click for selection - ensure this is properly bound
+        marker.on('click', (e) => {
+          console.log('Marker clicked!', location.name, 'Status:', location.status);
+          e.originalEvent?.stopPropagation(); // Prevent event bubbling
+          if (location.status === 'available') {
+            console.log('Handling selection for:', location.name);
+            handleOutdoorSelection(location);
+          } else {
+            console.log('Location not available:', location.name, location.status);
+          }
+        });
+
+        markersRef.current.set(location.id, marker);
+      });
+
+      // Center map on all markers if we have locations
+      if (validLocations.length > 0) {
+        // Add a small delay to ensure markers are fully added before centering
+        setTimeout(() => {
+          if (validLocations.length === 1) {
+            // If only one location, center on it with a reasonable zoom
+            const location = validLocations[0];
+            mapInstanceRef.current.setView([location.lat, location.lon], 16);
+          } else {
+            // If multiple locations, calculate center point and use fixed zoom
+            const avgLat = validLocations.reduce((sum, loc) => sum + loc.lat, 0) / validLocations.length;
+            const avgLon = validLocations.reduce((sum, loc) => sum + loc.lon, 0) / validLocations.length;
+            mapInstanceRef.current.setView([avgLat, avgLon], 15); // Fixed zoom level for campus view
+          }
+        }, 100);
+      }
+    };
+
     const initMap = () => {
       if (L && mapRef.current && !mapInstanceRef.current && !showManagement) {
         console.log('Initializing map...');
@@ -283,115 +402,11 @@ const SelectionDashboard = ({ db }) => {
         mapInstanceRef.current = null;
       }
     };
-  }, [L, outdoorLocations, showManagement]);
+  }, [outdoorLocations, showManagement, handleOutdoorSelection]);
 
-  // Create custom icons (only when L is available)
-  const createIcons = () => {
-    if (!L) return { availableIcon: null, claimedIcon: null };
-    
-    // Larger icons for better mobile touch targets
-    const iconSize = [30, 45]; // Slightly larger than default
-    const iconAnchor = [15, 45];
-    const popupAnchor = [1, -34];
-    
-    const availableIcon = new L.Icon({
-      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-green.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-      iconSize: iconSize,
-      iconAnchor: iconAnchor,
-      popupAnchor: popupAnchor,
-      shadowSize: [41, 41]
-    });
 
-    const claimedIcon = new L.Icon({
-      iconUrl: 'https://raw.githubusercontent.com/pointhi/leaflet-color-markers/master/img/marker-icon-2x-grey.png',
-      shadowUrl: 'https://cdnjs.cloudflare.com/ajax/libs/leaflet/1.7.1/images/marker-shadow.png',
-      iconSize: iconSize,
-      iconAnchor: iconAnchor,
-      popupAnchor: popupAnchor,
-      shadowSize: [41, 41]
-    });
 
-    return { availableIcon, claimedIcon };
-  };
 
-  // Update map markers when outdoor locations change
-  const updateMapMarkers = (locations) => {
-    if (!L || !mapInstanceRef.current) {
-      console.log('Map not ready for markers:', { L: !!L, map: !!mapInstanceRef.current });
-      return;
-    }
-
-    const { availableIcon, claimedIcon } = createIcons();
-    if (!availableIcon || !claimedIcon) {
-      console.log('Icons not ready');
-      return;
-    }
-
-    console.log('Updating map markers with', locations.length, 'locations');
-
-    // Clear existing markers
-    markersRef.current.forEach(marker => {
-      mapInstanceRef.current.removeLayer(marker);
-    });
-    markersRef.current.clear();
-
-    // Add new markers
-    const validLocations = locations.filter(location => location.lat && location.lon);
-    
-    validLocations.forEach(location => {
-      const icon = location.status === 'available' ? availableIcon : claimedIcon;
-      const marker = L.marker([location.lat, location.lon], { icon })
-        .addTo(mapInstanceRef.current);
-
-      // Create popup content
-      const popupContent = `
-        <div>
-          <h3>${location.name}</h3>
-          <p>${location.description || 'No description available'}</p>
-          <p><strong>Status:</strong> ${location.status}</p>
-          ${location.claimedBy ? `
-            <p><strong>Claimed by:</strong> ${location.claimedBy}</p>
-            ${location.cnCounselors && location.cnCounselors.length > 0 ? 
-              `<p><strong>CN Counselors:</strong> ${location.cnCounselors.map(cn => cn.name).join(', ')}</p>` : ''
-            }
-          ` : ''}
-        </div>
-      `;
-      marker.bindPopup(popupContent);
-
-      // Handle marker click for selection - ensure this is properly bound
-      marker.on('click', (e) => {
-        console.log('Marker clicked!', location.name, 'Status:', location.status);
-        e.originalEvent?.stopPropagation(); // Prevent event bubbling
-        if (location.status === 'available') {
-          console.log('Handling selection for:', location.name);
-          handleOutdoorSelection(location);
-        } else {
-          console.log('Location not available:', location.name, location.status);
-        }
-      });
-
-      markersRef.current.set(location.id, marker);
-    });
-
-    // Center map on all markers if we have locations
-    if (validLocations.length > 0) {
-      // Add a small delay to ensure markers are fully added before centering
-      setTimeout(() => {
-        if (validLocations.length === 1) {
-          // If only one location, center on it with a reasonable zoom
-          const location = validLocations[0];
-          mapInstanceRef.current.setView([location.lat, location.lon], 16);
-        } else {
-          // If multiple locations, calculate center point and use fixed zoom
-          const avgLat = validLocations.reduce((sum, loc) => sum + loc.lat, 0) / validLocations.length;
-          const avgLon = validLocations.reduce((sum, loc) => sum + loc.lon, 0) / validLocations.length;
-          mapInstanceRef.current.setView([avgLat, avgLon], 15); // Fixed zoom level for campus view
-        }
-      }, 100);
-    }
-  };
 
   // Modal helper functions
   const openModal = (type) => {
@@ -402,26 +417,7 @@ const SelectionDashboard = ({ db }) => {
     setModals(prev => ({ ...prev, [type]: false }));
   };
 
-  const closeAllModals = () => {
-    setModals({ company: false, cnCounselors: false, indoor: false, outdoor: false });
-  };
 
-  // Handle outdoor location selection
-  const handleOutdoorSelection = (location) => {
-    if (location.status !== 'available') return;
-    
-    setSelection(prev => ({ ...prev, outdoor: location }));
-    closeModal('outdoor');
-    
-    // Pan map to selected location and open popup without changing zoom
-    if (mapInstanceRef.current && location.lat && location.lon) {
-      mapInstanceRef.current.panTo([location.lat, location.lon]);
-      const marker = markersRef.current.get(location.id);
-      if (marker) {
-        marker.openPopup();
-      }
-    }
-  };
 
   // Handle indoor location selection
   const handleIndoorSelection = (location) => {
@@ -594,7 +590,10 @@ const SelectionDashboard = ({ db }) => {
                 }, {})
               ).map(([companyName, data]) => (
                 <div key={companyName} className="bg-white rounded-lg shadow p-4">
-                  <h3 className="font-bold text-lg mb-2 text-blue-600">{companyName}</h3>
+                  <h3 className="font-bold text-lg mb-1 text-blue-600">{companyName}</h3>
+                  {data.company?.scripture_reference && (
+                    <div className="text-xs text-gray-500 mb-2">{data.company.scripture_reference}</div>
+                  )}
                   
                   {/* CN Counselors */}
                   <div className="mb-3">

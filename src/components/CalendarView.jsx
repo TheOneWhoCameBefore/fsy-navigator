@@ -9,6 +9,38 @@ import Header from './Header';
 import Modals from './Modals';
 import useCalendarData from '../hooks/useCalendarData';
 
+// Helper function to handle location clicks
+const handleLocationClick = (location) => {
+  // Return early if the location is invalid or a non-specific entry
+  if (!location || location === 'None' || location === 'Travel') {
+    return;
+  }
+  
+  // --- IMPORTANT ---
+  // Your Google My Map ID (from the sharing URL)
+  const myMapId = '18Y8R67StmyY90vh3Jq4Ysb-OAzEhQ_U'; 
+  const baseMapUrl = `https://www.google.com/maps/d/viewer?mid=${myMapId}`;
+  
+  // For general areas that don't have specific pins, just open the map
+  const generalAreas = [
+    'Residence Halls', 'Company Spots', 'Classrooms'
+  ];
+  
+  // Check if the location is a general area (case-insensitive)
+  const isGeneralArea = generalAreas.some(area => 
+    location.toLowerCase().includes(area.toLowerCase())
+  );
+  
+  if (isGeneralArea) {
+    // Just open the base map view for general areas
+    window.open(baseMapUrl, '_blank', 'noopener,noreferrer');
+  } else {
+    // For specific pins, append the 'q' parameter to search for the location name
+    const searchUrl = `${baseMapUrl}&q=${encodeURIComponent(location)}`;
+    window.open(searchUrl, '_blank', 'noopener,noreferrer');
+  }
+};
+
 const CalendarHeader = memo(({ roles, activeFilterRoles, createMobileAbbreviation }) => (
     <thead>
         <tr>
@@ -167,6 +199,15 @@ const TravelEventCard = memo(({ agendaEvent, index }) => (
          className="flex items-center justify-center gap-2 bg-white border border-gray-300 rounded-lg p-2 shadow-sm transition-all duration-200 hover:translate-y-[-1px] hover:shadow-md text-sm">
         <span className="bg-gray-200 text-gray-800 px-2 py-0.5 rounded-md text-xs font-semibold whitespace-nowrap">{agendaEvent.startTime}</span>
         <span className="text-gray-700 font-medium text-center flex-grow text-sm">{agendaEvent.eventName}</span>
+        {agendaEvent.location && agendaEvent.location !== 'Travel' && agendaEvent.location !== 'None' && (
+            <button
+                onClick={() => handleLocationClick(agendaEvent.location)}
+                className="text-xs text-gray-600 bg-blue-50 px-1.5 py-0.5 rounded-md hover:bg-blue-100 hover:text-blue-800 transition-colors cursor-pointer"
+                title={`Open ${agendaEvent.location} on map`}
+            >
+                📍 {agendaEvent.location}
+            </button>
+        )}
     </div>
 ));
 
@@ -284,7 +325,18 @@ const AgendaEventCard = memo(({ agendaEvent, index, roleActivities, getActivityC
              className="bg-white border-2 border-blue-500 rounded-lg p-3 shadow-md">
             <div className="flex justify-between items-start mb-3 gap-3 flex-col md:flex-row">
                 <h3 className="text-lg font-bold text-gray-800 m-0">{agendaEvent.eventName}</h3>
-                <div className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-full whitespace-nowrap font-medium">{agendaEvent.startTime} - {agendaEvent.endTime}</div>
+                <div className="flex flex-wrap gap-2 items-center">
+                    <div className="text-xs text-gray-600 bg-gray-100 px-2 py-1 rounded-full whitespace-nowrap font-medium">{agendaEvent.startTime} - {agendaEvent.endTime}</div>
+                    {agendaEvent.location && agendaEvent.location !== 'Travel' && agendaEvent.location !== 'None' && (
+                        <button
+                            onClick={() => handleLocationClick(agendaEvent.location)}
+                            className="text-xs text-gray-600 bg-blue-50 px-2 py-1 rounded-full whitespace-nowrap font-medium hover:bg-blue-100 hover:text-blue-800 transition-colors cursor-pointer"
+                            title={`Open ${agendaEvent.location} on map`}
+                        >
+                            📍 {agendaEvent.location}
+                        </button>
+                    )}
+                </div>
             </div>
             <div className="text-gray-700 mb-3 leading-relaxed text-sm break-words">
                 <Linkify

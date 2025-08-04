@@ -1,6 +1,38 @@
 import React, { useCallback, memo } from 'react';
 import Linkify from 'linkify-react';
 
+// Helper function to handle location clicks
+const handleLocationClick = (location) => {
+  // Return early if the location is invalid or a non-specific entry
+  if (!location || location === 'None' || location === 'Travel') {
+    return;
+  }
+  
+  // --- IMPORTANT ---
+  // Your Google My Map ID (from the sharing URL)
+  const myMapId = '18Y8R67StmyY90vh3Jq4Ysb-OAzEhQ_U'; 
+  const baseMapUrl = `https://www.google.com/maps/d/viewer?mid=$${myMapId}`;
+  
+  // For general areas that don't have specific pins, just open the map
+  const generalAreas = [
+    'Residence Halls', 'Company Spots', 'Classrooms'
+  ];
+  
+  // Check if the location is a general area (case-insensitive)
+  const isGeneralArea = generalAreas.some(area => 
+    location.toLowerCase().includes(area.toLowerCase())
+  );
+  
+  if (isGeneralArea) {
+    // Just open the base map view for general areas
+    window.open(baseMapUrl, '_blank', 'noopener,noreferrer');
+  } else {
+    // For specific pins, append the 'q' parameter to search for the location name
+    const searchUrl = `${baseMapUrl}&q=${encodeURIComponent(location)}`;
+    window.open(searchUrl, '_blank', 'noopener,noreferrer');
+  }
+};
+
 const Modals = ({
     isRoleModalOpen,
     closeRoleModal,
@@ -257,7 +289,18 @@ const Modals = ({
                         <div className="flex justify-between items-center p-4 sm:p-6 border-b bg-gray-50">
                             <div>
                                 <h2 className="text-lg sm:text-xl font-bold text-gray-800 m-0 mb-2">{selectedEvent.activity}</h2>
-                                <div className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full inline-block">{selectedEvent.eventTime}</div>
+                                <div className="flex flex-wrap gap-2 items-center">
+                                    <div className="text-sm text-gray-600 bg-gray-100 px-3 py-1 rounded-full inline-block">{selectedEvent.eventTime}</div>
+                                    {selectedEvent.mergedEvent?.location && (
+                                        <button
+                                            onClick={() => handleLocationClick(selectedEvent.mergedEvent.location)}
+                                            className="text-sm text-gray-600 bg-blue-50 px-3 py-1 rounded-full inline-block hover:bg-blue-100 hover:text-blue-800 transition-colors cursor-pointer"
+                                            title={`Open ${selectedEvent.mergedEvent.location} on map`}
+                                        >
+                                            📍 {selectedEvent.mergedEvent.location}
+                                        </button>
+                                    )}
+                                </div>
                             </div>
                             <button 
                                 onClick={closeRoleModal} 
