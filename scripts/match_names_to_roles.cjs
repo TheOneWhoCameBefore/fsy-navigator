@@ -11,7 +11,7 @@ const fs = require('fs');
 // --- 1. Data Parsing Functions ---
 
 function parseRoleSchedules() {
-    const csv = fs.readFileSync('data/duties_8_ac.csv', 'utf-8').split(/\r?\n/);
+    const csv = fs.readFileSync('data/duties_10_ac.csv', 'utf-8').split(/\r?\n/);
     const acRoles = {};
     const cnRoles = {};
 
@@ -93,17 +93,30 @@ function parseObservedSchedules() {
             if (!line || !line.trim()) continue;
 
             const isCn = line.startsWith('CN ');
+            const isAc = line.startsWith('AC ');
+            
+            if (!isCn && !isAc) continue; // Skip lines that don't start with AC or CN
+            
             let name = line.replace(/^AC |^CN /, '').trim();
             
+            // Handle multi-line names more robustly
             let nextLineIndex = k + 1;
-            while(nextLineIndex < namesEndIndex && txt[nextLineIndex] && !txt[nextLineIndex].startsWith('AC ') && !txt[nextLineIndex].startsWith('CN ') && !txt[nextLineIndex].match(/^(\d{1,2}:\d{2} [AP]M) - (\d{1,2}:\d{2} [AP]M)$/)) {
+            while(nextLineIndex < namesEndIndex && 
+                  txt[nextLineIndex] && 
+                  !txt[nextLineIndex].startsWith('AC ') && 
+                  !txt[nextLineIndex].startsWith('CN ') && 
+                  !txt[nextLineIndex].match(/^(\d{1,2}:\d{2} [AP]M) - (\d{1,2}:\d{2} [AP]M)$/)) {
                  name += ' ' + txt[nextLineIndex].trim();
                  k++; 
                  nextLineIndex++;
             }
 
+            // Clean up the name
+            name = name.trim();
+            if (!name) continue;
+
             if(isCn) currentCNs.push(name);
-            else currentACs.push(name);
+            else if(isAc) currentACs.push(name);
         }
         
         const event = { ...time, name: eventName };
@@ -138,24 +151,112 @@ function calculateMatchScore(scheduleA, scheduleB) {
     const eventsB = new Set(scheduleB.map(e => `${e.start}-${e.end}:${e.name.toLowerCase()}`));
     
     for (const eventA of scheduleA) {
-        if (eventsB.has(`${eventA.start}-${eventA.end}:${eventA.name.toLowerCase()}`)) {
-            score++;
+        const eventKey = `${eventA.start}-${eventA.end}:${eventA.name.toLowerCase()}`;
+        if (eventsB.has(eventKey)) {
+            // Weight different event types differently
+            let eventScore = 1;
+            const eventName = eventA.name.toLowerCase();
+            
+            // Higher weight for more specific/important events
+            if (eventName.includes('coordination')) eventScore = 3;
+            else if (eventName.includes('class support')) eventScore = 2.5;
+            else if (eventName.includes('lunch support')) eventScore = 2;
+            else if (eventName.includes('time-off')) eventScore = 1.5;
+            
+            score += eventScore;
         }
     }
     return score;
 }
 
-function findBestAssignments(roles, schedules) {
+function calculateGroupStability(cnGroupSchedules, cnGroupMembers) {
+    const groupStability = {};
+    
+    for (const groupKey in cnGroupSchedules) {
+        const events = cnGroupSchedules[groupKey];
+        const members = cnGroupMembers[groupKey];
+        
+        // Calculate stability based on:
+        // 1. Number of events the group appears together
+        // 2. Consistency of group composition
+        // 3. Group size (medium-sized groups are often more stable)
+        // 4. Diversity of event types (groups that work together across different types of events)
+        
+        const eventCount = events.length;
+        const groupSize = members.length;
+        
+        // Base score from frequency
+        let stabilityScore = eventCount * 10;
+        
+        // Group size bonus - medium-sized groups tend to be more stable
+        if (groupSize >= 2 && groupSize <= 6) {
+            stabilityScore += 30;
+        } else if (groupSize === 1) {
+            stabilityScore += 10; // Individual assignments can be stable too
+        }
+        
+        // Event diversity bonus - groups that work together across different event types
+        const eventTypes = new Set(events.map(e => e.name.toLowerCase().split(' ')[0]));
+        stabilityScore += eventTypes.size * 5;
+        
+        // Time span bonus - groups that work together across different time periods
+        const timeSlots = new Set(events.map(e => `${e.start}-${e.end}`));
+        stabilityScore += timeSlots.size * 3;
+        
+        groupStability[groupKey] = stabilityScore;
+    }
+    
+    return groupStability;
+}
+
+function findBestAssignments(roles, schedules, isAC = true) {
     const assignments = {};
     const assignedRoles = new Set();
     const assignedSchedules = new Set();
     const potentialMatches = [];
 
-    for (const roleName in roles) {
-        for (const scheduleName in schedules) {
-            const score = calculateMatchScore(roles[roleName], schedules[scheduleName]);
-            if (score > 0) {
-                potentialMatches.push({ roleName, scheduleName, score });
+    // For CN roles, also calculate group stability
+    let groupStability = {};
+    if (!isAC && typeof schedules === 'object' && Object.keys(schedules).some(key => key.includes(';'))) {
+        // This is cnGroupSchedules, calculate stability
+        const cnGroupMembers = {}; // We need to reconstruct this
+        for (const groupKey in schedules) {
+            cnGroupMembers[groupKey] = groupKey.split(';');
+        }
+        groupStability = calculateGroupStability(schedules, cnGroupMembers);
+    }
+    
+    // Special logic for CN roles - analyze duty patterns more carefully
+    if (!isAC) {
+        // Create enhanced matching for CN roles
+        for (const roleName in roles) {
+            for (const scheduleName in schedules) {
+                let matchScore = calculateMatchScore(roles[roleName], schedules[scheduleName]);
+                let stabilityBonus = groupStability[scheduleName] || 0;
+                let patternBonus = calculateCNRolePatternBonus(roleName, scheduleName, roles[roleName], schedules[scheduleName]);
+                
+                let totalScore = matchScore + stabilityBonus + patternBonus;
+                
+                if (totalScore > 0) {
+                    potentialMatches.push({ 
+                        roleName, 
+                        scheduleName, 
+                        score: totalScore,
+                        matchScore,
+                        stabilityBonus,
+                        patternBonus
+                    });
+                }
+            }
+        }
+    } else {
+        // Original logic for AC roles
+        for (const roleName in roles) {
+            for (const scheduleName in schedules) {
+                const score = calculateMatchScore(roles[roleName], schedules[scheduleName]);
+                if (score > 0) {
+                    potentialMatches.push({ roleName, scheduleName, score });
+                }
             }
         }
     }
@@ -172,14 +273,82 @@ function findBestAssignments(roles, schedules) {
     return assignments;
 }
 
+function calculateCNRolePatternBonus(roleName, groupKey, roleSchedule, groupSchedule) {
+    let bonus = 0;
+    const groupMembers = groupKey.split(';');
+    const groupSize = groupMembers.length;
+    
+    // Remove the specific Amber assignment since we want general logic
+    
+    // Analyze the role's expected pattern from the duty schedule
+    const roleEventTypes = new Set(roleSchedule.map(e => e.name.toLowerCase()));
+    const groupEventTypes = new Set(groupSchedule.map(e => e.name.toLowerCase()));
+    
+    // Calculate event type overlap
+    let eventTypeMatches = 0;
+    for (const eventType of roleEventTypes) {
+        if (groupEventTypes.has(eventType)) {
+            eventTypeMatches++;
+        }
+    }
+    
+    // Bonus for good event type matching
+    bonus += eventTypeMatches * 25;
+    
+    // Role-specific patterns based on typical CN group characteristics
+    switch (roleName) {
+        case 'CN A':
+        case 'CN B':
+        case 'CN C':
+        case 'CN D':
+            // These are typically larger, more active groups
+            if (groupSize >= 4 && groupSize <= 6) bonus += 40;
+            if (groupSchedule.length >= 3) bonus += 30; // Active in multiple time slots
+            break;
+            
+        case 'CN E':
+        case 'CN G':
+            // These might be smaller groups
+            if (groupSize >= 1 && groupSize <= 3) bonus += 35;
+            // Bonus for individual assignments in these categories
+            if (groupSize === 1) bonus += 20;
+            break;
+            
+        case 'CN F':
+        case 'CN H':
+        case 'CN I':
+        case 'CN J':
+            // Medium-sized groups with specific patterns
+            if (groupSize >= 3 && groupSize <= 5) bonus += 30;
+            
+            // Look for specific duty patterns that are common in these roles
+            const hasClassSupport = groupSchedule.some(event => 
+                event.name.toLowerCase().includes('class support'));
+            const hasTimeOff = groupSchedule.some(event => 
+                event.name.toLowerCase().includes('time-off'));
+            const hasCoordination = groupSchedule.some(event => 
+                event.name.toLowerCase().includes('coordination'));
+            const hasLunchSupport = groupSchedule.some(event => 
+                event.name.toLowerCase().includes('lunch support'));
+                
+            if (hasClassSupport) bonus += 20;
+            if (hasTimeOff) bonus += 15;
+            if (hasCoordination) bonus += 25;
+            if (hasLunchSupport) bonus += 15;
+            break;
+    }
+    
+    return bonus;
+}
+
 
 // --- 3. Main Execution ---
 
 const { acRoles, cnRoles } = parseRoleSchedules();
 const { acSchedules, cnGroupSchedules, cnGroupMembers } = parseObservedSchedules();
 
-let acAssignments = findBestAssignments(acRoles, acSchedules);
-let cnAssignments = findBestAssignments(cnRoles, cnGroupSchedules);
+let acAssignments = findBestAssignments(acRoles, acSchedules, true);
+let cnAssignments = findBestAssignments(cnRoles, cnGroupSchedules, false);
 
 // "Mop-up" Logic
 const unassignedAcRoles = Object.keys(acRoles).filter(r => !acAssignments[r]);

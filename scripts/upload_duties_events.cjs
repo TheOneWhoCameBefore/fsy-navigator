@@ -2,13 +2,13 @@
 const path = require('path');
 const fs = require('fs');
 const { initializeApp } = require('firebase/app');
-const { getFirestore, collection, addDoc } = require('firebase/firestore');
+const { getFirestore, collection, addDoc, getDocs, deleteDoc } = require('firebase/firestore');
 
-const firebaseConfigModule = require('./src/firebase-config');
+const firebaseConfigModule = require('../src/firebase-config');
 const firebaseConfig = firebaseConfigModule.firebaseConfig || firebaseConfigModule;
 const appId = firebaseConfigModule.appId || '';
 
-const dutiesCsvPath = path.resolve(__dirname, '../data/duties_8_ac.csv');
+const dutiesCsvPath = path.resolve(__dirname, '../data/duties_10_ac_sackville.csv');
 const dutiesEventsCollectionPath = `artifacts/${appId}/public/data/roleEvents`;
 
 // Simple CSV parser (no external dependency)
@@ -38,6 +38,23 @@ function parseCsv(content) {
       return obj;
     }, {});
   });
+}
+
+async function clearCollection(db, collectionPath) {
+  console.log(`Clearing existing data from ${collectionPath}...`);
+  const colRef = collection(db, collectionPath);
+  const snapshot = await getDocs(colRef);
+  
+  let deleteCount = 0;
+  const deletePromises = [];
+  
+  snapshot.forEach((doc) => {
+    deletePromises.push(deleteDoc(doc.ref));
+    deleteCount++;
+  });
+  
+  await Promise.all(deletePromises);
+  console.log(`Deleted ${deleteCount} existing documents`);
 }
 
 async function uploadDutiesEvents() {
@@ -87,6 +104,9 @@ async function uploadDutiesEvents() {
   const app = initializeApp(firebaseConfig);
   const db = getFirestore(app);
   const colRef = collection(db, dutiesEventsCollectionPath);
+
+  // Clear existing data first
+  await clearCollection(db, dutiesEventsCollectionPath);
 
   let successCount = 0;
   let failCount = 0;

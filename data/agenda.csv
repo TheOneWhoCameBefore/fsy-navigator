@@ -1,4 +1,4 @@
-Weekday,Start Time,End Time,Role,Event Name,Event Abbreviation,Event Type,Event Description
+Weekday,Start Time,End Time,Role,Event Name,Event Abbreviation,Event Type,Event Description,Location
 Sunday,6:00 PM,6:45 PM,Agenda,SC/AC/WC Meeting,ME,Agenda,"A mandatory coordination meeting for Session Coordinators, Assistant Coordinators, and Wellness Coordinators to receive weekly duty assignments and provide input. The agenda typically includes a spiritual thought, roll call, duty distribution, interview sign-ups, and a review of session-specific information."
 Sunday,6:45 PM,7:00 PM,Agenda,Roll Call and Transition,RC,Agenda,"A brief gathering to account for all staff members before transitioning to the Session Adviser Message."
 Sunday,7:00 PM,7:45 PM,Agenda,Session Adviser Message,SA,Agenda,"A mandatory meeting for all staff where the Session Adviser presents an uplifting message for their enrichment and edification to help them in their roles."
