@@ -18,7 +18,7 @@ const handleLocationClick = (location) => {
   
   // --- IMPORTANT ---
   // Your Google My Map ID (from the sharing URL)
-  const myMapId = '18Y8R67StmyY90vh3Jq4Ysb-OAzEhQ_U'; 
+  const myMapId = '1T-SFoK36YwOGviBM3ZI4D_K4UmC_cuc'; 
   const baseMapUrl = `https://www.google.com/maps/d/viewer?mid=${myMapId}`;
   
   // For general areas that don't have specific pins, just open the map

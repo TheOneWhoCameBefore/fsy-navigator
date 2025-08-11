@@ -9,7 +9,7 @@ const firebaseConfigModule = require('../src/firebase-config');
 const firebaseConfig = firebaseConfigModule.firebaseConfig || firebaseConfigModule;
 const appId = firebaseConfigModule.appId || '';
 
-const agendaCsvPath = path.resolve(__dirname, '../data/agenda_sackville.csv');
+const agendaCsvPath = path.resolve(__dirname, '../data/agenda_st_catherines.csv');
 const agendaEventsCollectionPath = `artifacts/${appId}/public/data/agendaEvents`;
 
 async function clearExistingAgendaEvents(db, colRef) {

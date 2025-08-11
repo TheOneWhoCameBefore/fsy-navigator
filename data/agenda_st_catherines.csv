@@ -1,0 +1,137 @@
+Weekday,Start Time,End Time,Role,Event Name,Event Abbreviation,Event Type,Event Description,Location
+Sunday,6:00 PM,6:45 PM,Agenda,SC/AC/WC Meeting,ME,Agenda,"A mandatory coordination meeting for Session Coordinators, Assistant Coordinators, and Wellness Coordinators to receive weekly duty assignments and provide input. The agenda typically includes a spiritual thought, roll call, duty distribution, interview sign-ups, and a review of session-specific information.",None
+Sunday,6:45 PM,7:00 PM,Agenda,Roll Call and Transition,RC,Agenda,A brief gathering to account for all staff members before transitioning to the Session Adviser Message.,Travel
+Sunday,7:00 PM,7:45 PM,Agenda,Session Adviser Message,SA,Agenda,A mandatory meeting for all staff where the Session Adviser presents an uplifting message for their enrichment and edification to help them in their roles.,Pond Inlet
+Sunday,7:45 PM,8:00 PM,Agenda,Move to AC/CN Breakout,TR,Agenda,A transition time for Assistant Coordinators and Counselors to move to their breakout session locations.,Travel
+Sunday,8:00 PM,8:15 PM,Agenda,AC/CN Breakout,ME,Agenda,"Assistant Coordinators (ACs) meet with the Counselors (CNs) they supervise to build relationships, define FSY expectations, distribute necessary paperwork, and answer questions.",None
+Sunday,8:15 PM,9:15 PM,Agenda,Mingle | Meet Your Co-CN | CN Interviews | Door Tag Prep,PL,Agenda,"A multi-purpose time for staff to mingle, for co-counselors to meet and plan, for individual Counselor interviews with ACs to be conducted, and for preparing personalized door tags for participant rooms.",None
+Monday,7:30 AM,8:20 AM,Agenda,Staff Breakfast,BR,Agenda,A breakfast for all staff members to start the day together.,Market Hall
+Monday,8:20 AM,8:30 AM,Agenda,Transition,TR,Agenda,A brief transition to the Staff Business Meeting.,Travel
+Monday,8:30 AM,9:15 AM,Agenda,Staff Business Meeting,ME,Agenda,"A mandatory meeting for staff to receive announcements, discuss agenda changes, review session-specific information, and receive a briefing for check-in procedures. ACs and WCs announce their duties for the week.",Pond Inlet
+Monday,9:15 AM,10:00 AM,Agenda,Co-counselor Planning,CO,Agenda,"Co-counselors meet to plan and discuss how they will carry out activities and assignments for the week, such as ""Meet Your Company,"" home evening, and gospel study.",None
+Monday,10:00 AM,11:00 AM,Agenda,Check-In Set Up,CH,Agenda,"Under the direction of the Check-in Coordinator, staff help prepare the check-in area by organizing name cards, wristbands, and participant kits.",Between Earp & Vallee
+Monday,11:00 AM,12:00 PM,Agenda,Participant Check-In 1,CH,Agenda,"The first shift for participant arrival and check-in. Staff are expected to be professional and welcoming, directing any questions about room changes to the Solutions Table.",Between Earp & Vallee
+Monday,12:00 PM,1:00 PM,Agenda,Participant Check-In 2,CH,Agenda,The second shift for participant arrival and check-in. Staff continue to provide a welcoming experience and direct specific questions to the Solutions Table.,Between Earp & Vallee
+Monday,1:00 PM,1:15:00 PM,Agenda,Transition,TR,Agenda,A transition time to conclude check-in and prepare for participant room checks.,Travel
+Monday,1:15 PM,1:30 PM,Agenda,Participant Room Checks,RC,Agenda,"Counselors, along with participants, check rooms for any pre-session damage and report it. This time also serves as an opportunity for youth to get acquainted.",Residence Halls
+Monday,1:30 PM,2:20 PM,Agenda,Meet Your Counselor | Head Count,CO,Agenda,"The first meeting where Counselors interact with their youth. This is an opportunity to set a tone of love, discuss standards and rules, and conduct the first head count. Please fill out the pizza ordering form here: https://forms.office.com/pages/responsepage.aspx?id=m278xvtRqEi3eZ7lZLQEEyQ4eCGxr49LviNofbdtoxdUM1BPREU4TVYxTFA0Q0UwQjFaNVY4Tk9HRy4u&route=shorturl",Residence Halls
+Monday,2:20 PM,2:30 PM,Agenda,Travel to Meet Your Company,TR,Agenda,Participants and counselors travel to their designated company meeting spots.,Travel
+Monday,2:30 PM,3:00 PM,Agenda,Meet Your Company,CO,Agenda,An activity designed to create unity and allow youth to get to know each other through various get-to-know-you games.,Company Spots
+Monday,3:00 PM,3:15 PM,Agenda,"Company Name, Scripture, and Chant",CO,Agenda,The company discusses its assigned name and scripture to build unity. Counselors also teach the company a simple chant to be used throughout the week.,Company Spots
+Monday,3:15 PM,3:30 PM,Agenda,Travel to Orientation,TR,Agenda,All companies travel together to the main orientation location.,Travel
+Monday,3:30 PM,4:30 PM,Agenda,Orientation,OR,Agenda,"This meeting serves to excite the youth about the week, introduce the leadership team, and share crucial information. The Session Adviser will also reinforce the Code of Conduct.",Bob Davis Gymnasium
+Monday,4:30 PM,6:00 PM,Agenda,Dinner,DI,Agenda,Dinner for all participants and staff. Staff are encouraged to help youth behave appropriately and stay in approved areas.,Market Hall
+Monday,6:00 PM,6:15 PM,Agenda,Meet with Company & Travel to Home Evening,TR,Agenda,Companies meet for a head count before traveling together to the home evening lesson.,Travel
+Monday,6:15 PM,7:00 PM,Agenda,Home Evening Lesson,HL,Agenda,The FSY theme is formally introduced by the Session Adviser in a lesson that teaches the importance of following the prophet's counsel and reinforces gospel principles.,Bob Davis Gymnasium
+Monday,7:00 PM,7:15 PM,Agenda,Travel to Company Spot,TR,Agenda,Companies travel to their designated spots for games and goal-setting activities.,Travel
+Monday,7:15 PM,8:00 PM,Agenda,Home Evening Games,HG,Agenda,"Counselors lead their companies in selected games, followed by a debriefing to connect the games to gospel principles.",Company Spots
+Monday,8:00 PM,8:45 PM,Agenda,Home Evening Goal-Setting,HG,Agenda,"An activity to unify the company by setting both personal and company goals that encourage unity, service, and spiritual growth for the week.",Company Spots
+Monday,8:45 PM,9:00 PM,Agenda,Travel,TR,Agenda,A designated time for movement back to the dorms for the nightly routine.,Travel
+Monday,9:00 PM,9:30 PM,Agenda,"Head Count, Reflect & Review, Journaling, Prayer",RR,Agenda,"A nightly routine where youth ponder and process the day's experiences, record their thoughts, and share testimonies to better understand what Heavenly Father is teaching them.",Residence Halls
+Monday,9:30 PM,10:15 PM,Agenda,Quiet Time - Get Ready for Bed,QU,Agenda,"A time for youth to relax, visit with others, and prepare for bed while counselors monitor the hallways to ensure participants do not leave their floor.",Residence Halls
+Monday,10:15 PM,10:30 PM,Agenda,Lights Out,LO,Agenda,"The official time for lights to be out. Participants must be in their rooms, though roommates are permitted to talk quietly as long as they do not disturb others.",Residence Halls
+Tuesday,6:00 AM,7:10 AM,Agenda,Morning Exercise,EX,Agenda,An opportunity for youth to engage in physical activity like jogging or stretching in a safe and supervised environment.,Soccer Field #2
+Tuesday,7:10 AM,7:20 AM,Agenda,AC/CN Meeting,ME,Agenda,"A daily morning meeting for Assistant Coordinators and Counselors to receive announcements, get instruction, and pray together.",Residence Halls
+Tuesday,7:20 AM,7:30 AM,Agenda,Participant Devotional,DV,Agenda,"A devotional led by participants on a topic from ""For the Strength of Youth: A Guide for Making Choices"".",Residence Halls
+Tuesday,7:30 AM,8:30 AM,Agenda,Breakfast,BR,Agenda,Breakfast for all participants and staff.,Market Hall
+Tuesday,8:30 AM,9:30 AM,Agenda,Gospel Study,GS,Agenda,"A daily opportunity for youth to increase their love of the scriptures, learn how they can bless their lives, and develop a habit of daily study.",Company Spots
+Tuesday,9:30 AM,9:45 AM,Agenda,Travel to Morning Devotional,TR,Agenda,Movement to the location for the morning devotional.,Travel
+Tuesday,9:45 AM,10:30 AM,Agenda,Morning Devotional,DV,Agenda,An uplifting lesson presented by the Session Adviser that focuses on and further develops the FSY theme.,Bob Davis Gymnasium
+Tuesday,10:30 AM,10:45 AM,Agenda,Travel to Classes,TR,Agenda,Movement to the various classroom locations.,Travel
+Tuesday,10:45 AM,11:30 AM,Agenda,Classes - Hear Him!,CL,Agenda,A class focused on learning how to receive personal revelation.,Classrooms
+Tuesday,11:30 AM,11:45 AM,Agenda,Travel between Classes,TR,Agenda,Movement between the various classroom locations.,Travel
+Tuesday,11:45 AM,12:30 PM,Agenda,Classes - Finding Answers to Questions,CL,Agenda,A class focused on how to find answers to gospel questions.,Classrooms
+Tuesday,12:30 PM,1:30 PM,Agenda,Lunch,LU,Agenda,Lunch for all participants and staff.,Market Hall
+Tuesday,1:30 PM,1:45 PM,Agenda,Travel to Classes,TR,Agenda,Movement to the various classroom locations.,Travel
+Tuesday,1:45 PM,2:30 PM,Agenda,Classes,CL,Agenda,General class time for various gospel topics.,Classrooms
+Tuesday,2:30 PM,2:45 PM,Agenda,Travel between Classes,TR,Agenda,Movement between the various classroom locations.,Travel
+Tuesday,2:45 PM,3:30 PM,Agenda,Classes,CL,Agenda,General class time for various gospel topics.,Classrooms
+Tuesday,3:30 PM,6:00 PM,Agenda,Participant Flex Time and Dinner,FT,Agenda,"A period of free time for participants to choose their own on-campus activities, with dinner available during this time. It is an opportunity for Counselors to spend time with their participants.",None
+Tuesday,6:00 PM,6:30 PM,Agenda,Taking Charge of Technology #ShareGoodness,SG,Agenda,"A company activity designed to help youth learn about the benefits and costs of technology and to set goals for using it for good, based on the principles of Purpose, Plan, and Pause.",Company Spots
+Tuesday,6:30 PM,7:00 PM,Agenda,Banner and Cheer Prep,BC,Agenda,A time for companies to prepare their banner and a cheer of approximately one minute for the cheer-off competition later in the week.,Company Spots
+Tuesday,7:00 PM,7:15 PM,Agenda,FSY Social Etiquette,SE,Agenda,A review of FSY dance standards and social etiquette to ensure a wholesome social experience where the Spirit can be present.,Company Spots
+Tuesday,7:15 PM,8:45 PM,Agenda,Dance,DA,Agenda,A fun and energetic dance where all counselors are expected to help maintain dance standards and encourage participation in a wholesome atmosphere.,Jubilee Courtyard
+Tuesday,8:45 PM,9:00 PM,Agenda,Travel,TR,Agenda,Movement to the dorms.,Travel
+Tuesday,9:00 PM,9:30 PM,Agenda,"Head Count, Reflect & Review, Journaling, Prayer",RR,Agenda,"A nightly routine of headcount, reflection on the day's events, journaling, and a company prayer.",Residence Halls
+Tuesday,9:30 PM,10:15 PM,Agenda,Quiet Time - Get Ready for Bed,QU,Agenda,A designated time for participants to wind down and prepare for bed.,Residence Halls
+Tuesday,10:15 PM,10:30 PM,Agenda,Lights Out,LO,Agenda,The official time for all lights to be out in the dorms.,Residence Halls
+Wednesday,6:00 AM,7:10 AM,Agenda,Morning Exercise,EX,Agenda,Time for participants to exercise.,Soccer Field #2
+Wednesday,7:10 AM,7:20 AM,Agenda,AC/CN Meeting,ME,Agenda,A meeting for Assistant Coordinators and Counselors.,Residence Halls
+Wednesday,7:20 AM,7:30 AM,Agenda,Participant Devotional,DV,Agenda,A devotional led by the participants.,Residence Halls
+Wednesday,7:30 AM,8:30 AM,Agenda,Breakfast,BR,Agenda,Breakfast for all participants and staff.,Market Hall
+Wednesday,8:30 AM,9:30 AM,Agenda,Gospel Study,GS,Agenda,Personal and group gospel study time for participants.,Company Spots
+Wednesday,9:30 AM,9:45 AM,Agenda,Travel to Morning Devotional,TR,Agenda,Movement to the location for the morning devotional.,Travel
+Wednesday,9:45 AM,10:30 AM,Agenda,Morning Devotional,DV,Agenda,"A short, spiritual devotional by the Session Advisor to start the day.",Bob Davis Gymnasium
+Wednesday,10:30 AM,10:45 AM,Agenda,Travel to Classes,TR,Agenda,Movement to the various classroom locations.,Travel
+Wednesday,10:45 AM,11:30 AM,Agenda,Classes,CL,Agenda,General class time for various gospel topics.,Classrooms
+Wednesday,11:30 AM,11:45 AM,Agenda,Travel between Classes,TR,Agenda,Movement between the various classroom locations.,Travel
+Wednesday,11:45 AM,12:30 PM,Agenda,Classes,CL,Agenda,General class time for various gospel topics.,Classrooms
+Wednesday,12:30 PM,1:30 PM,Agenda,Lunch,LU,Agenda,Lunch for all participants and staff.,Market Hall
+Wednesday,1:30 PM,1:45 PM,Agenda,Travel to Classes,TR,Agenda,Movement to the various classroom locations.,Travel
+Wednesday,1:45 PM,2:30 PM,Agenda,Classes,CL,Agenda,General class time for various gospel topics.,Classrooms
+Wednesday,2:30 PM,2:45 PM,Agenda,Travel between Classes,TR,Agenda,Movement between the various classroom locations.,Travel
+Wednesday,2:45 PM,3:30 PM,Agenda,Classes,CL,Agenda,General class time for various gospel topics.,Classrooms
+Wednesday,3:30 PM,6:00 PM,Agenda,Participant Flex Time and Dinner,FT,Agenda,A block of free time for participants to choose their own activities.,None
+Wednesday,6:00 PM,6:30 PM,Agenda,Games Night Prep,GN,Agenda,Preparation for games night.,Company Spots
+Wednesday,6:30 PM,6:45 PM,Agenda,Travel to Games Night,TR,Agenda,Movement to the location for games night.,Travel
+Wednesday,6:45 PM,8:00 PM,Agenda,Games Night and Cheer-Off,GN,Agenda,"An evening activity designed to help youth unite as a company, feel the Spirit while having fun, and step outside their comfort zones through various games and a cheer competition.",Soccer Field #2
+Wednesday,8:00 PM,8:15 PM,Agenda,Travel to Pizza Night,TR,Agenda,Movement to the dorms.,Travel
+Wednesday,8:15 PM,9:00 PM,Agenda,Pizza Night,PN,Agenda,A pizza party for all participants. Counselors are encouraged to maintain an uplifting atmosphere to prepare for the nightly Reflect and Review session.,Residence Halls
+Wednesday,9:00 PM,9:30 PM,Agenda,"Head Count, Reflect & Review, Journaling, Prayer",RR,Agenda,"A nightly routine of headcount, reflection on the day's events, journaling, and a company prayer.",Residence Halls
+Wednesday,9:30 PM,10:15 PM,Agenda,Quiet Time - Get Ready for Bed,QU,Agenda,A designated time for participants to wind down and prepare for bed.,Residence Halls
+Wednesday,10:15 PM,10:30 PM,Agenda,Lights Out,LO,Agenda,The official time for all lights to be out in the dorms.,Residence Halls
+Thursday,6:00 AM,7:10 AM,Agenda,Morning Exercise,EX,Agenda,Time for participants to exercise.,Soccer Field #2
+Thursday,7:10 AM,7:20 AM,Agenda,AC/CN Meeting,ME,Agenda,A meeting for Assistant Coordinators and Counselors.,Residence Halls
+Thursday,7:20 AM,7:30 AM,Agenda,Participant Devotional,DV,Agenda,A devotional led by the participants.,Residence Halls
+Thursday,7:30 AM,8:30 AM,Agenda,Breakfast,BR,Agenda,Breakfast for all participants and staff.,Market Hall
+Thursday,8:30 AM,9:30 AM,Agenda,Gospel Study,GS,Agenda,Personal and group gospel study time for participants.,Company Spots
+Thursday,9:30 AM,9:45 AM,Agenda,Travel,TR,Agenda,Movement to the location for the YM/YW Activities.,Travel
+Thursday,9:45 AM,11:00 AM,Agenda,Young Men Morning Devotional and Young Women Activity,YM,Agenda,"The young men attend a morning devotional with the Session Adviser, while the young women participate in an activity focused on ""The Family: A Proclamation to the World"".",Bob Davis Gymnasium
+Thursday,11:00 AM,11:15 AM,Agenda,Travel between Devotional and Activity,TR,Agenda,Movement between the location for the YM/YW Activities.,Travel
+Thursday,11:15 AM,12:30 PM,Agenda,Young Women Morning Devotional and Young Men Activity,YW,Agenda,"The young women attend a morning devotional with the Session Adviser, while the young men participate in an activity focused on ""The Family: A Proclamation to the World"".",Bob Davis Gymnasium
+Thursday,12:30 PM,1:30 PM,Agenda,Lunch,LU,Agenda,Lunch for all participants and staff.,Market Hall
+Thursday,1:30 PM,2:00 PM,Agenda,Variety Show Guidelines,VS,Agenda,Reviewing the guidelines for the variety show.,Company Spots
+Thursday,2:00 PM,2:15 PM,Agenda,Travel to Variety Show,TR,Agenda,Movement to the location of the variety show.,Travel
+Thursday,2:15 PM,3:30 PM,Agenda,Variety Show,VS,Agenda,"An opportunity for youth to showcase their diverse talents and skills in a series of short, unrelated acts or performances.",Bob Davis Gymnasium
+Thursday,3:30 PM,5:50 PM,Agenda,Participant Flex Time and Dinner,FT,Agenda,A block of free time for participants to choose their own activities.,None
+Thursday,5:50 PM,6:05 PM,Agenda,Reverence-Testimony Discussion,RT,Agenda,A company discussion on the doctrine and purpose of reverence and the nature of a testimony to prepare for the evening's activities.,Company Spots
+Thursday,6:05 PM,6:20 PM,Agenda,Seating for Musical Program and Evening Devotional,MP,Agenda,Participants and staff get seated for the evening's events.,Travel
+Thursday,6:20 PM,6:55 PM,Agenda,Musical Program,MP,Agenda,"A 30-minute program where youth share their testimonies through song and spoken word, setting the tone for the evening devotional and testimony meeting.",Bob Davis Gymnasium
+Thursday,6:55 PM,7:30 PM,Agenda,Evening Devotional,DV,Agenda,An evening devotional for all participants.,Bob Davis Gymnasium
+Thursday,7:30 PM,7:40 PM,Agenda,Testimony Writing,TE,Agenda,"Following the evening devotional, the Session Adviser invites youth to take time to write their testimonies in their handbooks.",Bob Davis Gymnasium
+Thursday,7:40 PM,7:50 PM,Agenda,Seating for Testimony Meetings,TE,Agenda,Participants and staff get seated for the testimony meetings.,Travel
+Thursday,7:50 PM,8:40 PM,Agenda,Testimony Meetings,TE,Agenda,A sacred meeting where participants have the opportunity to share a personal witness of truth and a humble declaration of what they know and feel about the Savior and His restored gospel.,Classrooms
+Thursday,8:40 PM,9:00 PM,Agenda,Travel,TR,Agenda,Movement to the dorms.,Travel
+Thursday,9:00 PM,9:30 PM,Agenda,"Head Count, Reflect & Review, Journaling, Prayer",RR,Agenda,"A nightly routine of headcount, reflection on the day's events, journaling, and a company prayer.",Residence Halls
+Thursday,9:30 PM,10:15 PM,Agenda,Quiet Time - Get Ready for Bed,QU,Agenda,A designated time for participants to wind down and prepare for bed.,Residence Halls
+Thursday,10:15 PM,10:30 PM,Agenda,Lights Out,LO,Agenda,The official time for all lights to be out in the dorms.,Residence Halls
+Friday,6:00 AM,7:10 AM,Agenda,Morning Exercise,EX,Agenda,Time for participants to exercise.,Soccer Field #2
+Friday,7:10 AM,7:20 AM,Agenda,AC/CN Meeting,ME,Agenda,A meeting for Assistant Coordinators and Counselors.,Residence Halls
+Friday,7:20 AM,7:30 AM,Agenda,Participant Devotional,DV,Agenda,A devotional led by the participants.,Residence Halls
+Friday,7:30 AM,8:30 AM,Agenda,Breakfast,BR,Agenda,Breakfast for all participants and staff.,Market Hall
+Friday,8:30 AM,9:30 AM,Agenda,Gospel Study,GS,Agenda,Personal and group gospel study time for participants.,Company Spots
+Friday,9:30 AM,9:45 AM,Agenda,Travel to Morning Devotional,TR,Agenda,Movement to the location for the morning devotional.,Travel
+Friday,9:45 AM,10:30 AM,Agenda,Morning Devotional,DV,Agenda,"A short, spiritual devotional by the Session Advisor to start the day.",Bob Davis Gymnasium
+Friday,10:30 AM,10:45 AM,Agenda,Travel,TR,Agenda,Movement to company spots.,Travel
+Friday,10:45 AM,12:00 PM,Agenda,Sharing the Gospel Activity,SH,Agenda,"An activity to help youth feel inspired to respond to the invitation to gather Israel by preparing to share the gospel, strengthening their families, and making a plan to receive temple blessings.",Company Spots
+Friday,12:00 PM,12:30 PM,Agenda,#ShareGoodness Debrief,SG,Agenda,"A debriefing session to discuss experiences with the #ShareGoodness challenge and using technology for good, including a discussion on creating a positive online presence.",Company Spots
+Friday,12:30 PM,1:30 PM,Agenda,Lunch,LU,Agenda,Lunch for all participants and staff.,Market Hall
+Friday,1:30 PM,1:45 PM,Agenda,Travel to Slide Show and Taking It Home Showcase,TR,Agenda,Movement to the location of the final events.,Travel
+Friday,1:45 PM,2:45 PM,Agenda,Taking It Home Showcase and Slideshow,TH,Agenda,"A final showcase activity to review and celebrate the week and watch the session slideshow, with a focus on highlighting ways the youth can apply the lessons learned at home.",Bob Davis Gymnasium
+Friday,2:45 PM,3:00 PM,Agenda,Travel,TR,Agenda,Movement to copmpany spots.,Travel
+Friday,3:00 PM,3:30 PM,Agenda,Goal-Setting Review,GR,Agenda,"An activity to help youth recognize the impact of setting goals, reflect on what they have learned, celebrate their growth, and feel empowered to continue setting goals at home.",Company Spots
+Friday,3:30 PM,6:00 PM,Agenda,"Participant Flex Time, Packing, and Dinner",FT,Agenda,"A block of free time for participants to engage in on-campus activities, pack their belongings, and have dinner in preparation for returning home.",None
+Friday,6:00 PM,6:15 PM,Agenda,Picture Taking,PI,Agenda,A time for group pictures.,Company Spots
+Friday,6:15 PM,8:00 PM,Agenda,Dance,DA,Agenda,A fun and energetic dance for all participants.,Bob Davis Gymnasium
+Friday,8:00 PM,8:15 PM,Agenda,Transition Time,TR,Agenda,Gather as a company and review lost and found.,Travel
+Friday,8:15 PM,8:45 PM,Agenda,Taking It Home Message,TH,Agenda,"The Session Adviser delivers a final message reflecting on the week's devotional topics and extends the ""Do and Become"" invitation to encourage lasting change.",Bob Davis Gymnasium
+Friday,8:45 PM,9:00 PM,Agenda,Travel to Company Spots,TR,Agenda,Companies travel to their company spots for the last time.,Travel
+Friday,9:00 PM,9:30 PM,Agenda,Company Taking It Home,CO,Agenda,A final company meeting where counselors facilitate a discussion to help youth set and share personal goals for living the gospel when they return home.,Company Spots
+Friday,9:30 PM,9:45 PM,Agenda,Travel,TR,Agenda,Movement to the dorms.,Travel
+Friday,9:45 PM,10:15 PM,Agenda,Head Count | Quiet Time—Get Ready for Bed Announcements | Prayer,RR,Agenda,The final nightly routine.,Residence Halls
+Friday,10:15 PM,10:30 PM,Agenda,Lights Out,LO,Agenda,The official time for all lights to be out in the dorms.,Residence Halls
+Friday,10:30 PM,10:50 PM,Agenda,Night Watch,NW,Agenda,FSY staff provide increased supervision by stationing themselves at strategic points to monitor youth dorms and ensure a safe and secure environment throughout the night.,Residence Halls
+Saturday,6:30 AM,7:00 AM,Agenda,Prepare to Leave,PR,Agenda,"Participants get ready to leave, making sure their belongings are packed and rooms are ready for inspection.",Residence Halls
+Saturday,7:00 AM,7:30 AM,Agenda,Post-session Room Checks,RC,Agenda,"Counselors inspect each participant's room with them, collect all keys, and document any damage or lost keys before the final checkout.",Residence Halls
+Saturday,7:30 AM,7:45 AM,Agenda,Mandatory Wrap-up Meeting,ME,Agenda,"A final, mandatory meeting for all staff to review the week, coordinate departure logistics, ensure all keys are returned, and complete online evaluations.",Pond Inlet
+Saturday,7:45 AM,8:30 AM,Agenda,Staff Breakfast,BR,Agenda,An optional breakfast for staff members to conclude the session together.,Market Hall

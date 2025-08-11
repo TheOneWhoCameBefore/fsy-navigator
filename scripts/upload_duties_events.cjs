@@ -8,7 +8,7 @@ const firebaseConfigModule = require('../src/firebase-config');
 const firebaseConfig = firebaseConfigModule.firebaseConfig || firebaseConfigModule;
 const appId = firebaseConfigModule.appId || '';
 
-const dutiesCsvPath = path.resolve(__dirname, '../data/duties_10_ac_sackville.csv');
+const dutiesCsvPath = path.resolve(__dirname, '../data/duties_10_ac.csv');
 const dutiesEventsCollectionPath = `artifacts/${appId}/public/data/roleEvents`;
 
 // Simple CSV parser (no external dependency)
